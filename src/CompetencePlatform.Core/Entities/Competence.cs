@@ -19,6 +19,7 @@ namespace CompetencePlatform.Core.Entities
         public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
         public virtual ICollection<CompetenceDictionary> CompetenceDictionaries { get; set; }
         public virtual ICollection<EmployeeCompetence> EmployeeCompetences { get; set; }
+        public ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
 
     }
 }

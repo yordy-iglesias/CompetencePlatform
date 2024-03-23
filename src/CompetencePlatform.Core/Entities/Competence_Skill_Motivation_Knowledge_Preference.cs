@@ -14,33 +14,33 @@ namespace CompetencePlatform.Core.Entities
         /// Gets or sets the IdCompetence.
         /// </summary>
         [ForeignKey("IdCompetence")]
-        public int IdCompetence { get; set; }
+        public int? IdCompetence { get; set; }
         public virtual Competence Competence { get; set; }
         /// <summary>
         /// Gets or sets the IdKnowlwdge.
         /// </summary>
         [ForeignKey("IdKnowlwdge")]
-        public int IdKnowlwdge { get; set; }
+        public int? IdKnowlwdge { get; set; }
         public virtual Knowledge Knowledge { get; set; }
 
         /// <summary>
         /// Gets or sets the IdKnowlwdge.
         /// </summary>
         [ForeignKey("IdPreference")]
-        public int IdPreference { get; set; }
+        public int? IdPreference { get; set; }
         public virtual Preference Preference { get; set; }
 
         /// <summary>
         /// Gets or sets the IdSkill
         /// </summary>
         [ForeignKey("IdSkill")]
-        public int IdSkill { get; set; }
+        public int? IdSkill { get; set; }
         public virtual Skill Skill { get; set; }
         /// <summary>
         /// Gets or sets the IdMotivation
         /// </summary>
         [ForeignKey("IdMotivation")]
-        public int IdMotivation { get; set; }
+        public int? IdMotivation { get; set; }
         public virtual Motiviation Motivation { get; set; }
         //Audited Method
 

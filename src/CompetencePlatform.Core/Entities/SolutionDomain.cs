@@ -26,7 +26,8 @@ namespace CompetencePlatform.Core.Entities
         [ForeignKey("IdOrganization")]
         public int IdOrganization { get; set; }
         public virtual Organization Organization { get; set; }
-        //public ICollection<Project> Projects { get; set; }
+        public ICollection<Project> Projects { get; set; }
+        public ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
 
         //Audited Method
         /// <summary>

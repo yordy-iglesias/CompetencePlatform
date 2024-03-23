@@ -1,7 +1,6 @@
 ﻿using CompetencePlatform.Core.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,26 +8,22 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public  class Project : BaseEntity, IAuditedEntity
+    public class SolutionDomainCompetence:BaseEntity, IAuditedEntity
     {
-        /// <summary>
-		/// Gets or sets the Name.
-		/// </summary>
-        [Required]
-        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the SolutionDomainId.
+        /// Gets or sets the IdSolutionDomain.
         /// </summary>
         [ForeignKey("IdSolutionDomain")]
         public int IdSolutionDomain { get; set; }
         public virtual SolutionDomain SolutionDomain { get; set; }
         /// <summary>
-        /// Gets or sets the IdTechnicalSheet.
+        /// Gets or sets the IdCompetence.
         /// </summary>
-        //[ForeignKey("IdTechnicalSheet")]
-        public int IdTechnicalSheet { get; set; }
-        public virtual TechnicalSheet TechnicalSheet { get; set; }
+        [ForeignKey("IdCompetence")]
+        public int IdCompetence { get; set; }
+        public virtual Competence Competence { get; set; }
+
 
         //Audited Methods
 
