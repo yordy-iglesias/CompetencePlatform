@@ -42,5 +42,6 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        public bool? Delete { get ; set; }
     }
 }

@@ -13,14 +13,14 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdCompetence.
         /// </summary>
-        [ForeignKey("IdCompetence")]
-        public int IdCompetence { get; set; }
+        
+        public int? CompetenceId { get; set; }
         public virtual Competence Competence { get; set; }
         /// <summary>
-        /// Gets or sets the IdBehavoiurDictionary.
+        /// Gets or sets the BehavoiurDictionaryId.
         /// </summary>
-        [ForeignKey("IdBehavoiurDictionary")]
-        public int IdBehavoiurDictionary { get; set; }
+        
+        public int? BehavoiurDictionaryId { get; set; }
         public virtual BehaviourDictionary BehaviourDictionary { get; set; }
         public virtual ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
 
@@ -42,5 +42,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

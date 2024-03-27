@@ -11,37 +11,42 @@ namespace CompetencePlatform.Core.Entities
     public class Competence_Skill_Motivation_Knowledge_Preference: BaseEntity, IAuditedEntity
     {
         /// <summary>
-        /// Gets or sets the IdCompetence.
+        /// Gets or sets the CompetenceId.
         /// </summary>
-        [ForeignKey("IdCompetence")]
-        public int? IdCompetence { get; set; }
+      
+        public int? CompetenceId { get; set; }
         public virtual Competence Competence { get; set; }
         /// <summary>
         /// Gets or sets the IdKnowlwdge.
         /// </summary>
-        [ForeignKey("IdKnowlwdge")]
-        public int? IdKnowlwdge { get; set; }
+        
+        public int? KnowlwdgeId { get; set; }
         public virtual Knowledge Knowledge { get; set; }
 
         /// <summary>
-        /// Gets or sets the IdKnowlwdge.
+        /// Gets or sets the IdPreference.
         /// </summary>
-        [ForeignKey("IdPreference")]
-        public int? IdPreference { get; set; }
+        
+        public int? PreferenceId { get; set; }
         public virtual Preference Preference { get; set; }
 
         /// <summary>
         /// Gets or sets the IdSkill
         /// </summary>
-        [ForeignKey("IdSkill")]
-        public int? IdSkill { get; set; }
+        
+        public int? SkillId { get; set; }
         public virtual Skill Skill { get; set; }
         /// <summary>
         /// Gets or sets the IdMotivation
         /// </summary>
-        [ForeignKey("IdMotivation")]
-        public int? IdMotivation { get; set; }
-        public virtual Motiviation Motivation { get; set; }
+        
+        public int? MotivationId { get; set; }
+        public virtual Motivation Motivation { get; set; }
+
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
         //Audited Method
 
         /// <summary>

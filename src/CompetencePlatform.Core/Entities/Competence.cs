@@ -10,10 +10,9 @@ namespace CompetencePlatform.Core.Entities
     public class Competence:CommonEntity
     {
         /// <summary>
-        /// Gets or sets the IdCompetenceType.
+        /// Gets or sets the CompetenceTypeId.
         /// </summary>
-        [ForeignKey("IdCompetenceType")]
-        public int IdCompetenceType { get; set; }
+        public int? CompetenceTypeId { get; set; }
         public virtual CompetenceType CompetenceType { get; set; }
 
         public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }

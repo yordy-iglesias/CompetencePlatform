@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace N_Tier.DataAccess.Persistence.Migrations
+namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240323042550_InitialComptenceDB")]
-    partial class InitialComptenceDB
+    [Migration("20240327022858_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -143,11 +146,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<int?>("DegreeCompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdBehaviour")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDegreeCompetence")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -181,12 +181,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdCompetenceType")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -216,6 +216,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<int?>("BehaviourDictionaryId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BehavoiurDictionaryId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CompetenceId")
                         .HasColumnType("int");
 
@@ -225,11 +228,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdBehavoiurDictionary")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCompetence")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -263,13 +263,10 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("EmployeeProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCompetenceDictionary")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEmployeeProfile")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -300,6 +297,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -337,22 +337,13 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdCompetence")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdKnowlwdge")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdMotivation")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdPreference")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdSkill")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("KnowledgeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KnowlwdgeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("MotivationId")
@@ -399,6 +390,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -432,8 +426,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdOrganization")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -469,6 +463,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("DepartamentId")
                         .HasColumnType("int");
 
@@ -482,15 +479,6 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<string>("FirstSurName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdDepartament")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEmployeeProfile")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdTeam")
-                        .HasColumnType("int");
 
                     b.Property<string>("SecondLastSurName")
                         .IsRequired()
@@ -536,13 +524,10 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdCompetence")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEmployee")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -574,6 +559,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -582,6 +570,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SolutionDomainId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -589,6 +580,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SolutionDomainId");
 
                     b.ToTable("EmployeeProfiles");
                 });
@@ -606,6 +599,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -626,7 +622,7 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.ToTable("Knowledges");
                 });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.Motiviation", b =>
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Motivation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -639,6 +635,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -672,6 +671,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Mision")
                         .IsRequired()
@@ -710,12 +712,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdPreferenceType")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -751,6 +753,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -784,17 +789,14 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdSolutionDomain")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTechnicalSheet")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SolutionDomainId")
+                    b.Property<int?>("TechnicalSheetId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -805,10 +807,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdTechnicalSheet")
-                        .IsUnique();
-
-                    b.HasIndex("SolutionDomainId");
+                    b.HasIndex("TechnicalSheetId")
+                        .IsUnique()
+                        .HasFilter("[TechnicalSheetId] IS NOT NULL");
 
                     b.ToTable("Projects");
                 });
@@ -827,10 +828,13 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProjectId")
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -862,12 +866,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdSkillType")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -903,6 +907,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -936,11 +943,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdOrganization")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -979,11 +986,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCompetence")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdSolutionDomain")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("SolutionDomainId")
                         .HasColumnType("int");
@@ -1017,6 +1021,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1046,6 +1053,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
                     b.Property<string>("InitialTechnicalProposal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1053,6 +1063,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Property<string>("Scope")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SolutionDomainId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Target")
                         .IsRequired()
@@ -1066,10 +1079,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SolutionDomainId");
+
                     b.ToTable("TechnicalSheets");
                 });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.TodoItem", b =>
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheetCompose", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1077,30 +1092,23 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDone")
+                    b.Property<bool?>("Delete")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ListId")
+                    b.Property<int>("EmployeeProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MyProperty")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("TechnicalSheetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1110,39 +1118,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListId");
+                    b.HasIndex("EmployeeProfileId");
 
-                    b.ToTable("TodoItem");
-                });
+                    b.HasIndex("TechnicalSheetId");
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.TodoList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TodoList");
+                    b.ToTable("TechnicalSheetCompose");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1346,7 +1326,7 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                         .WithMany("Competence_Skill_Motivation_Knowledge_Preferences")
                         .HasForeignKey("KnowledgeId");
 
-                    b.HasOne("CompetencePlatform.Core.Entities.Motiviation", "Motivation")
+                    b.HasOne("CompetencePlatform.Core.Entities.Motivation", "Motivation")
                         .WithMany("Competence_Skill_Motivation_Knowledge_Preferences")
                         .HasForeignKey("MotivationId");
 
@@ -1414,6 +1394,15 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.EmployeeProfile", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
+                        .WithMany("EmployeeProfiles")
+                        .HasForeignKey("SolutionDomainId");
+
+                    b.Navigation("SolutionDomain");
+                });
+
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Preference", b =>
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.PreferenceType", "PreferenceType")
@@ -1427,15 +1416,7 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.TechnicalSheet", "TechnicalSheet")
                         .WithOne("Project")
-                        .HasForeignKey("CompetencePlatform.Core.Entities.Project", "IdTechnicalSheet")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
-                        .WithMany("Projects")
-                        .HasForeignKey("SolutionDomainId");
-
-                    b.Navigation("SolutionDomain");
+                        .HasForeignKey("CompetencePlatform.Core.Entities.Project", "TechnicalSheetId");
 
                     b.Navigation("TechnicalSheet");
                 });
@@ -1444,15 +1425,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjectId");
 
                     b.HasOne("CompetencePlatform.Core.Entities.Team", "Team")
                         .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeamId");
 
                     b.Navigation("Project");
 
@@ -1492,14 +1469,30 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Navigation("SolutionDomain");
                 });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.TodoItem", b =>
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheet", b =>
                 {
-                    b.HasOne("CompetencePlatform.Core.Entities.TodoList", "List")
-                        .WithMany("Items")
-                        .HasForeignKey("ListId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
+                        .WithMany("TechnicalSheets")
+                        .HasForeignKey("SolutionDomainId");
 
-                    b.Navigation("List");
+                    b.Navigation("SolutionDomain");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheetCompose", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.EmployeeProfile", "EmployeeProfile")
+                        .WithMany("TechnicalSheetComposes")
+                        .HasForeignKey("EmployeeProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CompetencePlatform.Core.Entities.TechnicalSheet", "TechnicalSheet")
+                        .WithMany("TechnicalSheetComposes")
+                        .HasForeignKey("TechnicalSheetId");
+
+                    b.Navigation("EmployeeProfile");
+
+                    b.Navigation("TechnicalSheet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1604,6 +1597,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Navigation("CompetenceProfiles");
 
                     b.Navigation("Employees");
+
+                    b.Navigation("TechnicalSheetComposes");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Knowledge", b =>
@@ -1611,7 +1606,7 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     b.Navigation("Competence_Skill_Motivation_Knowledge_Preferences");
                 });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.Motiviation", b =>
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Motivation", b =>
                 {
                     b.Navigation("Competence_Skill_Motivation_Knowledge_Preferences");
                 });
@@ -1645,9 +1640,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.SolutionDomain", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("EmployeeProfiles");
 
                     b.Navigation("SolutionDomainCompetences");
+
+                    b.Navigation("TechnicalSheets");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Team", b =>
@@ -1658,11 +1655,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
             modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheet", b =>
                 {
                     b.Navigation("Project");
-                });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.TodoList", b =>
-                {
-                    b.Navigation("Items");
+                    b.Navigation("TechnicalSheetComposes");
                 });
 #pragma warning restore 612, 618
         }

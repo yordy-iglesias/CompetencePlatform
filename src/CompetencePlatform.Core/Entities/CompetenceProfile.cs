@@ -13,22 +13,28 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdCompetenceDictionary.
         /// </summary>
-        [ForeignKey("IdCompetenceDictionary")]
-        public int IdCompetenceDictionary { get; set; }
+        
+        public int? CompetenceDictionaryId { get; set; }
         public virtual CompetenceDictionary CompetenceDictionary { get; set; }
 
         /// <summary>
         /// Gets or sets the IdEmployeeProfile.
         /// </summary>
-        [ForeignKey("IdEmployeeProfile")]
-        public int IdEmployeeProfile { get; set; }
+       
+        public int? EmployeeProfileId { get; set; }
         public virtual EmployeeProfile EmployeeProfile { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
+
+
 
         //Audited Method
 
         /// <summary>
-		/// Gets or sets the CreatedBy.
-		/// </summary>
+        /// Gets or sets the CreatedBy.
+        /// </summary>
         public string CreatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the CreatedOn.

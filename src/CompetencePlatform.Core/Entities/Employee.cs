@@ -34,24 +34,28 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdDepartament.
         /// </summary>
-        [ForeignKey("IdDepartament")]
-        public int IdDepartament { get; set; }
+       
+        public int? DepartamentId { get; set; }
         public virtual  Departament Departament { get; set; }
 
         /// <summary>
         /// Gets or sets the IdEmployeeProfile.
         /// </summary>
-        public int IdEmployeeProfile { get; set; }
+        public int? EmployeeProfileId { get; set; }
         public virtual EmployeeProfile EmployeeProfile { get; set; }
 
         /// <summary>
-        /// Gets or sets the Teamid.
+        /// Gets or sets the IdTeam.
         /// </summary>
-        public int? IdTeam { get; set; }
+        public int? TeamId { get; set; }
         public virtual Team Team { get; set; }
 
         public virtual ICollection<EmployeeCompetence> EmployeeCompetences { get; set; }
 
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
 
         //Audited Methods
 

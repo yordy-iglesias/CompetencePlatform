@@ -17,17 +17,12 @@ namespace CompetencePlatform.Core.Entities
         [Required]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the SolutionDomainId.
-        /// </summary>
-        [ForeignKey("IdSolutionDomain")]
-        public int IdSolutionDomain { get; set; }
-        public virtual SolutionDomain SolutionDomain { get; set; }
+       
         /// <summary>
         /// Gets or sets the IdTechnicalSheet.
         /// </summary>
-        //[ForeignKey("IdTechnicalSheet")]
-        public int IdTechnicalSheet { get; set; }
+        
+        public int? TechnicalSheetId { get; set; }
         public virtual TechnicalSheet TechnicalSheet { get; set; }
 
         //Audited Methods
@@ -48,5 +43,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

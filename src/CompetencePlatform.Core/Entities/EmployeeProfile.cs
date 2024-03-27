@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,15 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         [Required]
         public string Description { get; set; }
+        /// <summary>
+        /// Gets or sets the IdSolutionDomain.
+        /// </summary>
+        
+        public int? SolutionDomainId { get; set; }
+        public virtual SolutionDomain SolutionDomain { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
+        public virtual ICollection<TechnicalSheetCompose> TechnicalSheetComposes { get; set; }
 
 
         //Audited Methods
@@ -42,5 +50,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

@@ -14,17 +14,20 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdSolutionDomain.
         /// </summary>
-        [ForeignKey("IdSolutionDomain")]
-        public int IdSolutionDomain { get; set; }
+        
+        public int? SolutionDomainId { get; set; }
         public virtual SolutionDomain SolutionDomain { get; set; }
         /// <summary>
         /// Gets or sets the IdCompetence.
         /// </summary>
-        [ForeignKey("IdCompetence")]
-        public int IdCompetence { get; set; }
+        
+        public int? CompetenceId { get; set; }
         public virtual Competence Competence { get; set; }
 
-
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
         //Audited Methods
 
         /// <summary>

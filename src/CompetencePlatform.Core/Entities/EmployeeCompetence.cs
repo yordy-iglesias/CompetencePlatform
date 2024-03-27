@@ -13,17 +13,20 @@ namespace CompetencePlatform.Core.Entities
         // <summary>
         /// Gets or sets the IdEmployee.
         /// </summary>
-        [ForeignKey("IdEmployee")]
-        public int IdEmployee { get; set; }
+        
+        public int? EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
 
         // <summary>
         /// Gets or sets the IdEmployee.
         /// </summary>
-        [ForeignKey("IdCompetence")]
-        public int IdCompetence { get; set; }
+       
+        public int? CompetenceId { get; set; }
         public virtual Competence Competence { get; set; }
-
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
 
         //Audited Method
 

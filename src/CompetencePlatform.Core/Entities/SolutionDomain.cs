@@ -23,11 +23,13 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdOrganization.
         /// </summary>
-        [ForeignKey("IdOrganization")]
-        public int IdOrganization { get; set; }
+        
+        public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        
         public ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
+        public ICollection<TechnicalSheet> TechnicalSheets { get; set; }
+        public ICollection<EmployeeProfile> EmployeeProfiles { get; set; }
 
         //Audited Method
         /// <summary>
@@ -46,5 +48,10 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
+
     }
 }

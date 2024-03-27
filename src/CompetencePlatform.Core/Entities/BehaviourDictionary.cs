@@ -11,16 +11,16 @@ namespace CompetencePlatform.Core.Entities
     public class BehaviourDictionary:BaseEntity, IAuditedEntity
     {
         // <summary>
-        /// Gets or sets the IdDegreeCompetence.
+        /// Gets or sets the DegreeCompetenceId.
         /// </summary>
-        [ForeignKey("IdDegreeCompetence")]
-        public int IdDegreeCompetence { get; set; }
+
+        public int? DegreeCompetenceId { get; set; }
         public virtual DegreeCompetence DegreeCompetence { get; set; }
         // <summary>
         /// Gets or sets the IdDegreeCompetence.
         /// </summary>
-        [ForeignKey("IdBehaviour")]
-        public int IdBehaviour { get; set; }
+        
+        public int? BehaviourId { get; set; }
         public virtual Behaviour Behaviour { get; set; }
 
         public virtual ICollection<CompetenceDictionary> CompetenceDictionaries { get; set; }
@@ -43,5 +43,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

@@ -20,8 +20,8 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdOrganization.
         /// </summary>
-        [ForeignKey("IdOrganization")]
-        public int IdOrganization { get; set; }
+        
+        public int? OrganizationId { get; set; }
         public virtual Organization Organization { get; set; }
         public virtual  ICollection<Employee> Employees { get; set; }
         //Audited Methods
@@ -42,5 +42,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

@@ -13,13 +13,13 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the ProjectId.
         /// </summary>
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
         public virtual Project Project { get; set; }
 
         /// <summary>
         /// Gets or sets the TeamId.
         /// </summary>
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         public virtual Team Team { get; set; }
 
 
@@ -42,5 +42,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
     }
 }

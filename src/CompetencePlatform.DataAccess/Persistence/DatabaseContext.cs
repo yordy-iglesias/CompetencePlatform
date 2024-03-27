@@ -32,7 +32,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public DbSet<EmployeeCompetence> EmployeeCompetences { get; set; }
     public DbSet<EmployeeProfile> EmployeeProfiles { get; set; }
     public DbSet<Knowledge> Knowledges { get; set; }
-    public DbSet<Motiviation> Motiviations { get; set; }
+    public DbSet<Motivation> Motiviations { get; set; }
     public DbSet<Departament> Departaments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Preference> Preferences { get; set; }
@@ -52,12 +52,12 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         //Configuracion uno a uno con Project y TecnicalSheet
         builder.Entity<Project>()
             .HasOne(b => b.TechnicalSheet)
             .WithOne(ts => ts.Project)
-            .HasForeignKey<Project>(p => p.IdTechnicalSheet);
+            .HasForeignKey<Project>(p => p.TechnicalSheetId);
         base.OnModelCreating(builder);
 
     }

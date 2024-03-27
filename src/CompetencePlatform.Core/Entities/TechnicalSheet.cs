@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,19 @@ namespace CompetencePlatform.Core.Entities
         public string InitialTechnicalProposal { get; set; }
 
         public virtual Project Project { get; set; }
+
+        /// <summary>
+        /// Gets or sets the IdSolutionDomain.
+        /// </summary>
+        
+        public int? SolutionDomainId { get; set; }
+        public virtual SolutionDomain SolutionDomain { get; set; }
+
+        public virtual ICollection<TechnicalSheetCompose> TechnicalSheetComposes { get; set; }
+        /// <summary>
+		/// Gets or sets the Delete Borrado Logico.
+		/// </summary>
+        public bool? Delete { get; set; }
 
         //Audited Methods
 

@@ -13,8 +13,8 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdPreferenceType.
         /// </summary>
-        [ForeignKey("IdPreferenceType")]
-        public int IdPreferenceType { get; set; }
+        
+        public int?  PreferenceTypeId { get; set; }
         public virtual PreferenceType PreferenceType { get; set; }
 
         public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }

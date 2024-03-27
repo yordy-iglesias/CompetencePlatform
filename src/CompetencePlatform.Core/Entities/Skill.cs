@@ -14,8 +14,8 @@ namespace CompetencePlatform.Core.Entities
          /// <summary>
         /// Gets or sets the IdSkillType.
         /// </summary>
-        [ForeignKey("IdSkillType")]
-        public int IdSkillType { get; set; }
+       
+        public int? SkillTypeId { get; set; }
         public virtual SkillType SkillType { get; set; }
         public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
 

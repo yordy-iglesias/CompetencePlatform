@@ -3,19 +3,52 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace N_Tier.DataAccess.Persistence.Migrations
+namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialComptenceDB : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "TodoItems");
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
 
-            migrationBuilder.DropTable(
-                name: "TodoLists");
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Behaviours",
@@ -28,7 +61,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,7 +80,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,29 +99,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DegreeCompetences", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EmployeeProfiles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeProfiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,7 +118,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -118,7 +137,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -137,7 +157,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,7 +176,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,7 +195,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,7 +213,8 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,39 +222,109 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TechnicalSheets",
+                name: "AspNetRoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Target = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Scope = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InitialTechnicalProposal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TechnicalSheets", x => x.Id);
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TodoList",
+                name: "AspNetUserClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TodoList", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,14 +333,14 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCompetenceType = table.Column<int>(type: "int", nullable: false),
                     CompetenceTypeId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -264,14 +358,13 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdDegreeCompetence = table.Column<int>(type: "int", nullable: false),
                     DegreeCompetenceId = table.Column<int>(type: "int", nullable: true),
-                    IdBehaviour = table.Column<int>(type: "int", nullable: false),
                     BehaviourId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -295,12 +388,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdOrganization = table.Column<int>(type: "int", nullable: false),
                     OrganizationId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -320,12 +413,12 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdOrganization = table.Column<int>(type: "int", nullable: false),
                     OrganizationId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -343,14 +436,14 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPreferenceType = table.Column<int>(type: "int", nullable: false),
                     PreferenceTypeId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -368,14 +461,14 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdSkillType = table.Column<int>(type: "int", nullable: false),
                     SkillTypeId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -388,46 +481,19 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TodoItem",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
-                    ListId = table.Column<int>(type: "int", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    MyProperty = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TodoItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TodoItem_TodoList_ListId",
-                        column: x => x.ListId,
-                        principalTable: "TodoList",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CompetenceDictionaries",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCompetence = table.Column<int>(type: "int", nullable: false),
                     CompetenceId = table.Column<int>(type: "int", nullable: true),
-                    IdBehavoiurDictionary = table.Column<int>(type: "int", nullable: false),
+                    BehavoiurDictionaryId = table.Column<int>(type: "int", nullable: true),
                     BehaviourDictionaryId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -445,75 +511,28 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstSurName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondLastSurName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdDepartament = table.Column<int>(type: "int", nullable: false),
-                    DepartamentId = table.Column<int>(type: "int", nullable: true),
-                    IdEmployeeProfile = table.Column<int>(type: "int", nullable: false),
-                    EmployeeProfileId = table.Column<int>(type: "int", nullable: true),
-                    IdTeam = table.Column<int>(type: "int", nullable: true),
-                    TeamId = table.Column<int>(type: "int", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employees", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Employees_Departaments_DepartamentId",
-                        column: x => x.DepartamentId,
-                        principalTable: "Departaments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_EmployeeProfiles_EmployeeProfileId",
-                        column: x => x.EmployeeProfileId,
-                        principalTable: "EmployeeProfiles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employees_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
+                name: "EmployeeProfiles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdSolutionDomain = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SolutionDomainId = table.Column<int>(type: "int", nullable: true),
-                    IdTechnicalSheet = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeProfiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projects_SolutionDomains_SolutionDomainId",
+                        name: "FK_EmployeeProfiles_SolutionDomains_SolutionDomainId",
                         column: x => x.SolutionDomainId,
                         principalTable: "SolutionDomains",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Projects_TechnicalSheets_IdTechnicalSheet",
-                        column: x => x.IdTechnicalSheet,
-                        principalTable: "TechnicalSheets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -522,10 +541,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdSolutionDomain = table.Column<int>(type: "int", nullable: false),
                     SolutionDomainId = table.Column<int>(type: "int", nullable: true),
-                    IdCompetence = table.Column<int>(type: "int", nullable: false),
                     CompetenceId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -547,21 +565,44 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TechnicalSheets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Target = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Scope = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InitialTechnicalProposal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SolutionDomainId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TechnicalSheets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TechnicalSheets_SolutionDomains_SolutionDomainId",
+                        column: x => x.SolutionDomainId,
+                        principalTable: "SolutionDomains",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Competence_Skill_Motivation_Knowledge_Preferences",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCompetence = table.Column<int>(type: "int", nullable: true),
                     CompetenceId = table.Column<int>(type: "int", nullable: true),
-                    IdKnowlwdge = table.Column<int>(type: "int", nullable: true),
+                    KnowlwdgeId = table.Column<int>(type: "int", nullable: true),
                     KnowledgeId = table.Column<int>(type: "int", nullable: true),
-                    IdPreference = table.Column<int>(type: "int", nullable: true),
                     PreferenceId = table.Column<int>(type: "int", nullable: true),
-                    IdSkill = table.Column<int>(type: "int", nullable: true),
                     SkillId = table.Column<int>(type: "int", nullable: true),
-                    IdMotivation = table.Column<int>(type: "int", nullable: true),
                     MotivationId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -603,10 +644,9 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCompetenceDictionary = table.Column<int>(type: "int", nullable: false),
                     CompetenceDictionaryId = table.Column<int>(type: "int", nullable: true),
-                    IdEmployeeProfile = table.Column<int>(type: "int", nullable: false),
                     EmployeeProfileId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -628,15 +668,108 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstSurName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondLastSurName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartamentId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeProfileId = table.Column<int>(type: "int", nullable: true),
+                    TeamId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employees_Departaments_DepartamentId",
+                        column: x => x.DepartamentId,
+                        principalTable: "Departaments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Employees_EmployeeProfiles_EmployeeProfileId",
+                        column: x => x.EmployeeProfileId,
+                        principalTable: "EmployeeProfiles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Employees_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TechnicalSheetId = table.Column<int>(type: "int", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Projects_TechnicalSheets_TechnicalSheetId",
+                        column: x => x.TechnicalSheetId,
+                        principalTable: "TechnicalSheets",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TechnicalSheetCompose",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeProfileId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    TechnicalSheetId = table.Column<int>(type: "int", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TechnicalSheetCompose", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TechnicalSheetCompose_EmployeeProfiles_EmployeeProfileId",
+                        column: x => x.EmployeeProfileId,
+                        principalTable: "EmployeeProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TechnicalSheetCompose_TechnicalSheets_TechnicalSheetId",
+                        column: x => x.TechnicalSheetId,
+                        principalTable: "TechnicalSheets",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeCompetences",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEmployee = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    IdCompetence = table.Column<int>(type: "int", nullable: false),
                     CompetenceId = table.Column<int>(type: "int", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -663,12 +796,13 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: true),
+                    TeamId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Delete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -677,15 +811,52 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                         name: "FK_ProjectTeams_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ProjectTeams_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BehavioursDictionaries_BehaviourId",
@@ -763,6 +934,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EmployeeProfiles_SolutionDomainId",
+                table: "EmployeeProfiles",
+                column: "SolutionDomainId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Employees_DepartamentId",
                 table: "Employees",
                 column: "DepartamentId");
@@ -783,15 +959,11 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 column: "PreferenceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_IdTechnicalSheet",
+                name: "IX_Projects_TechnicalSheetId",
                 table: "Projects",
-                column: "IdTechnicalSheet",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Projects_SolutionDomainId",
-                table: "Projects",
-                column: "SolutionDomainId");
+                column: "TechnicalSheetId",
+                unique: true,
+                filter: "[TechnicalSheetId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectTeams_ProjectId",
@@ -824,14 +996,39 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 column: "OrganizationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TodoItem_ListId",
-                table: "TodoItem",
-                column: "ListId");
+                name: "IX_TechnicalSheetCompose_EmployeeProfileId",
+                table: "TechnicalSheetCompose",
+                column: "EmployeeProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TechnicalSheetCompose_TechnicalSheetId",
+                table: "TechnicalSheetCompose",
+                column: "TechnicalSheetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TechnicalSheets_SolutionDomainId",
+                table: "TechnicalSheets",
+                column: "SolutionDomainId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
+
             migrationBuilder.DropTable(
                 name: "Competence_Skill_Motivation_Knowledge_Preferences");
 
@@ -848,7 +1045,13 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 name: "SolutionDomainCompetence");
 
             migrationBuilder.DropTable(
-                name: "TodoItem");
+                name: "TechnicalSheetCompose");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Knowledges");
@@ -872,9 +1075,6 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "TodoList");
-
-            migrationBuilder.DropTable(
                 name: "PreferenceTypes");
 
             migrationBuilder.DropTable(
@@ -896,9 +1096,6 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "SolutionDomains");
-
-            migrationBuilder.DropTable(
                 name: "TechnicalSheets");
 
             migrationBuilder.DropTable(
@@ -911,53 +1108,10 @@ namespace N_Tier.DataAccess.Persistence.Migrations
                 name: "CompetenceTypes");
 
             migrationBuilder.DropTable(
+                name: "SolutionDomains");
+
+            migrationBuilder.DropTable(
                 name: "Organizations");
-
-            migrationBuilder.CreateTable(
-                name: "TodoLists",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TodoLists", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TodoItems",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ListId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Body = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TodoItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TodoItems_TodoLists_ListId",
-                        column: x => x.ListId,
-                        principalTable: "TodoLists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TodoItems_ListId",
-                table: "TodoItems",
-                column: "ListId");
         }
     }
 }

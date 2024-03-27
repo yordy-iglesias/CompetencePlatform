@@ -19,6 +19,9 @@ namespace CompetencePlatform.Core.Entities
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
-        public int MyProperty { get; set; }
+        // <summary>
+        /// Gets or sets the Delete Borrado Logico.
+        /// </summary>
+        public bool? Delete { get; set; }
     }
 }

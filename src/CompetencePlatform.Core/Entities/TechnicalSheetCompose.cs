@@ -1,23 +1,35 @@
 ﻿using CompetencePlatform.Core.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public class Team : BaseEntity, IAuditedEntity
+    public class TechnicalSheetCompose:BaseEntity, IAuditedEntity
     {
-        /// <summary>
-        /// Gets or sets the Name.
-        /// </summary>
-        [Required]
-        public string Name { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
 
-        //Audited Methods
+        /// <summary>
+        /// Gets or sets the EmployeeProfileId
+        /// </summary>
+
+        public int EmployeeProfileId { get; set; }
+        public virtual EmployeeProfile EmployeeProfile { get; set; }
+        /// <summary>
+        /// Gets or sets the Quantity
+        /// </summary>
+        public int Quantity { get; set; }
+
+        /// <summary>
+        /// Gets or sets the TechnicalSheetId
+        /// </summary>
+
+        public int? TechnicalSheetId { get; set; }
+        public virtual TechnicalSheet TechnicalSheet { get; set; }
+
+        //Audited Method
 
         /// <summary>
         /// Gets or sets the CreatedBy.
@@ -35,9 +47,9 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
-        /// <summary>
-		/// Gets or sets the Delete Borrado Logico.
-		/// </summary>
+        // <summary>
+        /// Gets or sets the Delete Borrado Logico.
+        /// </summary>
         public bool? Delete { get; set; }
     }
 }

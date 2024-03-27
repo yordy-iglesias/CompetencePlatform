@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public class Motiviation:CommonEntity
+    public class Motivation:CommonEntity
     {
         public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
     }
