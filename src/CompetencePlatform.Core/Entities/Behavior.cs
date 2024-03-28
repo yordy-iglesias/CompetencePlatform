@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public class Behaviour:CommonEntity
+    public class Behavior:CommonEntity
     {
-        public virtual ICollection<BehaviourDictionary> BehaviourDictionaries { get; set; }
+        public virtual ICollection<BehaviorDictionary> BehaviourDictionaries { get; set; }
     }
 }

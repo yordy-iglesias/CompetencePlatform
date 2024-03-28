@@ -20,8 +20,8 @@ namespace CompetencePlatform.Core.Entities
         /// Gets or sets the BehavoiurDictionaryId.
         /// </summary>
         
-        public int? BehavoiurDictionaryId { get; set; }
-        public virtual BehaviourDictionary BehaviourDictionary { get; set; }
+        public int? BehaviorDictionaryId { get; set; }
+        public virtual BehaviorDictionary BehaviorDictionary { get; set; }
         public virtual ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
 
         //Audited Method

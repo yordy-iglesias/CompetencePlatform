@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.DataAccess.Identity;
+using CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.KnowledgeData;
 using Microsoft.AspNetCore.Identity;
 
 namespace CompetencePlatform.Core.DataAccess.Persistence;
@@ -13,6 +14,8 @@ public static class DatabaseContextSeed
 
             await userManager.CreateAsync(user, "Admin123.?");
         }
+
+        await context.Knowledges.AddRangeAsync(KnowledgeGenerator.Generate());
 
         await context.SaveChangesAsync();
     }

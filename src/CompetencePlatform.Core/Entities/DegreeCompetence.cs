@@ -11,6 +11,6 @@ namespace CompetencePlatform.Core.Entities
     public class DegreeCompetence :CommonEntity
     {
 
-        public virtual ICollection<BehaviourDictionary> BehaviourDictionaries { get; set; }
+        public virtual ICollection<BehaviorDictionary> BehaviourDictionaries { get; set; }
     }
 }

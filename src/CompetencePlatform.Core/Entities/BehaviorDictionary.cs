@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public class BehaviourDictionary:BaseEntity, IAuditedEntity
+    public class BehaviorDictionary:BaseEntity, IAuditedEntity
     {
         // <summary>
         /// Gets or sets the DegreeCompetenceId.
@@ -20,8 +20,8 @@ namespace CompetencePlatform.Core.Entities
         /// Gets or sets the IdDegreeCompetence.
         /// </summary>
         
-        public int? BehaviourId { get; set; }
-        public virtual Behaviour Behaviour { get; set; }
+        public int? BehaviorId { get; set; }
+        public virtual Behavior Behavior { get; set; }
 
         public virtual ICollection<CompetenceDictionary> CompetenceDictionaries { get; set; }
 

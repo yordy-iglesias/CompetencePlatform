@@ -20,8 +20,8 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
         _claimService = claimService;
     }
 
-    public DbSet<Behaviour> Behaviours { get; set; }
-    public DbSet<BehaviourDictionary> BehavioursDictionaries { get; set; }
+    public DbSet<Behavior> Behaviors { get; set; }
+    public DbSet<BehaviorDictionary> BehavioursDictionaries { get; set; }
     public DbSet<Competence> Competences { get; set; }
     public DbSet<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
     public DbSet<CompetenceDictionary> CompetenceDictionaries { get; set; }
