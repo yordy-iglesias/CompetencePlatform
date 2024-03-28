@@ -1,40 +1,30 @@
 ﻿using CompetencePlatform.Core.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public class CompetenceProfile : BaseEntity, IAuditedEntity
+    public  class Responsability:BaseEntity, IAuditedEntity
     {
         /// <summary>
-        /// Gets or sets the IdCompetenceDictionary.
+        /// Gets or sets the CompetenceProfileId.
         /// </summary>
-        
-        public int? CompetenceDictionaryId { get; set; }
-        public virtual CompetenceDictionary CompetenceDictionary { get; set; }
+        public int? CompetenceProfileId { get; set; }
+        public virtual CompetenceProfile CompetenceProfile { get; set; }
+
         /// <summary>
-        /// Gets or sets the Resposabilities.
+        /// Gets or sets the Description.
         /// </summary>
-        public virtual ICollection<Responsability> Responsabilities { get; set; }
+        public string Description { get; set; }
 
 
         /// <summary>
-        /// Gets or sets the IdEmployeeProfile.
+        /// Gets or sets the Delete Borrado Logico.
         /// </summary>
-
-        public int? EmployeeProfileId { get; set; }
-        public virtual EmployeeProfile EmployeeProfile { get; set; }
-        /// <summary>
-		/// Gets or sets the Delete Borrado Logico.
-		/// </summary>
         public bool? Delete { get; set; }
-
-
-
         //Audited Method
 
         /// <summary>
@@ -53,5 +43,6 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
+
     }
 }
