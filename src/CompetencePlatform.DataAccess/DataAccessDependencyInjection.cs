@@ -27,6 +27,33 @@ public static class DataAccessDependencyInjection
     {
         services.AddScoped<ITodoItemRepository, TodoItemRepository>();
         services.AddScoped<ITodoListRepository, TodoListRepository>();
+        services.AddScoped<IBehaviorDictionaryRepository, BehaviorDictionaryRepository>();
+        services.AddScoped<IBehaviorRepository, BehaviorRepository>();
+        services.AddScoped<ICompetence_Skill_Motivation_Knowledge_PreferenceRepository, Competence_Skill_Motivation_Knowledge_PreferenceRepository>();
+        services.AddScoped<ICompetenceDictionaryRepository, CompetenceDictionaryRepository>();
+        services.AddScoped<ICompetenceProfileRepository, CompetenceProfileRepository>();
+        services.AddScoped<ICompetenceRepository, CompetenceRepository>();
+        services.AddScoped<ICompetenceTypeRepository, CompetenceTypeRepository>();
+        services.AddScoped<IDegreeCompetenceRepository, DegreeCompetenceRepository>();
+        services.AddScoped<IDepartamentRepository, DepartamentRepository>();
+        services.AddScoped<IEmployeeCompetenceRepository, EmployeeCompetenceRepository>();
+        services.AddScoped<IEmployeeProfileRepository, EmployeeProfileRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IKnowledgeRepository, KnowledgeRepository>();
+        services.AddScoped<IMotivationRepository, MotivationRepository>();
+        services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+        services.AddScoped<IPreferenceRepository, PreferenceRepository>();
+        services.AddScoped<IPreferenceTypeRepository, PreferenceTypeRepository>();
+        services.AddScoped<IProjectRepository, ProjectRepository>();
+        services.AddScoped<IProjectTeamRepository, ProjectTeamRepository>();
+        services.AddScoped<IResponsabilityRepository, ResponsabilityRepository>();
+        services.AddScoped<ISkillRepository, SkillRepository>();
+        services.AddScoped<ISkillTypeRepository, SkillTypeRepository>();
+        services.AddScoped<ISolutionDomainRepository, SolutionDomainRepository>();
+        services.AddScoped<ITeamRepository, TeamRepository>();
+        services.AddScoped<ITechnicalSheetComposeRepository, TechnicalSheetComposeRepository>();
+        services.AddScoped<ITechnicalSheetRepository, TechnicalSheetRepository>();
+       
     }
 
     private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)

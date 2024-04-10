@@ -42,6 +42,10 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
-        public bool? Delete { get ; set; }
+        public bool? Delete { get ; set; } = false;
+        /// <summary>
+		/// Gets or sets the IsSelected Determine if this Object is part of the organization
+		/// </summary>
+        public bool? IsSelected { get; set; } = false;
     }
 }

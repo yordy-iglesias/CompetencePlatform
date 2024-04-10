@@ -1,5 +1,6 @@
 ﻿using CompetencePlatform.Core.DataAccess.Identity;
 using CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.KnowledgeData;
+using CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.SkillData;
 using Microsoft.AspNetCore.Identity;
 
 namespace CompetencePlatform.Core.DataAccess.Persistence;
@@ -16,6 +17,7 @@ public static class DatabaseContextSeed
         }
 
         await context.Knowledges.AddRangeAsync(KnowledgeGenerator.Generate());
+        await context.SkillTypes.AddRangeAsync(SkillTypeGenerator.Generate());
 
         await context.SaveChangesAsync();
     }

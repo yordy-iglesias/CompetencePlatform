@@ -108,6 +108,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -144,6 +147,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
@@ -185,6 +191,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -225,6 +234,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Delete")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -263,6 +275,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("EmployeeProfileId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -299,6 +314,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -332,6 +350,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<int?>("KnowledgeId")
@@ -391,6 +412,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -421,6 +445,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -474,6 +501,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SecondLastSurName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -524,6 +554,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -559,6 +592,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -601,6 +637,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -637,6 +676,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -667,6 +709,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<string>("Mision")
@@ -713,6 +758,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -754,6 +802,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -784,6 +835,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -823,6 +877,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ProjectId")
@@ -869,6 +926,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -902,6 +962,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -944,6 +1007,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -978,6 +1044,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1019,6 +1088,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Delete")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("SolutionDomainId")
                         .HasColumnType("int");
 
@@ -1052,6 +1124,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -1089,6 +1164,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("InitialTechnicalProposal")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Scope")
                         .IsRequired()
@@ -1133,6 +1211,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<int>("EmployeeProfileId")
                         .HasColumnType("int");
+
+                    b.Property<bool?>("IsSelected")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

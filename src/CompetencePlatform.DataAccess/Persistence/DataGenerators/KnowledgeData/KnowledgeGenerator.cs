@@ -36,7 +36,6 @@ namespace CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.Knowledg
                 else
                     knowledge.Name = knw;
                 knowledge.Description = knw;
-                knowledge.Delete=false; 
                 knowledgeList.Add(knowledge);
                
             }

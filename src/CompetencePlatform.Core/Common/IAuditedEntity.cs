@@ -10,5 +10,6 @@
 
         public DateTime? UpdatedOn { get; set; }
         public bool? Delete { get; set; }
+        public bool? IsSelected { get; set; }
     }
 }
