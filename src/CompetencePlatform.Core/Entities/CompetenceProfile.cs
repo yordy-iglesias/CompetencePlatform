@@ -16,10 +16,8 @@ namespace CompetencePlatform.Core.Entities
         
         public int? CompetenceDictionaryId { get; set; }
         public virtual CompetenceDictionary CompetenceDictionary { get; set; }
-        /// <summary>
-        /// Gets or sets the Resposabilities.
-        /// </summary>
-        public virtual ICollection<Responsability> Responsabilities { get; set; }
+
+        public List<Responsability> Responsabilities { get; set; }
 
 
         /// <summary>

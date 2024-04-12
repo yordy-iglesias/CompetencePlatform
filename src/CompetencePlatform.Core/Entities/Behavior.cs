@@ -8,6 +8,6 @@ namespace CompetencePlatform.Core.Entities
 {
     public class Behavior:CommonEntity
     {
-        public virtual ICollection<BehaviorDictionary> BehaviourDictionaries { get; set; }
+        public virtual ICollection<BehaviorDictionary> BehaviorDictionaries { get; set; }
     }
 }
