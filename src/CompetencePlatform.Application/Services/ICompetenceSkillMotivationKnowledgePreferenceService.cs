@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IBehaviorDictionaryService:ICrudInterface<BehaviorDictionaryModel,DataTableServerSide>
+    public interface ICompetenceSkillMotivationKnowledgePreferenceService : ICrudInterface<Competence_Skill_Motivation_Knowledge_PreferenceModel, DataTableServerSide>
     {
     }
 }
