@@ -12,6 +12,7 @@ namespace CompetencePlatform.Application.Models
         
         public int? CompetenceDictionaryId { get; set; }
         public int? EmployeeProfileId { get; set; }
+        public string EmployeeProfileName { get; set; }
         // public  List<ResponsabilityModel> Responsabilities { get; set; }
 
     }

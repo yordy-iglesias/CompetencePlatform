@@ -10,6 +10,7 @@ namespace CompetencePlatform.Application.Models
     public class ProjectModel:CommonEntityModel
     {
         public int? TechnicalSheetId { get; set; }
+        
        
     }
 }

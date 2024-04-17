@@ -10,6 +10,7 @@ namespace CompetencePlatform.Application.Models
     public class DepartamentModel:CommonEntityModel
     {
         public int? OrganizationId { get; set; }
-        public List<EmployeeModel> Employees { get; set; }
+        public string OrganizationName { get; set; }
+        //public List<EmployeeModel> Employees { get; set; }
     }
 }
