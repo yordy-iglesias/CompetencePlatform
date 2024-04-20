@@ -1,0 +1,174 @@
+﻿using AutoMapper;
+using CompetencePlatform.Application.Exceptions;
+using CompetencePlatform.Application.Models;
+using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataTable;
+using CompetencePlatform.Core.Entities;
+using CompetencePlatform.Core.Utils;
+using CompetencePlatform.Shared.Services;
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Security.AccessControl;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompetencePlatform.Application.Services.Impl
+{
+    public class CompetenceSkillMotivationKnowledgePreferenceService : ICompetenceSkillMotivationKnowledgePreferenceService
+    {
+        private readonly ICompetence_Skill_Motivation_Knowledge_PreferenceRepository _cSMKPRepository;
+        private readonly IMapper _mapper;
+        private readonly IClaimService _claimService;
+        private readonly IUserRepository _userRepository;
+        public CompetenceSkillMotivationKnowledgePreferenceService(ICompetence_Skill_Motivation_Knowledge_PreferenceRepository cSMKPRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        {
+            _cSMKPRepository = cSMKPRepository;
+            _mapper = mapper;
+            _claimService = claimService;
+            _userRepository = userRepository;
+        }
+        public async Task<Competence_Skill_Motivation_Knowledge_PreferenceModel> Create(Competence_Skill_Motivation_Knowledge_PreferenceModel entity)
+        {
+            try
+            {
+                var result = await _cSMKPRepository.AddAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
+                return _mapper.Map<Competence_Skill_Motivation_Knowledge_PreferenceModel>(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Competence_Skill_Motivation_Knowledge_PreferenceModel> Delete(int id)
+        {
+            try
+            {
+                var result = await _cSMKPRepository.GetFirstAsync(bd => bd.Id == id, asNoTracking: false);
+                if (result != null)
+                {
+                    var resultDelete = await _cSMKPRepository.DeleteAsync(result);
+                    return _mapper.Map<Competence_Skill_Motivation_Knowledge_PreferenceModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el Competence Skill Motivation Knowledge Preference");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<Competence_Skill_Motivation_Knowledge_PreferenceModel>> Get()
+        {
+            try
+            {
+                var result = await _cSMKPRepository.GetAllAsync();
+                return _mapper.Map<IEnumerable<Competence_Skill_Motivation_Knowledge_PreferenceModel>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<Competence_Skill_Motivation_Knowledge_PreferenceModel> Get(int id)
+        {
+            try
+            {
+                var result = await _cSMKPRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este tipo de Competence Skill Motivation Knowledge Preference");
+                return _mapper.Map<Competence_Skill_Motivation_Knowledge_PreferenceModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<Competence_Skill_Motivation_Knowledge_PreferenceModel>> GetPagination(DataTableServerSide options)
+        {
+            try
+            {
+                var currentUserId = _claimService.GetUserId();
+                if (currentUserId == null)
+                    throw new BadRequestException("No se encuentra un usuario vàlido");
+                var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
+                string username = user.UserName;
+                var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
+
+                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, bool>> where = priority == true ?
+                 where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
+                : where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && csmkp.Deleted==false);
+
+                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, string>> order;
+
+                int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
+                string nameColumnOrder = options.Columns[columnsOrder].Name;
+                SortOrder sort = options.Order.FirstOrDefault()?.Dir == "asc" ? SortOrder.Ascending : SortOrder.Descending;
+
+                switch (nameColumnOrder)
+                {
+                    case "competenceName":
+                        order = col => col.Competence.Name;
+                        break;
+                    case "skillName":
+                        order = col => col.Skill.Name;
+                        break;
+                    case "motivationName":
+                        order = col => col.Motivation.Name;
+                        break;
+                    case "preferenceName":
+                        order = col => col.Preference.Name;
+                        break;
+
+                    default:
+                        order = col => col.Competence.Name;
+                        nameColumnOrder = "competenceName";
+                        break;
+                }
+
+                var obj = await _cSMKPRepository.GetPage(new PageInfo
+                {
+                    PageNumber = options.Start == 0 ? 1 : (options.Start / options.Length) + 1,
+                    PageSize = options.Length
+                }, where, order, sort);
+
+                obj.OrderColumnName = nameColumnOrder;
+                var result = _mapper.Map<DataTablePagin<Competence_Skill_Motivation_Knowledge_PreferenceModel>>(obj);
+                result.Draw = options.Draw;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<SelectViewModel>> GetSelect()
+        {
+           throw new NotImplementedException();
+        }
+
+        public async Task<Competence_Skill_Motivation_Knowledge_PreferenceModel> Update(Competence_Skill_Motivation_Knowledge_PreferenceModel entity)
+        {
+            try
+            {
+                var competence = await _cSMKPRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
+
+                if (competence == null)
+                    throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
+
+                var result = await _cSMKPRepository.UpdateAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
+                return _mapper.Map<Competence_Skill_Motivation_Knowledge_PreferenceModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+    }
+}

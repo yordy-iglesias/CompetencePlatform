@@ -18,7 +18,7 @@ namespace CompetencePlatform.Application.Models
         public string UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
-        public bool? Delete { get; set; }
+        public bool? Deleted { get; set; }
         public bool? IsSelected { get; set; }
     }
 }

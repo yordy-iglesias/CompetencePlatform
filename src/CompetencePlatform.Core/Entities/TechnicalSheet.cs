@@ -41,7 +41,7 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the Delete Borrado Logico.
 		/// </summary>
-        public bool? Delete { get; set; } = false;
+        public bool? Deleted { get; set; } = false;
 
         //Audited Methods
 

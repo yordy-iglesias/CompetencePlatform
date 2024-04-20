@@ -18,7 +18,7 @@ namespace CompetencePlatform.Core.Entities
         // <summary>
         /// Gets or sets the Delete Borrado Logico.
         /// </summary>
-        public bool? Delete { get; set; }
+        public bool? Deleted { get; set; }
         /// <summary>
 		/// Gets or sets the IsSelected Determine if this Object is part of the organization
 		/// </summary>
