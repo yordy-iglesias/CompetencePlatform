@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models
 {
-    public class SolutionDomainModel
+    public class SolutionDomainModel:CommonEntityModel
     {
         public int? OrganizationId { get; set; }
         public string OrganizationName { get; set; }

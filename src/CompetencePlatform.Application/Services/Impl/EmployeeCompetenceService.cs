@@ -105,7 +105,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = ecm => (ecm.Competence.Name.Contains(options.Search.Value) || ecm.Employee.FirstName.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = ecm => (ecm.Competence.Name.Contains(options.Search.Value) || ecm.Employee.FirstName.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && ecm.Deleted == false) ;
 
-                Expression<Func<EmployeeCompetence, string>> order;
+                Expression<Func<EmployeeCompetence, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -117,11 +117,16 @@ namespace CompetencePlatform.Application.Services.Impl
                         order = col => col.Employee.FirstName;
                         nameColumnOrder = "employeeName";
                         break;
+                    case "competenceName":
+                        order = col => col.Competence.Name;
+                        nameColumnOrder = "employeeName";
+                        break;
 
                     default:
-                        order = col => col.Competence.Name;
-                        nameColumnOrder = "competenceName";
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
                         break;
+
                 }
 
                 var obj = await _employeeCompetenceRepository.GetPage(new PageInfo

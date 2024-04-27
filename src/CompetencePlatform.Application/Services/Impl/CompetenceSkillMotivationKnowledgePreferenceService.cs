@@ -104,7 +104,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && csmkp.Deleted==false);
 
-                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, string>> order;
+                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -126,8 +126,8 @@ namespace CompetencePlatform.Application.Services.Impl
                         break;
 
                     default:
-                        order = col => col.Competence.Name;
-                        nameColumnOrder = "competenceName";
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
                         break;
                 }
 

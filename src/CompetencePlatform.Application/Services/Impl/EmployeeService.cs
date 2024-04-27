@@ -106,7 +106,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = emp => (emp.FirstName.Contains(options.Search.Value)  || emp.FirstSurName.Contains(options.Search.Value) || emp.SecondLastSurName.Contains(options.Search.Value) || emp.SecondName.Contains(options.Search.Value) || emp.Team.Name.Contains(options.Search.Value) || emp.Departament.Name.Contains(options.Search.Value) || emp.EmployeeProfile.Name.Contains(options.Search.Value)  || string.IsNullOrEmpty(options.Search.Value))
                 : where = emp => (emp.FirstName.Contains(options.Search.Value) || emp.FirstSurName.Contains(options.Search.Value) || emp.SecondLastSurName.Contains(options.Search.Value) || emp.SecondName.Contains(options.Search.Value) || emp.Team.Name.Contains(options.Search.Value) || emp.Departament.Name.Contains(options.Search.Value) || emp.EmployeeProfile.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && emp.Deleted==false);
 
-                Expression<Func<Employee, string>> order;
+                Expression<Func<Employee, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -116,6 +116,9 @@ namespace CompetencePlatform.Application.Services.Impl
                 {
                     case "secondName":
                         order = col => col.SecondName;
+                        break;
+                    case "firstName":
+                        order = col => col.FirstName;
                         break;
                     case "secondLastSurName":
                         order = col => col.SecondLastSurName;
@@ -132,11 +135,12 @@ namespace CompetencePlatform.Application.Services.Impl
                     case "firstSurName":
                         order = col => col.FirstSurName;
                         break;
-
                     default:
-                        order = col => col.FirstName;
-                        nameColumnOrder = "firstName";
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
                         break;
+
+                    
                 }
 
                 var obj = await _employeeRepository.GetPage(new PageInfo

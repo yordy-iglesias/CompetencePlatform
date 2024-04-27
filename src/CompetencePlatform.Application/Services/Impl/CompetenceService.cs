@@ -104,7 +104,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = cp => (cp.Name.Contains(options.Search.Value) || cp.CompetenceType.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = cp => (cp.Name.Contains(options.Search.Value) || cp.CompetenceType.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value)&& cp.Deleted==false);
 
-                Expression<Func<Competence, string>> order;
+                Expression<Func<Competence, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -120,8 +120,8 @@ namespace CompetencePlatform.Application.Services.Impl
                         break;
 
                     default:
-                        order = col => col.Name;
-                        nameColumnOrder = "name";
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
                         break;
                 }
 

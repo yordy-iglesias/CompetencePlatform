@@ -104,7 +104,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = bd => (bd.Behavior.Name.Contains(options.Search.Value) || bd.DegreeCompetence.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = bd => (bd.Behavior.Name.Contains(options.Search.Value) || bd.DegreeCompetence.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value)&& bd.Deleted==false);
 
-                Expression<Func<BehaviorDictionary, string>> order;
+                Expression<Func<BehaviorDictionary, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -119,8 +119,8 @@ namespace CompetencePlatform.Application.Services.Impl
                         order = col => col.DegreeCompetence.Name;
                         break;
                     default:
-                        order = col => col.Behavior.Name;
-                        nameColumnOrder = "behaviourName";
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
                         break;
                 }
 

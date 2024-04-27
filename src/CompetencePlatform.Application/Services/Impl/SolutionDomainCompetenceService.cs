@@ -2,6 +2,7 @@
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -18,25 +19,25 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services.Impl
 {
-    public class EmployeeProfileService : IEmployeeProfileService
+    public class SolutionDomainCompetenceService : ISolutionDomainCompetenceService
     {
-        private readonly IEmployeeProfileRepository _employeeProfileRepository;
+        private readonly ISolutionDomainCompetenceRepository _solutionDomainCompetenceRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public EmployeeProfileService(IEmployeeProfileRepository employeeProfileRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        public SolutionDomainCompetenceService(ISolutionDomainCompetenceRepository solutionDomainCompetenceRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
-            _employeeProfileRepository = employeeProfileRepository;
+            _solutionDomainCompetenceRepository = solutionDomainCompetenceRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeProfileModel> Create(EmployeeProfileModel entity)
+        public async Task<SolutionDomainCompetenceModel> Create(SolutionDomainCompetenceModel entity)
         {
             try
             {
-                var result = await _employeeProfileRepository.AddAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<EmployeeProfileModel>(result);
+                var result = await _solutionDomainCompetenceRepository.AddAsync(_mapper.Map<SolutionDomainCompetence>(entity));
+                return _mapper.Map<SolutionDomainCompetenceModel>(result);
             }   
             catch (Exception)
             {
@@ -44,17 +45,17 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeProfileModel> Delete(int id)
+        public async Task<SolutionDomainCompetenceModel> Delete(int id)
         {
             try
             {
-                var result = await _employeeProfileRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                var result = await _solutionDomainCompetenceRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
                 if (result != null)
                 {
-                    var resultDelete = await _employeeProfileRepository.DeleteAsync(result);
-                    return _mapper.Map<EmployeeProfileModel>(resultDelete);
+                    var resultDelete = await _solutionDomainCompetenceRepository.DeleteAsync(result);
+                    return _mapper.Map<SolutionDomainCompetenceModel>(resultDelete);
                 }
-                throw new BadRequestException("No se encuentra el Competence Dictionary ");
+                throw new BadRequestException("No se encuentra el Solution Domain");
             }
             catch
             {
@@ -62,12 +63,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<EmployeeProfileModel>> Get()
+        public async Task<IEnumerable<SolutionDomainCompetenceModel>> Get()
         {
             try
             {
-                var result = await _employeeProfileRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<EmployeeProfileModel>>(result);
+                var result = await _solutionDomainCompetenceRepository.GetAllAsync();
+                return _mapper.Map<IEnumerable<SolutionDomainCompetenceModel>>(result);
             }
             catch
             {
@@ -75,14 +76,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeProfileModel> Get(int id)
+        public async Task<SolutionDomainCompetenceModel> Get(int id)
         {
             try
             {
-                var result = await  _employeeProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                var result = await _solutionDomainCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
-                    throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<EmployeeProfileModel>(result);
+                    throw new BadRequestException("No existe este Solution Domain Competence");
+                return _mapper.Map<SolutionDomainCompetenceModel>(result);
             }
             catch
             {
@@ -90,7 +91,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<EmployeeProfileModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<SolutionDomainCompetenceModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -101,11 +102,11 @@ namespace CompetencePlatform.Application.Services.Impl
                 string username = user.UserName;
                 var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
-                Expression<Func<EmployeeProfile, bool>> where = priority == true ?
-                 where = emp => (emp.SolutionDomain.Name.Contains(options.Search.Value)  || string.IsNullOrEmpty(options.Search.Value))
-                : where = emp => (emp.SolutionDomain.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && emp.Deleted == false) ;
+                Expression<Func<SolutionDomainCompetence, bool>> where = priority == true ?
+                 where = k => (k.Competence.Name.Contains(options.Search.Value)  || string.IsNullOrEmpty(options.Search.Value))
+                : where = k => (k.Competence.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
 
-                Expression<Func<EmployeeProfile, object>> order;
+                Expression<Func<SolutionDomainCompetence, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -113,27 +114,24 @@ namespace CompetencePlatform.Application.Services.Impl
 
                 switch (nameColumnOrder)
                 {
-                    case "solutionName":
-                        order = col => col.SolutionDomain.Name;
-                        nameColumnOrder = "employeeName";
+                    case "competenceName":
+                        order = col => col.Competence.Name;
                         break;
-
                     default:
                         order = col => col.CreatedOn;
                         nameColumnOrder = "createdOn";
                         break;
-
-                  
+                   
                 }
 
-                var obj = await _employeeProfileRepository.GetPage(new PageInfo
+                var obj = await _solutionDomainCompetenceRepository.GetPage(new PageInfo
                 {
                     PageNumber = options.Start == 0 ? 1 : (options.Start / options.Length) + 1,
                     PageSize = options.Length
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<EmployeeProfileModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<SolutionDomainCompetenceModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -148,17 +146,17 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<EmployeeProfileModel> Update(EmployeeProfileModel entity)
+        public async Task<SolutionDomainCompetenceModel> Update(SolutionDomainCompetenceModel entity)
         {
             try
             {
-                var employeeProfile = await _employeeProfileRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
+                var employee = await _solutionDomainCompetenceRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
 
-                if (employeeProfile == null)
-                    throw new BadRequestException("No se encuentra este tipo de Employe Profile");
+                if (employee == null)
+                    throw new BadRequestException("No se encuentra este tipo Solution Domain Competence");
 
-                var result = await _employeeProfileRepository.UpdateAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<EmployeeProfileModel>(result);
+                var result = await _solutionDomainCompetenceRepository.UpdateAsync(_mapper.Map<SolutionDomainCompetence>(entity));
+                return _mapper.Map<SolutionDomainCompetenceModel>(result);
             }
             catch
             {

@@ -2,6 +2,7 @@
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -11,49 +12,50 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services.Impl
 {
-    public class CompetenceTypeService : ICompetenceTypeService
+    public class PreferenceTypeService : IPreferenceTypeService
     {
-        private readonly ICompetenceTypeRepository _competenceTypeRepository;
+        private readonly IPreferenceTypeRepository _preferenceTypeRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public CompetenceTypeService(ICompetenceTypeRepository competenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        public PreferenceTypeService(IPreferenceTypeRepository preferenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
-            _competenceTypeRepository = competenceTypeRepository;
+            _preferenceTypeRepository = preferenceTypeRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<CompetenceTypeModel> Create(CompetenceTypeModel entity)
+        public async Task<PreferenceTypeModel> Create(PreferenceTypeModel entity)
         {
             try
             {
-                var result = await _competenceTypeRepository.AddAsync(_mapper.Map<CompetenceType>(entity));
-                return _mapper.Map<CompetenceTypeModel>(result);
-            }
+                var result = await _preferenceTypeRepository.AddAsync(_mapper.Map<PreferenceType>(entity));
+                return _mapper.Map<PreferenceTypeModel>(result);
+            }   
             catch (Exception)
             {
                 throw;
             }
         }
 
-        public async Task<CompetenceTypeModel> Delete(int id)
+        public async Task<PreferenceTypeModel> Delete(int id)
         {
             try
             {
-                var result = await _competenceTypeRepository.GetFirstAsync(bd => bd.Id == id, asNoTracking: false);
+                var result = await _preferenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
                 if (result != null)
                 {
-                    var resultDelete = await _competenceTypeRepository.DeleteAsync(result);
-                    return _mapper.Map<CompetenceTypeModel>(resultDelete);
+                    var resultDelete = await _preferenceTypeRepository.DeleteAsync(result);
+                    return _mapper.Map<PreferenceTypeModel>(resultDelete);
                 }
-                throw new BadRequestException("No se encuentra el Competence Dictionary ");
+                throw new BadRequestException("No se encuentra la preferencia");
             }
             catch
             {
@@ -61,12 +63,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<CompetenceTypeModel>> Get()
+        public async Task<IEnumerable<PreferenceTypeModel>> Get()
         {
             try
             {
-                var result = await _competenceTypeRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<CompetenceTypeModel>>(result);
+                var result = await _preferenceTypeRepository.GetAllAsync();
+                return _mapper.Map<IEnumerable<PreferenceTypeModel>>(result);
             }
             catch
             {
@@ -74,14 +76,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceTypeModel> Get(int id)
+        public async Task<PreferenceTypeModel> Get(int id)
         {
             try
             {
-                var result = await _competenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                var result = await  _preferenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
-                    throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<CompetenceTypeModel>(result);
+                    throw new BadRequestException("No existe este tipo de Preferencia ");
+                return _mapper.Map<PreferenceTypeModel>(result);
             }
             catch
             {
@@ -89,7 +91,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<CompetenceTypeModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<PreferenceTypeModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -100,11 +102,11 @@ namespace CompetencePlatform.Application.Services.Impl
                 string username = user.UserName;
                 var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
-                Expression<Func<CompetenceType, bool>> where = priority == true ?
-                 where = ctm => (ctm.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
-                : where = ctm => (ctm.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value)&& ctm.Deleted==false);
+                Expression<Func<PreferenceType, bool>> where = priority == true ?
+                 where = k => (k.Name.Contains(options.Search.Value)  || string.IsNullOrEmpty(options.Search.Value))
+                : where = k => (k.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
 
-                Expression<Func<CompetenceType, object>> order;
+                Expression<Func<PreferenceType, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -119,17 +121,17 @@ namespace CompetencePlatform.Application.Services.Impl
                         order = col => col.CreatedOn;
                         nameColumnOrder = "createdOn";
                         break;
-                    
+                   
                 }
 
-                var obj = await _competenceTypeRepository.GetPage(new PageInfo
+                var obj = await _preferenceTypeRepository.GetPage(new PageInfo
                 {
                     PageNumber = options.Start == 0 ? 1 : (options.Start / options.Length) + 1,
                     PageSize = options.Length
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<CompetenceTypeModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<PreferenceTypeModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -143,7 +145,7 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var result = await _competenceTypeRepository.GetAllAsync(x => x.Name);
+                var result = await _preferenceTypeRepository.GetAllAsync(x => x.Name);
                 return _mapper.Map<IEnumerable<SelectViewModel>>(result);
             }
             catch
@@ -152,17 +154,17 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceTypeModel> Update(CompetenceTypeModel entity)
+        public async Task<PreferenceTypeModel> Update(PreferenceTypeModel entity)
         {
             try
             {
-                var competence = await _competenceTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
+                var employee = await _preferenceTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
 
-                if (competence == null)
-                    throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
+                if (employee == null)
+                    throw new BadRequestException("No se encuentra este tipo de  Preference");
 
-                var result = await _competenceTypeRepository.UpdateAsync(_mapper.Map<CompetenceType>(entity));
-                return _mapper.Map<CompetenceTypeModel>(result);
+                var result = await _preferenceTypeRepository.UpdateAsync(_mapper.Map<PreferenceType>(entity));
+                return _mapper.Map<PreferenceTypeModel>(result);
             }
             catch
             {

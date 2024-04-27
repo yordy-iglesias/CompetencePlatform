@@ -106,7 +106,7 @@ namespace CompetencePlatform.Application.Services.Impl
                  where = k => (k.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = k => (k.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
 
-                Expression<Func<Knowledge, string>> order;
+                Expression<Func<Knowledge, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -114,10 +114,15 @@ namespace CompetencePlatform.Application.Services.Impl
 
                 switch (nameColumnOrder)
                 {
-                    default:
+
+                    case "name":
                         order = col => col.Name;
-                        nameColumnOrder = "name";
                         break;
+                    default:
+                        order = col => col.CreatedOn;
+                        nameColumnOrder = "createdOn";
+                        break;
+                    
                 }
 
                 var obj = await _knowledgeRepository.GetPage(new PageInfo
