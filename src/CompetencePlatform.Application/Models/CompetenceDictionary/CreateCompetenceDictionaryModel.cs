@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.CompetenceDictionary
 {
-    public class CompetenceDictionaryModel:BaseEntityModel
+    public class CreateCompetenceDictionaryModel : CompetenceDictionaryModel
     {
-        
+
         public int? CompetenceId { get; set; }
-        public string CompetenceName { get; set; }
         public int? BehaviorDictionaryId { get; set; }
-       
-       // public List<CompetenceProfileModel> CompetenceProfiles { get; set; }
+
+        // public List<CompetenceProfileModel> CompetenceProfiles { get; set; }
     }
 }

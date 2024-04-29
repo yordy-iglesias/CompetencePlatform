@@ -1,4 +1,5 @@
-﻿using CompetencePlatform.Core.Entities;
+﻿using CompetencePlatform.Application.Models.Competence;
+using CompetencePlatform.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

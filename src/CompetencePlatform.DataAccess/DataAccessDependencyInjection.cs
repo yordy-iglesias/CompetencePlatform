@@ -29,7 +29,7 @@ public static class DataAccessDependencyInjection
         services.AddScoped<ITodoListRepository, TodoListRepository>();
         services.AddScoped<IBehaviorDictionaryRepository, BehaviorDictionaryRepository>();
         services.AddScoped<IBehaviorRepository, BehaviorRepository>();
-        services.AddScoped<ICompetence_Skill_Motivation_Knowledge_PreferenceRepository, Competence_Skill_Motivation_Knowledge_PreferenceRepository>();
+        services.AddScoped<IC_S_M_K_PRepository, Competence_Skill_Motivation_Knowledge_PreferenceRepository>();
         services.AddScoped<ICompetenceDictionaryRepository, CompetenceDictionaryRepository>();
         services.AddScoped<ICompetenceProfileRepository, CompetenceProfileRepository>();
         services.AddScoped<ICompetenceRepository, CompetenceRepository>();

@@ -45,7 +45,7 @@ public class TodoListService : ITodoListService
     public async Task<UpdateTodoListResponseModel> UpdateAsync(Guid id, UpdateTodoListModel updateTodoListModel)
     {
         //var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == id);
-        var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == 0);
+        var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == 0,false);
 
         var userId = _claimService.GetUserId();
 
@@ -63,7 +63,7 @@ public class TodoListService : ITodoListService
     public async Task<BaseResponseModel> DeleteAsync(Guid id)
     {
        // var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == id);
-        var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == 0);
+        var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == 0, false);
 
         return new BaseResponseModel
         {

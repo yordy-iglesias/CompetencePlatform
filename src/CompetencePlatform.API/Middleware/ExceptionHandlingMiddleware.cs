@@ -2,6 +2,7 @@
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Core.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CompetencePlatform.API.Middleware;
 
@@ -44,7 +45,11 @@ public class ExceptionHandlingMiddleware
             _ => code
         };
 
-        var result = JsonConvert.SerializeObject(ApiResult<string>.Failure(errors));
+        var serializeOptions = new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
+        var result = JsonConvert.SerializeObject(ApiResult<string>.Failure(errors), serializeOptions);
 
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = code;

@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IBehaviorDictionaryService:ICrudInterface<BehaviorDictionaryModel,DataTableServerSide>
+    public interface IBehaviorDictionaryService: ICrudInterface<BehaviorDictionaryModel, CreateBehaviorDictionaryModel, DataTableServerSide>
     {
     }
 }

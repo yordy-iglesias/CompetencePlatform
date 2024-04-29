@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models.BehaviorDictionary;
+﻿using CompetencePlatform.Application.Models.Competence;
 using CompetencePlatform.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models
 {
-    public class DegreeCompetenceModel:CommonEntityModel
+    public class CreateCompetenceModel : CompetenceModel
     {
-        public List<BehaviorDictionaryModel> BehaviourDictionaries { get; set; }
+        
+        public int? CompetenceTypeId { get; set; }
+       
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
@@ -30,7 +31,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<BehaviorDictionaryModel> Create(BehaviorDictionaryModel entity)
+        public async Task<BehaviorDictionaryModel> Create(CreateBehaviorDictionaryModel entity)
         {
             try
             {
@@ -74,13 +75,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<BehaviorDictionaryModel> Get(int id)
+        public async Task<CreateBehaviorDictionaryModel> Get(int id)
         {
             try
             {
                 var result = await _behaviorDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Behavior Dictionary");
+                return _mapper.Map<CreateBehaviorDictionaryModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async  Task<BehaviorDictionaryModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _behaviorDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<BehaviorDictionaryModel>(result);
             }
             catch
@@ -146,7 +162,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<BehaviorDictionaryModel> Update(BehaviorDictionaryModel entity)
+        public async Task<BehaviorDictionaryModel> Update(CreateBehaviorDictionaryModel entity)
         {
             try
             {
@@ -163,5 +179,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+
+        
     }
 }
