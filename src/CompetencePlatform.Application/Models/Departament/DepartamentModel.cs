@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.Departament
 {
-    public class DepartamentModel:CommonEntityModel
+    public class DepartamentModel : CommonEntityModel
     {
-        public int? OrganizationId { get; set; }
         public string OrganizationName { get; set; }
         //public List<EmployeeModel> Employees { get; set; }
     }

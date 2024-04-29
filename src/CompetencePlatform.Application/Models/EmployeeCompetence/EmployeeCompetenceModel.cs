@@ -5,14 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.EmployeeCompetence
 {
-    public class EmployeeCompetenceModel:BaseEntityModel
+    public class EmployeeCompetenceModel : BaseEntityModel
     {
-       
-        public int? EmployeeId { get; set; }
         public string EmployeeName { get; set; }
-        public int? CompetenceId { get; set; }
         public string CompetenceName { get; set; }
     }
 }

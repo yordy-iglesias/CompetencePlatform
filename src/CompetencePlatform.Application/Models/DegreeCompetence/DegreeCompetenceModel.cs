@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.DegreeCompetence
 {
-    public class DegreeCompetenceModel:CommonEntityModel
+    public class DegreeCompetenceModel : CommonEntityModel
     {
         public List<BehaviorDictionaryModel> BehaviourDictionaries { get; set; }
     }
