@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.Employee
 {
-    public class EmployeeModel:BaseEntityModel
+    public class EmployeeModel : BaseEntityModel
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
@@ -20,7 +20,7 @@ namespace CompetencePlatform.Application.Models
         public string EmployeeProfileName { get; set; }
         public int? TeamId { get; set; }
         public string TeamName { get; set; }
-       // public List<EmployeeCompetence> EmployeeCompetences { get; set; }
+        // public List<EmployeeCompetence> EmployeeCompetences { get; set; }
 
     }
 }
