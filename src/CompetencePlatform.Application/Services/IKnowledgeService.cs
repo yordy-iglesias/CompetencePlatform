@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.Knowledge;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;

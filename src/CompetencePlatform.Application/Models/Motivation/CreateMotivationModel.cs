@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.Motivation
 {
-    public class MotivationModel:CommonEntityModel
+    public class CreateMotivationModel : MotivationModel
     {
         //public List<Competence_Skill_Motivation_Knowledge_PreferenceModel> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
 

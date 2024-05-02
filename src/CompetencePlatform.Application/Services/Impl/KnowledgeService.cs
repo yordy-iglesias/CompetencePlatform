@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Knowledge;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
