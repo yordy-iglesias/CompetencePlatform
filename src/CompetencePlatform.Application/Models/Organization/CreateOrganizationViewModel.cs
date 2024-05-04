@@ -6,15 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.Organization
 {
-    public class OrganizationModel:CommonEntityModel
+    public class CreateOrganizationViewModel : OrganizationViewModel
     {
+
         
-        public string Mision { get; set; }
-       
-        public string Vision { get; set; }
-       // public List<DepartamentModel> Departaments { get; set; }
+        // public List<DepartamentModel> Departaments { get; set; }
         //public List<SolutionDomainModel> SolutionDomains { get; set; }
     }
 }

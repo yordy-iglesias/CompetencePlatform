@@ -26,31 +26,31 @@ public class EmployeeController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateEmployeeModel createEmployeeModel)
+    public async Task<IActionResult> CreateAsync(CreateEmployeeViewModel createEmployeeModel)
     {
-        return Ok(ApiResult<EmployeeModel>.Success(
+        return Ok(ApiResult<EmployeeViewModel>.Success(
             await _employeeService.Create(createEmployeeModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateEmployeeModel createEmployeeModel)
+    public async Task<IActionResult> Update([FromBody] CreateEmployeeViewModel createEmployeeModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<EmployeeModel>.Success(await _employeeService.Update(createEmployeeModel)));
+        return Ok(ApiResult<EmployeeViewModel>.Success(await _employeeService.Update(createEmployeeModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<EmployeeModel>.Success(await _employeeService.Delete(id)));
+        return Ok(ApiResult<EmployeeViewModel>.Success(await _employeeService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<EmployeeModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<EmployeeViewModel>>.Success(
              await _employeeService.GetPagination(options)));
 
     }

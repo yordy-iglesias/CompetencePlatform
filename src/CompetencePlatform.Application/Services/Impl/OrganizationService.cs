@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +33,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<OrganizationModel> Create(OrganizationModel entity)
+        public async Task<OrganizationViewModel> Create(OrganizationViewModel entity)
         {
             try
             {
                 var result = await _organizationRepository.AddAsync(_mapper.Map<Organization>(entity));
-                return _mapper.Map<OrganizationModel>(result);
+                return _mapper.Map<OrganizationViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +46,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<OrganizationModel> Delete(int id)
+        public async Task<OrganizationViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +54,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _organizationRepository.DeleteAsync(result);
-                    return _mapper.Map<OrganizationModel>(resultDelete);
+                    return _mapper.Map<OrganizationViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra la organization");
             }
@@ -63,12 +64,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<OrganizationModel>> Get()
+        public async Task<IEnumerable<OrganizationViewModel>> Get()
         {
             try
             {
                 var result = await _organizationRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<OrganizationModel>>(result);
+                return _mapper.Map<IEnumerable<OrganizationViewModel>>(result);
             }
             catch
             {
@@ -76,14 +77,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<OrganizationModel> Get(int id)
+        public async Task<OrganizationViewModel> Get(int id)
         {
             try
             {
                 var result = await  _organizationRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Motivation ");
-                return _mapper.Map<OrganizationModel>(result);
+                return _mapper.Map<OrganizationViewModel>(result);
             }
             catch
             {
@@ -91,7 +92,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<OrganizationModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<OrganizationViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +132,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<OrganizationModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<OrganizationViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +155,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<OrganizationModel> Update(OrganizationModel entity)
+        public async Task<OrganizationViewModel> Update(OrganizationViewModel entity)
         {
             try
             {
@@ -164,7 +165,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _organizationRepository.UpdateAsync(_mapper.Map<Organization>(entity));
-                return _mapper.Map<OrganizationModel>(result);
+                return _mapper.Map<OrganizationViewModel>(result);
             }
             catch
             {

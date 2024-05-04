@@ -31,12 +31,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<CompetenceDictionaryModel> Create(CompetenceDictionaryModel entity)
+        public async Task<CompetenceDictionaryViewModel> Create(CreateCompetenceDictionaryViewModel entity)
         {
             try
             {
                 var result = await _competenceDictionaryRepository.AddAsync(_mapper.Map<CompetenceDictionary>(entity));
-                return _mapper.Map<CompetenceDictionaryModel>(result);
+                return _mapper.Map<CompetenceDictionaryViewModel>(result);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceDictionaryModel> Delete(int id)
+        public async Task<CompetenceDictionaryViewModel> Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _competenceDictionaryRepository.DeleteAsync(result);
-                    return _mapper.Map<CompetenceDictionaryModel>(resultDelete);
+                    return _mapper.Map<CompetenceDictionaryViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -62,12 +62,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<CompetenceDictionaryModel>> Get()
+        public async Task<IEnumerable<CompetenceDictionaryViewModel>> Get()
         {
             try
             {
                 var result = await _competenceDictionaryRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<CompetenceDictionaryModel>>(result);
+                return _mapper.Map<IEnumerable<CompetenceDictionaryViewModel>>(result);
             }
             catch
             {
@@ -75,14 +75,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceDictionaryModel> Get(int id)
+        public async Task<CreateCompetenceDictionaryViewModel> Get(int id)
         {
             try
             {
                 var result = await _competenceDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<CompetenceDictionaryModel>(result);
+                return _mapper.Map<CreateCompetenceDictionaryViewModel>(result);
             }
             catch
             {
@@ -90,7 +90,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<CompetenceDictionaryModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<CompetenceDictionaryViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<CompetenceDictionaryModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<CompetenceDictionaryViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -145,7 +145,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<CompetenceDictionaryModel> Update(CompetenceDictionaryModel entity)
+        public async Task<CompetenceDictionaryViewModel> Update(CreateCompetenceDictionaryViewModel entity)
         {
             try
             {
@@ -155,7 +155,22 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
 
                 var result = await _competenceDictionaryRepository.UpdateAsync(_mapper.Map<CompetenceDictionary>(entity));
-                return _mapper.Map<CompetenceDictionaryModel>(result);
+                return _mapper.Map<CompetenceDictionaryViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<CompetenceDictionaryViewModel> GetDetails(int id)
+        {
+
+            try
+            {
+                var result = await _competenceDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<CompetenceDictionaryViewModel>(result);
             }
             catch
             {

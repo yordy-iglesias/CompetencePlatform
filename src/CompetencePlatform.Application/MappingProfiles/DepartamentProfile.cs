@@ -23,9 +23,9 @@ namespace CompetencePlatform.Application.MappingProfiles
         public DepartamentProfile()
         {
           
-            CreateMap<Departament, DepartamentModel>()
+            CreateMap<Departament, DepartamentViewModel>()
              .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name)).ReverseMap();
-            CreateMap<Departament, CreateDepartamentModel>()
+            CreateMap<Departament, CreateDepartamentViewModel>()
             .ForMember(cdpm => cdpm.OrganizationId, dp => dp.MapFrom(dp => dp.OrganizationId)).ReverseMap();
 
         }

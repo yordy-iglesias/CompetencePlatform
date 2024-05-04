@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Employee
 {
-    public class CreateEmployeeModel : EmployeeModel
+    public class CreateEmployeeViewModel : EmployeeViewModel
     {
         public int? DepartamentId { get; set; }
         public int? EmployeeProfileId { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CompetencePlatform.Application.Models.C_S_M_K_P
 {
     //CSMK-Competence_Skill_Motivation_Preference
-    public class C_S_M_K_PModel : BaseEntityModel
+    public class C_S_M_K_PViewModel : BaseEntityModel
     {
         public string CompetenceName { get; set; }
         public string KnowledgeName { get; set; }

@@ -22,31 +22,31 @@ public class EmployeeProfileController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateEmployeeProfileModel createEmployeeProfileModel)
+    public async Task<IActionResult> CreateAsync(CreateEmployeeProfileViewModel createEmployeeProfileModel)
     {
-        return Ok(ApiResult<EmployeeProfileModel>.Success(
+        return Ok(ApiResult<EmployeeProfileViewModel>.Success(
             await _employeeProfileService.Create(createEmployeeProfileModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateEmployeeProfileModel createEmployeeProfileModel)
+    public async Task<IActionResult> Update([FromBody] CreateEmployeeProfileViewModel createEmployeeProfileModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<EmployeeProfileModel>.Success(await _employeeProfileService.Update(createEmployeeProfileModel)));
+        return Ok(ApiResult<EmployeeProfileViewModel>.Success(await _employeeProfileService.Update(createEmployeeProfileModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<EmployeeProfileModel>.Success(await _employeeProfileService.Delete(id)));
+        return Ok(ApiResult<EmployeeProfileViewModel>.Success(await _employeeProfileService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<EmployeeProfileModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<EmployeeProfileViewModel>>.Success(
              await _employeeProfileService.GetPagination(options)));
 
     }

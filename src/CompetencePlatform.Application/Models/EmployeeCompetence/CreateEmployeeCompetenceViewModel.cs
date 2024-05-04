@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.EmployeeCompetence
 {
-    public class CreateEmployeeCompetenceModel : EmployeeCompetenceModel
+    public class CreateEmployeeCompetenceViewModel : EmployeeCompetenceViewModel
     {
 
         public int? EmployeeId { get; set; }

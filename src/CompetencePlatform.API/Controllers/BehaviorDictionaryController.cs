@@ -20,31 +20,31 @@ public class BehaviorDictionaryController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateBehaviorDictionaryModel createBehaviorDictionaryModel)
+    public async Task<IActionResult> CreateAsync(CreateBehaviorDictionaryViewModel createBehaviorDictionaryModel)
     {
-        return Ok(ApiResult<BehaviorDictionaryModel>.Success(
+        return Ok(ApiResult<BehaviorDictionaryViewModel>.Success(
             await _behaviorDictionaryService.Create(createBehaviorDictionaryModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateBehaviorDictionaryModel  createBehaviorDictionaryModel)
+    public async Task<IActionResult> Update([FromBody] CreateBehaviorDictionaryViewModel  createBehaviorDictionaryModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<BehaviorDictionaryModel>.Success(await _behaviorDictionaryService.Update(createBehaviorDictionaryModel)));
+        return Ok(ApiResult<BehaviorDictionaryViewModel>.Success(await _behaviorDictionaryService.Update(createBehaviorDictionaryModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<BehaviorDictionaryModel>.Success(await _behaviorDictionaryService.Delete(id)));
+        return Ok(ApiResult<BehaviorDictionaryViewModel>.Success(await _behaviorDictionaryService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<BehaviorDictionaryModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<BehaviorDictionaryViewModel>>.Success(
              await _behaviorDictionaryService.GetPagination(options)));
 
     }

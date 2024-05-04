@@ -31,12 +31,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<BehaviorModel> Create(BehaviorModel entity)
+        public async Task<BehaviorViewModel> Create(CreateBehaviorViewModel entity)
         {
             try
             {
                 var result = await _behaviorRepository.AddAsync(_mapper.Map<Behavior>(entity));
-                return _mapper.Map<BehaviorModel>(result);
+                return _mapper.Map<BehaviorViewModel>(result);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<BehaviorModel> Delete(int id)
+        public async Task<BehaviorViewModel> Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _behaviorRepository.DeleteAsync(result);
-                    return _mapper.Map<BehaviorModel>(resultDelete);
+                    return _mapper.Map<BehaviorViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Behavior Dictionary");
             }
@@ -62,12 +62,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<BehaviorModel>> Get()
+        public async Task<IEnumerable<BehaviorViewModel>> Get()
         {
             try
             {
                 var result = await _behaviorRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<BehaviorModel>>(result);
+                return _mapper.Map<IEnumerable<BehaviorViewModel>>(result);
             }
             catch
             {
@@ -75,14 +75,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<BehaviorModel> Get(int id)
+        public async Task<CreateBehaviorViewModel> Get(int id)
         {
             try
             {
                 var result = await _behaviorRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Behavior Dictionary");
-                return _mapper.Map<BehaviorModel>(result);
+                return _mapper.Map<CreateBehaviorViewModel>(result);
             }
             catch
             {
@@ -90,7 +90,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<BehaviorModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<BehaviorViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<BehaviorModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<BehaviorViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -145,7 +145,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<BehaviorModel> Update(BehaviorModel entity)
+        public async Task<BehaviorViewModel> Update(CreateBehaviorViewModel entity)
         {
             try
             {
@@ -155,7 +155,23 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Behaviour");
 
                 var result = await _behaviorRepository.UpdateAsync(_mapper.Map<Behavior>(entity));
-                return _mapper.Map<BehaviorModel>(result);
+                return _mapper.Map<BehaviorViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<BehaviorViewModel> GetDetails(int id)
+        {
+
+            try
+            {
+                var result = await _behaviorRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<BehaviorViewModel>(result);
             }
             catch
             {

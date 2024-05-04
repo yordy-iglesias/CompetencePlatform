@@ -22,31 +22,31 @@ public class CompetenceController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateCompetenceModel createCompetenceModel)
+    public async Task<IActionResult> CreateAsync(CreateCompetenceViewModel createCompetenceModel)
     {
-        return Ok(ApiResult<CompetenceModel>.Success(
+        return Ok(ApiResult<CompetenceViewModel>.Success(
             await _competenceService.Create(createCompetenceModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateCompetenceModel createCompetenceModel)
+    public async Task<IActionResult> Update([FromBody] CreateCompetenceViewModel createCompetenceModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<CompetenceModel>.Success(await _competenceService.Update(createCompetenceModel)));
+        return Ok(ApiResult<CompetenceViewModel>.Success(await _competenceService.Update(createCompetenceModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<CompetenceModel>.Success(await _competenceService.Delete(id)));
+        return Ok(ApiResult<CompetenceViewModel>.Success(await _competenceService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<CompetenceModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<CompetenceViewModel>>.Success(
              await _competenceService.GetPagination(options)));
 
     }

@@ -23,31 +23,31 @@ public class KnowledgeController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateKnowledgeModel createKnowledgeModel)
+    public async Task<IActionResult> CreateAsync(CreateKnowledgeViewModel createKnowledgeModel)
     {
-        return Ok(ApiResult<KnowledgeModel>.Success(
+        return Ok(ApiResult<KnowledgeViewModel>.Success(
             await _knowledgeService.Create(createKnowledgeModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateKnowledgeModel createKnowledgeModel)
+    public async Task<IActionResult> Update([FromBody] CreateKnowledgeViewModel createKnowledgeModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<KnowledgeModel>.Success(await _knowledgeService.Update(createKnowledgeModel)));
+        return Ok(ApiResult<KnowledgeViewModel>.Success(await _knowledgeService.Update(createKnowledgeModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<KnowledgeModel>.Success(await _knowledgeService.Delete(id)));
+        return Ok(ApiResult<KnowledgeViewModel>.Success(await _knowledgeService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<KnowledgeModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<KnowledgeViewModel>>.Success(
              await _knowledgeService.GetPagination(options)));
 
     }

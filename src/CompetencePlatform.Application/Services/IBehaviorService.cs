@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IBehaviorService : ICrudInterface<BehaviorModel,DataTableServerSide>
+    public interface IBehaviorService : ICrudInterface<BehaviorViewModel, CreateBehaviorViewModel, DataTableServerSide>
     {
     }
 }

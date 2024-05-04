@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models.Knowledge
+namespace CompetencePlatform.Application.Models.Behaviour
 {
-    public class CreateKnowledgeModel:KnowledgeModel
+    public class CreateBehaviorViewModel:BehaviorViewModel
     {
     }
 }

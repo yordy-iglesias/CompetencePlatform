@@ -20,8 +20,8 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public CompetenceTypeProfile()
         {
-            CreateMap<CompetenceType, CompetenceTypeModel>().ReverseMap();
-            CreateMap<CompetenceType, CreateCompetenceTypeModel>().ReverseMap();
+            CreateMap<CompetenceType, CompetenceTypeViewModel>().ReverseMap();
+            CreateMap<CompetenceType, CreateCompetenceTypeViewModel>().ReverseMap();
            
         }
     }

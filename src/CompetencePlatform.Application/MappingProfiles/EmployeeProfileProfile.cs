@@ -24,8 +24,8 @@ namespace CompetencePlatform.Application.MappingProfiles
         public EmployeeProfileProfile()
         {
             
-            CreateMap<Core.Entities.EmployeeProfile, EmployeeProfileModel>().ReverseMap();
-            CreateMap<Core.Entities.EmployeeProfile, CreateEmployeeProfileModel>().ReverseMap();
+            CreateMap<Core.Entities.EmployeeProfile, EmployeeProfileViewModel>().ReverseMap();
+            CreateMap<Core.Entities.EmployeeProfile, CreateEmployeeProfileViewModel>().ReverseMap();
            
         }
     }

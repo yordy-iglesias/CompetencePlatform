@@ -21,31 +21,31 @@ public class BehaviorController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateBehaviorModel createBehaviorModel)
+    public async Task<IActionResult> CreateAsync(CreateBehaviorViewModel createBehaviorModel)
     {
-        return Ok(ApiResult<BehaviorModel>.Success(
+        return Ok(ApiResult<BehaviorViewModel>.Success(
             await _behaviorService.Create(createBehaviorModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateBehaviorModel createBehaviorModel)
+    public async Task<IActionResult> Update([FromBody] CreateBehaviorViewModel createBehaviorModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<BehaviorModel>.Success(await _behaviorService.Update(createBehaviorModel)));
+        return Ok(ApiResult<BehaviorViewModel>.Success(await _behaviorService.Update(createBehaviorModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<BehaviorModel>.Success(await _behaviorService.Delete(id)));
+        return Ok(ApiResult<BehaviorViewModel>.Success(await _behaviorService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<BehaviorModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<BehaviorViewModel>>.Success(
              await _behaviorService.GetPagination(options)));
 
     }

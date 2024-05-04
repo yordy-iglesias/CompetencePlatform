@@ -23,12 +23,12 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public EmployeeProfile()
         {
-            CreateMap<Employee, EmployeeModel>()
+            CreateMap<Employee, EmployeeViewModel>()
             .ForMember(empm => empm.DepartamentName, emp => emp.MapFrom(emp => emp.Departament.Name))
             .ForMember(empm => empm.EmployeeProfileName, emp => emp.MapFrom(emp => emp.EmployeeProfile.Name))
             .ForMember(empm => empm.TeamName, emp => emp.MapFrom(emp => emp.Team.Name)).ReverseMap();
 
-            CreateMap<Employee, CreateEmployeeModel>().ReverseMap();
+            CreateMap<Employee, CreateEmployeeViewModel>().ReverseMap();
 
         }
     }

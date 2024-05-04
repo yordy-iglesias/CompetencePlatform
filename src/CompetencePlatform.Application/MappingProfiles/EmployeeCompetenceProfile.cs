@@ -24,11 +24,11 @@ namespace CompetencePlatform.Application.MappingProfiles
         public EmployeeCompetenceProfile()
         {
            
-            CreateMap<EmployeeCompetence, EmployeeCompetenceModel>()
+            CreateMap<EmployeeCompetence, EmployeeCompetenceViewModel>()
                  .ForMember(ecm => ecm.CompetenceName, ec => ec.MapFrom(ec => ec.Competence.Name))
                  .ForMember(ecm => ecm.EmployeeName, ec => ec.MapFrom(ec => ec.Employee.FirstName)).ReverseMap();
 
-            CreateMap<EmployeeCompetence, CreateEmployeeCompetenceModel>().ReverseMap();
+            CreateMap<EmployeeCompetence, CreateEmployeeCompetenceViewModel>().ReverseMap();
         }
     }
 }

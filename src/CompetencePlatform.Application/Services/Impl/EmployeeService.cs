@@ -33,12 +33,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeModel> Create(EmployeeModel entity)
+        public async Task<EmployeeViewModel> Create(EmployeeViewModel entity)
         {
             try
             {
                 var result = await _employeeRepository.AddAsync(_mapper.Map<Employee>(entity));
-                return _mapper.Map<EmployeeModel>(result);
+                return _mapper.Map<EmployeeViewModel>(result);
             }   
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeModel> Delete(int id)
+        public async Task<EmployeeViewModel> Delete(int id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _employeeRepository.DeleteAsync(result);
-                    return _mapper.Map<EmployeeModel>(resultDelete);
+                    return _mapper.Map<EmployeeViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -64,12 +64,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<EmployeeModel>> Get()
+        public async Task<IEnumerable<EmployeeViewModel>> Get()
         {
             try
             {
                 var result = await _employeeRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<EmployeeModel>>(result);
+                return _mapper.Map<IEnumerable<EmployeeViewModel>>(result);
             }
             catch
             {
@@ -77,14 +77,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeModel> Get(int id)
+        public async Task<EmployeeViewModel> Get(int id)
         {
             try
             {
                 var result = await  _employeeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<EmployeeModel>(result);
+                return _mapper.Map<EmployeeViewModel>(result);
             }
             catch
             {
@@ -92,7 +92,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<EmployeeModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<EmployeeViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<EmployeeModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<EmployeeViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -174,7 +174,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeModel> Update(EmployeeModel entity)
+        public async Task<EmployeeViewModel> Update(EmployeeViewModel entity)
         {
             try
             {
@@ -184,7 +184,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _employeeRepository.UpdateAsync(_mapper.Map<Employee>(entity));
-                return _mapper.Map<EmployeeModel>(result);
+                return _mapper.Map<EmployeeViewModel>(result);
             }
             catch
             {

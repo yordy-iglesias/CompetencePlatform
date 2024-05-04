@@ -33,12 +33,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<KnowledgeModel> Create(KnowledgeModel entity)
+        public async Task<KnowledgeViewModel> Create(KnowledgeViewModel entity)
         {
             try
             {
                 var result = await _knowledgeRepository.AddAsync(_mapper.Map<Knowledge>(entity));
-                return _mapper.Map<KnowledgeModel>(result);
+                return _mapper.Map<KnowledgeViewModel>(result);
             }   
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<KnowledgeModel> Delete(int id)
+        public async Task<KnowledgeViewModel> Delete(int id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _knowledgeRepository.DeleteAsync(result);
-                    return _mapper.Map<KnowledgeModel>(resultDelete);
+                    return _mapper.Map<KnowledgeViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -64,12 +64,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<KnowledgeModel>> Get()
+        public async Task<IEnumerable<KnowledgeViewModel>> Get()
         {
             try
             {
                 var result = await _knowledgeRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<KnowledgeModel>>(result);
+                return _mapper.Map<IEnumerable<KnowledgeViewModel>>(result);
             }
             catch
             {
@@ -77,14 +77,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<KnowledgeModel> Get(int id)
+        public async Task<KnowledgeViewModel> Get(int id)
         {
             try
             {
                 var result = await  _knowledgeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<KnowledgeModel>(result);
+                return _mapper.Map<KnowledgeViewModel>(result);
             }
             catch
             {
@@ -92,7 +92,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<KnowledgeModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<KnowledgeViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<KnowledgeModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<KnowledgeViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -156,7 +156,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<KnowledgeModel> Update(KnowledgeModel entity)
+        public async Task<KnowledgeViewModel> Update(KnowledgeViewModel entity)
         {
             try
             {
@@ -166,7 +166,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await  _knowledgeRepository.UpdateAsync(_mapper.Map<Knowledge>(entity));
-                return _mapper.Map<KnowledgeModel>(result);
+                return _mapper.Map<KnowledgeViewModel>(result);
             }
             catch
             {

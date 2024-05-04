@@ -8,6 +8,7 @@ using CompetencePlatform.Application.Models.CompetenceProfile;
 using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.Departament;
+using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Application.Models.TodoItem;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -22,31 +23,31 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public CompetenceGlobalProfile()
         {
-            CreateMap<BehaviorDictionary, BehaviorDictionaryModel>()
+            CreateMap<BehaviorDictionary, BehaviorDictionaryViewModel>()
             .ForMember(bdm => bdm.BehaviorName, bd => bd.MapFrom(bd => bd.Behavior.Name))
             .ForMember(bdm => bdm.DegreeCompetenceName, bd => bd.MapFrom(bd => bd.DegreeCompetence.Name));
 
-            CreateMap<BehaviorDictionaryModel, BehaviorDictionary>();
+            CreateMap<BehaviorDictionaryViewModel, BehaviorDictionary>();
 
-            CreateMap<Behavior, BehaviorModel>().ReverseMap();
-            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, C_S_M_K_PModel>()
+            CreateMap<Behavior, BehaviorViewModel>().ReverseMap();
+            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, C_S_M_K_PViewModel>()
                .ForMember(csmkpm => csmkpm.CompetenceName, csmkp => csmkp.MapFrom(csmkp => csmkp.Competence.Name))
                .ForMember(csmkpm => csmkpm.MotivationName, csmkp => csmkp.MapFrom(csmkp => csmkp.Motivation.Name))
                .ForMember(csmkpm => csmkpm.SkillName, csmkp => csmkp.MapFrom(csmkp => csmkp.Skill.Name))
                .ForMember(csmkpm => csmkpm.KnowledgeName, csmkp => csmkp.MapFrom(csmkp => csmkp.Knowledge.Name))
                .ForMember(csmkpm => csmkpm.PreferenceName, csmkp => csmkp.MapFrom(csmkp => csmkp.Preference.Name));
 
-            CreateMap<CompetenceDictionary, CompetenceDictionaryModel>()
+            CreateMap<CompetenceDictionary, CompetenceDictionaryViewModel>()
                 .ForMember(cdm => cdm.CompetenceName, cd => cd.MapFrom(cd => cd.Competence.Name)).ReverseMap() ;
 
-            CreateMap<Core.Entities.CompetenceProfile, CompetenceProfileModel>()
+            CreateMap<Core.Entities.CompetenceProfile, CompetenceProfileViewModel>()
                .ForMember(cpm => cpm.EmployeeProfileName, cp => cp.MapFrom(cd => cd.EmployeeProfile.Name)).ReverseMap();
 
-            CreateMap<CompetenceType, CompetenceTypeModel>().ReverseMap();
-            CreateMap<DegreeCompetence, DegreeCompetenceModel>().ReverseMap(); 
-            CreateMap<Departament, DepartamentModel>()
+            CreateMap<CompetenceType, CompetenceTypeViewModel>().ReverseMap();
+            CreateMap<DegreeCompetence, DegreeCompetenceViewModel>().ReverseMap(); 
+            CreateMap<Departament, DepartamentViewModel>()
              .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name)).ReverseMap();
-            CreateMap<Organization, OrganizationModel>().ReverseMap();
+            CreateMap<Organization, OrganizationViewModel>().ReverseMap();
             CreateMap<Preference, PreferenceModel>()
                 .ForMember(pm => pm.PreferenceTypeName, p => p.MapFrom(p => p.PreferenceType.Name)).ReverseMap();
             CreateMap<Project, ProjectModel>().ReverseMap();

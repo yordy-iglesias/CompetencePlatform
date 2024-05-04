@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Departament
 {
-    public class CreateDepartamentModel : DepartamentModel
+    public class DepartamentViewModel : CommonEntityModel
     {
-        public int? OrganizationId { get; set; }
-        
+        public string OrganizationName { get; set; }
+        //public List<EmployeeModel> Employees { get; set; }
     }
 }

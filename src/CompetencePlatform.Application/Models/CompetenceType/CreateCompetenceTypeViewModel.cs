@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.CompetenceType
 {
-    public class CreateCompetenceTypeModel : CompetenceTypeModel
+    public class CreateCompetenceTypeViewModel : CompetenceTypeViewModel
     {
         
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Employee
 {
-    public class EmployeeModel : BaseEntityModel
+    public class EmployeeViewModel : BaseEntityModel
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }

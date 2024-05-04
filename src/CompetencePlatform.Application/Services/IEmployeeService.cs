@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IEmployeeService : ICrudInterface<EmployeeModel,DataTableServerSide>
+    public interface IEmployeeService : ICrudInterface<EmployeeViewModel,DataTableServerSide>
     {
     }
 }

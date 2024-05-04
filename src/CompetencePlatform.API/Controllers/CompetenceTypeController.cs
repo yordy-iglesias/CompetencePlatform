@@ -23,31 +23,31 @@ public class CompetenceTypeController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateCompetenceTypeModel createCompetenceTypeModel)
+    public async Task<IActionResult> CreateAsync(CreateCompetenceTypeViewModel createCompetenceTypeModel)
     {
-        return Ok(ApiResult<CompetenceTypeModel>.Success(
+        return Ok(ApiResult<CompetenceTypeViewModel>.Success(
             await _competenceTypeService.Create(createCompetenceTypeModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateCompetenceTypeModel createCompetenceTypeModel)
+    public async Task<IActionResult> Update([FromBody] CreateCompetenceTypeViewModel createCompetenceTypeModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<CompetenceTypeModel>.Success(await _competenceTypeService.Update(createCompetenceTypeModel)));
+        return Ok(ApiResult<CompetenceTypeViewModel>.Success(await _competenceTypeService.Update(createCompetenceTypeModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<CompetenceTypeModel>.Success(await _competenceTypeService.Delete(id)));
+        return Ok(ApiResult<CompetenceTypeViewModel>.Success(await _competenceTypeService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<CompetenceTypeModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<CompetenceTypeViewModel>>.Success(
              await _competenceTypeService.GetPagination(options)));
 
     }

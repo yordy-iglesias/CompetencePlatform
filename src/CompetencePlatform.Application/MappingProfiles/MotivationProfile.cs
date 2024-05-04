@@ -24,8 +24,8 @@ namespace CompetencePlatform.Application.MappingProfiles
         public MotivationProfile()
         {
            
-            CreateMap<Motivation, MotivationModel>().ReverseMap();
-            CreateMap<Motivation, CreateMotivationModel>().ReverseMap();
+            CreateMap<Motivation, MotivationViewModel>().ReverseMap();
+            CreateMap<Motivation, CreateMotivationViewModel>().ReverseMap();
            
         }
     }

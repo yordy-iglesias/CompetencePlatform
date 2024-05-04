@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.DegreeCompetence
 {
-    public class CreateDegreeCompetenceModel : DegreeCompetenceModel
+    public class DegreeCompetenceViewModel : CommonEntityModel
     {
-       
+        public List<BehaviorDictionaryViewModel> BehaviourDictionaries { get; set; }
     }
 }

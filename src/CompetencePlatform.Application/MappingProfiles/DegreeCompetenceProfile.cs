@@ -23,8 +23,8 @@ namespace CompetencePlatform.Application.MappingProfiles
         public DegreeCompetenceProfile()
         {
           
-            CreateMap<DegreeCompetence, DegreeCompetenceModel>().ReverseMap(); 
-            CreateMap<DegreeCompetence, CreateDegreeCompetenceModel>().ReverseMap(); 
+            CreateMap<DegreeCompetence, DegreeCompetenceViewModel>().ReverseMap(); 
+            CreateMap<DegreeCompetence, CreateDegreeCompetenceViewModel>().ReverseMap(); 
 
         }
     }

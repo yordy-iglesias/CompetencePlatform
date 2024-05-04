@@ -31,12 +31,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<DegreeCompetenceModel> Create(DegreeCompetenceModel entity)
+        public async Task<DegreeCompetenceViewModel> Create(DegreeCompetenceViewModel entity)
         {
             try
             {
                 var result = await _degreeCompetenceRepository.AddAsync(_mapper.Map<DegreeCompetence>(entity));
-                return _mapper.Map<DegreeCompetenceModel>(result);
+                return _mapper.Map<DegreeCompetenceViewModel>(result);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DegreeCompetenceModel> Delete(int id)
+        public async Task<DegreeCompetenceViewModel> Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _degreeCompetenceRepository.DeleteAsync(result);
-                    return _mapper.Map<DegreeCompetenceModel>(resultDelete);
+                    return _mapper.Map<DegreeCompetenceViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -62,12 +62,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<DegreeCompetenceModel>> Get()
+        public async Task<IEnumerable<DegreeCompetenceViewModel>> Get()
         {
             try
             {
                 var result = await _degreeCompetenceRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<DegreeCompetenceModel>>(result);
+                return _mapper.Map<IEnumerable<DegreeCompetenceViewModel>>(result);
             }
             catch
             {
@@ -75,14 +75,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DegreeCompetenceModel> Get(int id)
+        public async Task<DegreeCompetenceViewModel> Get(int id)
         {
             try
             {
                 var result = await  _degreeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<DegreeCompetenceModel>(result);
+                return _mapper.Map<DegreeCompetenceViewModel>(result);
             }
             catch
             {
@@ -90,7 +90,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<DegreeCompetenceModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<DegreeCompetenceViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<DegreeCompetenceModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<DegreeCompetenceViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -153,7 +153,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DegreeCompetenceModel> Update(DegreeCompetenceModel entity)
+        public async Task<DegreeCompetenceViewModel> Update(DegreeCompetenceViewModel entity)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
 
                 var result = await _degreeCompetenceRepository.UpdateAsync(_mapper.Map<DegreeCompetence>(entity));
-                return _mapper.Map<DegreeCompetenceModel>(result);
+                return _mapper.Map<DegreeCompetenceViewModel>(result);
             }
             catch
             {

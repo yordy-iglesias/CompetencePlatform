@@ -23,8 +23,8 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public KnowledgeProfileProfile()
         {
-            CreateMap<Knowledge, KnowledgeModel>().ReverseMap();
-            CreateMap<Knowledge, CreateKnowledgeModel>().ReverseMap();
+            CreateMap<Knowledge, KnowledgeViewModel>().ReverseMap();
+            CreateMap<Knowledge, CreateKnowledgeViewModel>().ReverseMap();
           
         }
     }

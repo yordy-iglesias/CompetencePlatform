@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Knowledge
 {
-    public class KnowledgeModel : CommonEntityModel
+    public class KnowledgeViewModel : CommonEntityModel
     {
         // public List<Competence_Skill_Motivation_Knowledge_PreferenceModel> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
 

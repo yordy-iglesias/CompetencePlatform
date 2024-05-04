@@ -20,9 +20,9 @@ namespace CompetencePlatform.Application.MappingProfiles
         public CompetenceProfileProfile()
         {
            
-            CreateMap<Core.Entities.CompetenceProfile, CompetenceProfileModel>()
+            CreateMap<Core.Entities.CompetenceProfile, CompetenceProfileViewModel>()
                .ForMember(cpm => cpm.EmployeeProfileName, cp => cp.MapFrom(cd => cd.EmployeeProfile.Name)).ReverseMap();
-            CreateMap<Core.Entities.CompetenceProfile, CreateCompetenceProfileModel>().ReverseMap();
+            CreateMap<Core.Entities.CompetenceProfile, CreateCompetenceProfileViewModel>().ReverseMap();
 
 
         }

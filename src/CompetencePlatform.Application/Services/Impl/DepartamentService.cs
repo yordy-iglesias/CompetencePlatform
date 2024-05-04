@@ -32,12 +32,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<DepartamentModel> Create(DepartamentModel entity)
+        public async Task<DepartamentViewModel> Create(DepartamentViewModel entity)
         {
             try
             {
                 var result = await _departamentRepository.AddAsync(_mapper.Map<Departament>(entity));
-                return _mapper.Map<DepartamentModel>(result);
+                return _mapper.Map<DepartamentViewModel>(result);
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DepartamentModel> Delete(int id)
+        public async Task<DepartamentViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _departamentRepository.DeleteAsync(result);
-                    return _mapper.Map<DepartamentModel>(resultDelete);
+                    return _mapper.Map<DepartamentViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -63,12 +63,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<DepartamentModel>> Get()
+        public async Task<IEnumerable<DepartamentViewModel>> Get()
         {
             try
             {
                 var result = await _departamentRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<DepartamentModel>>(result);
+                return _mapper.Map<IEnumerable<DepartamentViewModel>>(result);
             }
             catch
             {
@@ -76,14 +76,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DepartamentModel> Get(int id)
+        public async Task<DepartamentViewModel> Get(int id)
         {
             try
             {
                 var result = await  _departamentRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<DepartamentModel>(result);
+                return _mapper.Map<DepartamentViewModel>(result);
             }
             catch
             {
@@ -91,7 +91,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<DepartamentModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<DepartamentViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<DepartamentModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<DepartamentViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -156,7 +156,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DepartamentModel> Update(DepartamentModel entity)
+        public async Task<DepartamentViewModel> Update(DepartamentViewModel entity)
         {
             try
             {
@@ -166,7 +166,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Departament");
 
                 var result = await _departamentRepository.UpdateAsync(_mapper.Map<Departament>(entity));
-                return _mapper.Map<DepartamentModel>(result);
+                return _mapper.Map<DepartamentViewModel>(result);
             }
             catch
             {

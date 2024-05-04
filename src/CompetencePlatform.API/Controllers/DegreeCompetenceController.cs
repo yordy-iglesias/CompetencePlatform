@@ -24,31 +24,31 @@ public class DegreeCompetenceController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateDegreeCompetenceModel createDegreeCompetenceModel)
+    public async Task<IActionResult> CreateAsync(CreateDegreeCompetenceViewModel createDegreeCompetenceModel)
     {
-        return Ok(ApiResult<DegreeCompetenceModel>.Success(
+        return Ok(ApiResult<DegreeCompetenceViewModel>.Success(
             await _degreeCompetenceService.Create(createDegreeCompetenceModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateDegreeCompetenceModel createDegreeCompetenceModel)
+    public async Task<IActionResult> Update([FromBody] CreateDegreeCompetenceViewModel createDegreeCompetenceModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<DegreeCompetenceModel>.Success(await _degreeCompetenceService.Update(createDegreeCompetenceModel)));
+        return Ok(ApiResult<DegreeCompetenceViewModel>.Success(await _degreeCompetenceService.Update(createDegreeCompetenceModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<DegreeCompetenceModel>.Success(await _degreeCompetenceService.Delete(id)));
+        return Ok(ApiResult<DegreeCompetenceViewModel>.Success(await _degreeCompetenceService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<DegreeCompetenceModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<DegreeCompetenceViewModel>>.Success(
              await _degreeCompetenceService.GetPagination(options)));
 
     }

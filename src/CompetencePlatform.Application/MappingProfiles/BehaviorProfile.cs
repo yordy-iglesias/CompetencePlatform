@@ -17,7 +17,7 @@ namespace CompetencePlatform.Application.MappingProfiles
         public BehaviorProfile()
         {
          
-            CreateMap<Behavior, BehaviorModel>().ReverseMap();
+            CreateMap<Behavior, BehaviorViewModel>().ReverseMap();
            
                
         }

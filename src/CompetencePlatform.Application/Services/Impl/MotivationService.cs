@@ -33,12 +33,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<MotivationModel> Create(MotivationModel entity)
+        public async Task<MotivationViewModel> Create(MotivationViewModel entity)
         {
             try
             {
                 var result = await _motivationRepository.AddAsync(_mapper.Map<Motivation>(entity));
-                return _mapper.Map<MotivationModel>(result);
+                return _mapper.Map<MotivationViewModel>(result);
             }   
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<MotivationModel> Delete(int id)
+        public async Task<MotivationViewModel> Delete(int id)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _motivationRepository.DeleteAsync(result);
-                    return _mapper.Map<MotivationModel>(resultDelete);
+                    return _mapper.Map<MotivationViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Motivation");
             }
@@ -64,12 +64,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<MotivationModel>> Get()
+        public async Task<IEnumerable<MotivationViewModel>> Get()
         {
             try
             {
                 var result = await _motivationRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<MotivationModel>>(result);
+                return _mapper.Map<IEnumerable<MotivationViewModel>>(result);
             }
             catch
             {
@@ -77,14 +77,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<MotivationModel> Get(int id)
+        public async Task<MotivationViewModel> Get(int id)
         {
             try
             {
                 var result = await  _motivationRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Motivation ");
-                return _mapper.Map<MotivationModel>(result);
+                return _mapper.Map<MotivationViewModel>(result);
             }
             catch
             {
@@ -92,7 +92,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<MotivationModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<MotivationViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<MotivationModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<MotivationViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +154,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<MotivationModel> Update(MotivationModel entity)
+        public async Task<MotivationViewModel> Update(MotivationViewModel entity)
         {
             try
             {
@@ -164,7 +164,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _motivationRepository.UpdateAsync(_mapper.Map<Motivation>(entity));
-                return _mapper.Map<MotivationModel>(result);
+                return _mapper.Map<MotivationViewModel>(result);
             }
             catch
             {

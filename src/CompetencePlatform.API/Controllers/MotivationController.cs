@@ -24,31 +24,31 @@ public class MotivationController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateMotivationModel createMotivationModel)
+    public async Task<IActionResult> CreateAsync(CreateMotivationViewModel createMotivationModel)
     {
-        return Ok(ApiResult<MotivationModel>.Success(
+        return Ok(ApiResult<MotivationViewModel>.Success(
             await _motivationService.Create(createMotivationModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateMotivationModel createMotivationModel)
+    public async Task<IActionResult> Update([FromBody] CreateMotivationViewModel createMotivationModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<MotivationModel>.Success(await _motivationService.Update(createMotivationModel)));
+        return Ok(ApiResult<MotivationViewModel>.Success(await _motivationService.Update(createMotivationModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<MotivationModel>.Success(await _motivationService.Delete(id)));
+        return Ok(ApiResult<MotivationViewModel>.Success(await _motivationService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<MotivationModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<MotivationViewModel>>.Success(
              await _motivationService.GetPagination(options)));
 
     }

@@ -17,14 +17,14 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public C_S_M_K_PProfile()
         {
-            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, C_S_M_K_PModel>()
+            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, C_S_M_K_PViewModel>()
                .ForMember(csmkpm => csmkpm.CompetenceName, csmkp => csmkp.MapFrom(csmkp => csmkp.Competence.Name))
                .ForMember(csmkpm => csmkpm.MotivationName, csmkp => csmkp.MapFrom(csmkp => csmkp.Motivation.Name))
                .ForMember(csmkpm => csmkpm.SkillName, csmkp => csmkp.MapFrom(csmkp => csmkp.Skill.Name))
                .ForMember(csmkpm => csmkpm.KnowledgeName, csmkp => csmkp.MapFrom(csmkp => csmkp.Knowledge.Name))
                .ForMember(csmkpm => csmkpm.PreferenceName, csmkp => csmkp.MapFrom(csmkp => csmkp.Preference.Name)).ReverseMap();
 
-            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, CreateC_S_M_K_PModel>().ReverseMap();
+            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, CreateC_S_M_K_PViewModel>().ReverseMap();
 
 
         }

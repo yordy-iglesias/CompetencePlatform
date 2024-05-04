@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Behaviour
 {
-    public class BehaviorModel : CommonEntityModel
+    public class BehaviorViewModel : CommonEntityModel
     {
         // public List<BehaviorDictionaryModel> BehaviorDictionaries { get; set; }
     }

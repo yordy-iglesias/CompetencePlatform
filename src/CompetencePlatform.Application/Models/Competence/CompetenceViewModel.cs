@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Competence
 {
-    public class CompetenceModel : CommonEntityModel
+    public class CompetenceViewModel : CommonEntityModel
     {
 
         public string CompetenceTypeName { get; set; }

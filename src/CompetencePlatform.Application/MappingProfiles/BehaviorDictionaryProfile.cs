@@ -15,11 +15,11 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public BehaviorDictionaryProfile()
         {
-            CreateMap<BehaviorDictionary, BehaviorDictionaryModel>()
+            CreateMap<BehaviorDictionary, BehaviorDictionaryViewModel>()
             .ForMember(bdm => bdm.BehaviorName, bd => bd.MapFrom(bd => bd.Behavior.Name))
             .ForMember(bdm => bdm.DegreeCompetenceName, bd => bd.MapFrom(bd => bd.DegreeCompetence.Name)).ReverseMap();
 
-            CreateMap<BehaviorDictionary, CreateBehaviorDictionaryModel>().ReverseMap();
+            CreateMap<BehaviorDictionary, CreateBehaviorDictionaryViewModel>().ReverseMap();
 
 
         }

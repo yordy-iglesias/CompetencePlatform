@@ -31,12 +31,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<C_S_M_K_PModel> Create(C_S_M_K_PModel entity)
+        public async Task<C_S_M_K_PViewModel> Create(CreateC_S_M_K_PViewModel entity)
         {
             try
             {
                 var result = await _cSMKPRepository.AddAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
-                return _mapper.Map<C_S_M_K_PModel>(result);
+                return _mapper.Map<C_S_M_K_PViewModel>(result);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<C_S_M_K_PModel> Delete(int id)
+        public async Task<C_S_M_K_PViewModel> Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _cSMKPRepository.DeleteAsync(result);
-                    return _mapper.Map<C_S_M_K_PModel>(resultDelete);
+                    return _mapper.Map<C_S_M_K_PViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Skill Motivation Knowledge Preference");
             }
@@ -62,12 +62,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<C_S_M_K_PModel>> Get()
+        public async Task<IEnumerable<C_S_M_K_PViewModel>> Get()
         {
             try
             {
                 var result = await _cSMKPRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<C_S_M_K_PModel>>(result);
+                return _mapper.Map<IEnumerable<C_S_M_K_PViewModel>>(result);
             }
             catch
             {
@@ -75,14 +75,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<C_S_M_K_PModel> Get(int id)
+        public async Task<CreateC_S_M_K_PViewModel> Get(int id)
         {
             try
             {
                 var result = await _cSMKPRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Skill Motivation Knowledge Preference");
-                return _mapper.Map<C_S_M_K_PModel>(result);
+                return _mapper.Map<CreateC_S_M_K_PViewModel>(result);
             }
             catch
             {
@@ -90,7 +90,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<C_S_M_K_PModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<C_S_M_K_PViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<C_S_M_K_PModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<C_S_M_K_PViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +154,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<C_S_M_K_PModel> Update(C_S_M_K_PModel entity)
+        public async Task<C_S_M_K_PViewModel> Update(CreateC_S_M_K_PViewModel entity)
         {
             try
             {
@@ -164,7 +164,23 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
 
                 var result = await _cSMKPRepository.UpdateAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
-                return _mapper.Map<C_S_M_K_PModel>(result);
+                return _mapper.Map<C_S_M_K_PViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<C_S_M_K_PViewModel> GetDetails(int id)
+        {
+
+            try
+            {
+                var result = await _cSMKPRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<C_S_M_K_PViewModel>(result);
             }
             catch
             {

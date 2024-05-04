@@ -32,12 +32,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeCompetenceModel> Create(EmployeeCompetenceModel entity)
+        public async Task<EmployeeCompetenceViewModel> Create(EmployeeCompetenceViewModel entity)
         {
             try
             {
                 var result = await _employeeCompetenceRepository.AddAsync(_mapper.Map<EmployeeCompetence>(entity));
-                return _mapper.Map<EmployeeCompetenceModel>(result);
+                return _mapper.Map<EmployeeCompetenceViewModel>(result);
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeCompetenceModel> Delete(int id)
+        public async Task<EmployeeCompetenceViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _employeeCompetenceRepository.DeleteAsync(result);
-                    return _mapper.Map<EmployeeCompetenceModel>(resultDelete);
+                    return _mapper.Map<EmployeeCompetenceViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -63,12 +63,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<EmployeeCompetenceModel>> Get()
+        public async Task<IEnumerable<EmployeeCompetenceViewModel>> Get()
         {
             try
             {
                 var result = await _employeeCompetenceRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<EmployeeCompetenceModel>>(result);
+                return _mapper.Map<IEnumerable<EmployeeCompetenceViewModel>>(result);
             }
             catch
             {
@@ -76,14 +76,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeCompetenceModel> Get(int id)
+        public async Task<EmployeeCompetenceViewModel> Get(int id)
         {
             try
             {
                 var result = await  _employeeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<EmployeeCompetenceModel>(result);
+                return _mapper.Map<EmployeeCompetenceViewModel>(result);
             }
             catch
             {
@@ -91,7 +91,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<EmployeeCompetenceModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<EmployeeCompetenceViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<EmployeeCompetenceModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<EmployeeCompetenceViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -152,7 +152,7 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<EmployeeCompetenceModel> Update(EmployeeCompetenceModel entity)
+        public async Task<EmployeeCompetenceViewModel> Update(EmployeeCompetenceViewModel entity)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Departament");
 
                 var result = await _employeeCompetenceRepository.UpdateAsync(_mapper.Map<EmployeeCompetence>(entity));
-                return _mapper.Map<EmployeeCompetenceModel>(result);
+                return _mapper.Map<EmployeeCompetenceViewModel>(result);
             }
             catch
             {

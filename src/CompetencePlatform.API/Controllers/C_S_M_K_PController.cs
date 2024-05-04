@@ -21,31 +21,31 @@ public class C_S_M_K_PController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateC_S_M_K_PModel createC_S_M_K_PModel)
+    public async Task<IActionResult> CreateAsync(CreateC_S_M_K_PViewModel createC_S_M_K_PModel)
     {
-        return Ok(ApiResult<C_S_M_K_PModel>.Success(
+        return Ok(ApiResult<C_S_M_K_PViewModel>.Success(
             await _c_S_M_K_PService.Create(createC_S_M_K_PModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateC_S_M_K_PModel createC_S_M_K_PModel)
+    public async Task<IActionResult> Update([FromBody] CreateC_S_M_K_PViewModel createC_S_M_K_PModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<C_S_M_K_PModel>.Success(await _c_S_M_K_PService.Update(createC_S_M_K_PModel)));
+        return Ok(ApiResult<C_S_M_K_PViewModel>.Success(await _c_S_M_K_PService.Update(createC_S_M_K_PModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<C_S_M_K_PModel>.Success(await _c_S_M_K_PService.Delete(id)));
+        return Ok(ApiResult<C_S_M_K_PViewModel>.Success(await _c_S_M_K_PService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<C_S_M_K_PModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<C_S_M_K_PViewModel>>.Success(
              await _c_S_M_K_PService.GetPagination(options)));
 
     }

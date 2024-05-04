@@ -31,12 +31,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<BehaviorDictionaryModel> Create(CreateBehaviorDictionaryModel entity)
+        public async Task<BehaviorDictionaryViewModel> Create(CreateBehaviorDictionaryViewModel entity)
         {
             try
             {
                 var result = await _behaviorDictionaryRepository.AddAsync(_mapper.Map<BehaviorDictionary>(entity));
-                return _mapper.Map<BehaviorDictionaryModel>(result);
+                return _mapper.Map<BehaviorDictionaryViewModel>(result);
             }
             catch (Exception)
             {
@@ -44,7 +44,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<BehaviorDictionaryModel> Delete(int id)
+        public async Task<BehaviorDictionaryViewModel> Delete(int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _behaviorDictionaryRepository.DeleteAsync(result);
-                    return _mapper.Map<BehaviorDictionaryModel>(resultDelete);
+                    return _mapper.Map<BehaviorDictionaryViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Behavior Dictionary");
             }
@@ -62,12 +62,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<BehaviorDictionaryModel>> Get()
+        public async Task<IEnumerable<BehaviorDictionaryViewModel>> Get()
         {
             try
             {
                 var result = await _behaviorDictionaryRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<BehaviorDictionaryModel>>(result);
+                return _mapper.Map<IEnumerable<BehaviorDictionaryViewModel>>(result);
             }
             catch
             {
@@ -75,14 +75,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CreateBehaviorDictionaryModel> Get(int id)
+        public async Task<CreateBehaviorDictionaryViewModel> Get(int id)
         {
             try
             {
                 var result = await _behaviorDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Behavior Dictionary");
-                return _mapper.Map<CreateBehaviorDictionaryModel>(result);
+                return _mapper.Map<CreateBehaviorDictionaryViewModel>(result);
             }
             catch
             {
@@ -90,14 +90,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async  Task<BehaviorDictionaryModel> GetDetails(int id)
+        public async  Task<BehaviorDictionaryViewModel> GetDetails(int id)
         {
             try
             {
                 var result = await _behaviorDictionaryRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este elemento");
-                return _mapper.Map<BehaviorDictionaryModel>(result);
+                return _mapper.Map<BehaviorDictionaryViewModel>(result);
             }
             catch
             {
@@ -105,7 +105,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<BehaviorDictionaryModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<BehaviorDictionaryViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<BehaviorDictionaryModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<BehaviorDictionaryViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -162,7 +162,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<BehaviorDictionaryModel> Update(CreateBehaviorDictionaryModel entity)
+        public async Task<BehaviorDictionaryViewModel> Update(CreateBehaviorDictionaryViewModel entity)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Behaviour Dictionary");
 
                 var result = await _behaviorDictionaryRepository.UpdateAsync(_mapper.Map<BehaviorDictionary>(entity));
-                return _mapper.Map<BehaviorDictionaryModel>(result);
+                return _mapper.Map<BehaviorDictionaryViewModel>(result);
             }
             catch
             {

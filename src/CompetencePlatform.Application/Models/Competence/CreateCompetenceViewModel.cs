@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models.CompetenceType
+namespace CompetencePlatform.Application.Models
 {
-    public class CompetenceTypeModel : CommonEntityModel
+    public class CreateCompetenceViewModel : CompetenceViewModel
     {
-        public List<CompetenceModel> Competences { get; set; }
+        
+        public int? CompetenceTypeId { get; set; }
+       
     }
 }

@@ -32,12 +32,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeProfileModel> Create(EmployeeProfileModel entity)
+        public async Task<EmployeeProfileViewModel> Create(EmployeeProfileViewModel entity)
         {
             try
             {
                 var result = await _employeeProfileRepository.AddAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<EmployeeProfileModel>(result);
+                return _mapper.Map<EmployeeProfileViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeProfileModel> Delete(int id)
+        public async Task<EmployeeProfileViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _employeeProfileRepository.DeleteAsync(result);
-                    return _mapper.Map<EmployeeProfileModel>(resultDelete);
+                    return _mapper.Map<EmployeeProfileViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Competence Dictionary ");
             }
@@ -63,12 +63,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<EmployeeProfileModel>> Get()
+        public async Task<IEnumerable<EmployeeProfileViewModel>> Get()
         {
             try
             {
                 var result = await _employeeProfileRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<EmployeeProfileModel>>(result);
+                return _mapper.Map<IEnumerable<EmployeeProfileViewModel>>(result);
             }
             catch
             {
@@ -76,14 +76,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeProfileModel> Get(int id)
+        public async Task<EmployeeProfileViewModel> Get(int id)
         {
             try
             {
                 var result = await  _employeeProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
-                return _mapper.Map<EmployeeProfileModel>(result);
+                return _mapper.Map<EmployeeProfileViewModel>(result);
             }
             catch
             {
@@ -91,7 +91,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<EmployeeProfileModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<EmployeeProfileViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<EmployeeProfileModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<EmployeeProfileViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -149,7 +149,7 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<EmployeeProfileModel> Update(EmployeeProfileModel entity)
+        public async Task<EmployeeProfileViewModel> Update(EmployeeProfileViewModel entity)
         {
             try
             {
@@ -159,7 +159,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _employeeProfileRepository.UpdateAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<EmployeeProfileModel>(result);
+                return _mapper.Map<EmployeeProfileViewModel>(result);
             }
             catch
             {

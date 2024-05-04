@@ -25,31 +25,31 @@ public class EmployeeCompetenceController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateEmployeeCompetenceModel createEmployeeCompetenceModel)
+    public async Task<IActionResult> CreateAsync(CreateEmployeeCompetenceViewModel createEmployeeCompetenceModel)
     {
-        return Ok(ApiResult<EmployeeCompetenceModel>.Success(
+        return Ok(ApiResult<EmployeeCompetenceViewModel>.Success(
             await _employeeCompetenceService.Create(createEmployeeCompetenceModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateEmployeeCompetenceModel createEmployeeCompetenceModel)
+    public async Task<IActionResult> Update([FromBody] CreateEmployeeCompetenceViewModel createEmployeeCompetenceModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<EmployeeCompetenceModel>.Success(await _employeeCompetenceService.Update(createEmployeeCompetenceModel)));
+        return Ok(ApiResult<EmployeeCompetenceViewModel>.Success(await _employeeCompetenceService.Update(createEmployeeCompetenceModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<EmployeeCompetenceModel>.Success(await _employeeCompetenceService.Delete(id)));
+        return Ok(ApiResult<EmployeeCompetenceViewModel>.Success(await _employeeCompetenceService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<EmployeeCompetenceModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<EmployeeCompetenceViewModel>>.Success(
              await _employeeCompetenceService.GetPagination(options)));
 
     }
