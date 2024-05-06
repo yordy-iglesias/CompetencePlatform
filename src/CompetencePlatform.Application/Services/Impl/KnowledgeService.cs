@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.Knowledge;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
@@ -33,7 +34,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<KnowledgeViewModel> Create(KnowledgeViewModel entity)
+        public async Task<KnowledgeViewModel> Create(CreateKnowledgeViewModel entity)
         {
             try
             {
@@ -77,13 +78,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<KnowledgeViewModel> Get(int id)
+        public async Task<CreateKnowledgeViewModel> Get(int id)
         {
             try
             {
                 var result = await  _knowledgeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateKnowledgeViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<KnowledgeViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _knowledgeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<KnowledgeViewModel>(result);
             }
             catch
@@ -156,7 +172,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<KnowledgeViewModel> Update(KnowledgeViewModel entity)
+        public async Task<KnowledgeViewModel> Update(CreateKnowledgeViewModel entity)
         {
             try
             {

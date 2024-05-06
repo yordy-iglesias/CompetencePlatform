@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IMotivationService : ICrudInterface<MotivationViewModel,DataTableServerSide>
+    public interface IMotivationService : ICrudInterface<MotivationViewModel,CreateMotivationViewModel,DataTableServerSide>
     {
     }
 }

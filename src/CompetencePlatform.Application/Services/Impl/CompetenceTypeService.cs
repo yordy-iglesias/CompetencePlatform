@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Competence;
 using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -31,7 +33,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<CompetenceTypeViewModel> Create(CompetenceTypeViewModel entity)
+        public async Task<CompetenceTypeViewModel> Create(CreateCompetenceTypeViewModel entity)
         {
             try
             {
@@ -75,13 +77,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceTypeViewModel> Get(int id)
+        public async Task<CreateCompetenceTypeViewModel> Get(int id)
         {
             try
             {
                 var result = await _competenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateCompetenceTypeViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<CompetenceTypeViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _competenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<CompetenceTypeViewModel>(result);
             }
             catch
@@ -153,7 +170,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceTypeViewModel> Update(CompetenceTypeViewModel entity)
+        public async Task<CompetenceTypeViewModel> Update(CreateCompetenceTypeViewModel entity)
         {
             try
             {

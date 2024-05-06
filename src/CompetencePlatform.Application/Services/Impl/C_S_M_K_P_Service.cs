@@ -18,13 +18,13 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services.Impl
 {
-    public class CompetenceSkillMotivationKnowledgePreferenceService : IC_S_M_K_PService
+    public class C_S_M_K_P_Service : IC_S_M_K_PService
     {
         private readonly IC_S_M_K_PRepository _cSMKPRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public CompetenceSkillMotivationKnowledgePreferenceService(IC_S_M_K_PRepository cSMKPRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        public C_S_M_K_P_Service(IC_S_M_K_PRepository cSMKPRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _cSMKPRepository = cSMKPRepository;
             _mapper = mapper;

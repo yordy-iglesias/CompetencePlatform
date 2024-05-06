@@ -2,7 +2,9 @@
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.Competence;
+using CompetencePlatform.Application.Models.CompetenceProfile;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -31,7 +33,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<CompetenceViewModel> Create(CompetenceViewModel entity)
+        public async Task<CompetenceViewModel> Create(CreateCompetenceViewModel entity)
         {
             try
             {
@@ -75,13 +77,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceViewModel> Get(int id)
+        public async Task<CreateCompetenceViewModel> Get(int id)
         {
             try
             {
                 var result = await _competenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateCompetenceViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<CompetenceViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _competenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<CompetenceViewModel>(result);
             }
             catch
@@ -156,7 +173,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceViewModel> Update(CompetenceViewModel entity)
+        public async Task<CompetenceViewModel> Update(CreateCompetenceViewModel entity)
         {
             try
             {

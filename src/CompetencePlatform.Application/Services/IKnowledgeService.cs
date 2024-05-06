@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IKnowledgeService : ICrudInterface<KnowledgeViewModel,DataTableServerSide>
+    public interface IKnowledgeService : ICrudInterface<KnowledgeViewModel,CreateKnowledgeViewModel,DataTableServerSide>
     {
     }
 }

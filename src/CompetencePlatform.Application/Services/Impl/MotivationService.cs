@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.Motivation;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
@@ -33,7 +34,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<MotivationViewModel> Create(MotivationViewModel entity)
+        public async Task<MotivationViewModel> Create(CreateMotivationViewModel entity)
         {
             try
             {
@@ -76,15 +77,29 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+        public async Task<MotivationViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _motivationRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<MotivationViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
-        public async Task<MotivationViewModel> Get(int id)
+        public async Task<CreateMotivationViewModel> Get(int id)
         {
             try
             {
                 var result = await  _motivationRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Motivation ");
-                return _mapper.Map<MotivationViewModel>(result);
+                return _mapper.Map<CreateMotivationViewModel>(result);
             }
             catch
             {
@@ -154,7 +169,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<MotivationViewModel> Update(MotivationViewModel entity)
+        public async Task<MotivationViewModel> Update(CreateMotivationViewModel entity)
         {
             try
             {

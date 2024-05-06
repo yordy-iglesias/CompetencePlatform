@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -31,7 +33,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<DegreeCompetenceViewModel> Create(DegreeCompetenceViewModel entity)
+        public async Task<DegreeCompetenceViewModel> Create(CreateDegreeCompetenceViewModel entity)
         {
             try
             {
@@ -75,13 +77,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DegreeCompetenceViewModel> Get(int id)
+        public async Task<CreateDegreeCompetenceViewModel> Get(int id)
         {
             try
             {
                 var result = await  _degreeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateDegreeCompetenceViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DegreeCompetenceViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _degreeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<DegreeCompetenceViewModel>(result);
             }
             catch
@@ -153,7 +170,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DegreeCompetenceViewModel> Update(DegreeCompetenceViewModel entity)
+        public async Task<DegreeCompetenceViewModel> Update(CreateDegreeCompetenceViewModel entity)
         {
             try
             {

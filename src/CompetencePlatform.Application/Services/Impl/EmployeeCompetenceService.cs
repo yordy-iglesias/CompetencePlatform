@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.EmployeeCompetence;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -32,7 +34,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeCompetenceViewModel> Create(EmployeeCompetenceViewModel entity)
+        public async Task<EmployeeCompetenceViewModel> Create(CreateEmployeeCompetenceViewModel entity)
         {
             try
             {
@@ -76,13 +78,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeCompetenceViewModel> Get(int id)
+        public async Task<CreateEmployeeCompetenceViewModel> Get(int id)
         {
             try
             {
                 var result = await  _employeeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateEmployeeCompetenceViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<EmployeeCompetenceViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _employeeCompetenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<EmployeeCompetenceViewModel>(result);
             }
             catch
@@ -152,7 +169,7 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<EmployeeCompetenceViewModel> Update(EmployeeCompetenceViewModel entity)
+        public async Task<EmployeeCompetenceViewModel> Update(CreateEmployeeCompetenceViewModel entity)
         {
             try
             {

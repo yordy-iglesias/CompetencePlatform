@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.EmployeeProfile;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -32,7 +34,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<EmployeeProfileViewModel> Create(EmployeeProfileViewModel entity)
+        public async Task<EmployeeProfileViewModel> Create(CreateEmployeeProfileViewModel entity)
         {
             try
             {
@@ -76,13 +78,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<EmployeeProfileViewModel> Get(int id)
+        public async Task<CreateEmployeeProfileViewModel> Get(int id)
         {
             try
             {
                 var result = await  _employeeProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateEmployeeProfileViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<EmployeeProfileViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _employeeProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<EmployeeProfileViewModel>(result);
             }
             catch
@@ -149,7 +166,7 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<EmployeeProfileViewModel> Update(EmployeeProfileViewModel entity)
+        public async Task<EmployeeProfileViewModel> Update(CreateEmployeeProfileViewModel entity)
         {
             try
             {
@@ -159,7 +176,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _employeeProfileRepository.UpdateAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<EmployeeProfileViewModel>(result);
+                return _mapper.Map<CreateEmployeeProfileViewModel>(result);
             }
             catch
             {

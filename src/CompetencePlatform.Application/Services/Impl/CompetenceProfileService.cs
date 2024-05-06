@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.CompetenceDictionary;
 using CompetencePlatform.Application.Models.CompetenceProfile;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -31,7 +33,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<CompetenceProfileViewModel> Create(CompetenceProfileViewModel entity)
+        public async Task<CompetenceProfileViewModel> Create(CreateCompetenceProfileViewModel entity)
         {
             try
             {
@@ -75,13 +77,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<CompetenceProfileViewModel> Get(int id)
+        public async Task<CreateCompetenceProfileViewModel> Get(int id)
         {
             try
             {
                 var result = await _competenceProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                return _mapper.Map<CreateCompetenceProfileViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<CompetenceProfileViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _competenceProfileRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<CompetenceProfileViewModel>(result);
             }
             catch
@@ -145,7 +162,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<CompetenceProfileViewModel> Update(CompetenceProfileViewModel entity)
+        public async Task<CompetenceProfileViewModel> Update(CreateCompetenceProfileViewModel entity)
         {
             try
             {

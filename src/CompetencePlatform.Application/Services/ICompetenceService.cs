@@ -1,4 +1,5 @@
-﻿using CompetencePlatform.Application.Models.Competence;
+﻿using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Competence;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ICompetenceService : ICrudInterface<CompetenceViewModel,DataTableServerSide>
+    public interface ICompetenceService : ICrudInterface<CompetenceViewModel,CreateCompetenceViewModel,DataTableServerSide>
     {
     }
 }
