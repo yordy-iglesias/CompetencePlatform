@@ -33,7 +33,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<OrganizationViewModel> Create(OrganizationViewModel entity)
+        public async Task<OrganizationViewModel> Create(CreateOrganizationViewModel entity)
         {
             try
             {
@@ -77,19 +77,24 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<OrganizationViewModel> Get(int id)
+        public async Task<CreateOrganizationViewModel> Get(int id)
         {
             try
             {
                 var result = await  _organizationRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Motivation ");
-                return _mapper.Map<OrganizationViewModel>(result);
+                return _mapper.Map<CreateOrganizationViewModel>(result);
             }
             catch
             {
                 throw;
             }
+        }
+
+        public Task<OrganizationViewModel> GetDetails(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<DataTablePagin<OrganizationViewModel>> GetPagination(DataTableServerSide options)
@@ -155,7 +160,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<OrganizationViewModel> Update(OrganizationViewModel entity)
+        public async Task<OrganizationViewModel> Update(CreateOrganizationViewModel entity)
         {
             try
             {

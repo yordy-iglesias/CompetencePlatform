@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IOrganizationService : ICrudInterface<OrganizationViewModel,DataTableServerSide>
+    public interface IOrganizationService : ICrudInterface<OrganizationViewModel,CreateOrganizationViewModel,DataTableServerSide>
     {
     }
 }

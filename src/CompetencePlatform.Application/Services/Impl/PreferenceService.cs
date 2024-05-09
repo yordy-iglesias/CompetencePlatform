@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Motivation;
+using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,7 +34,7 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<PreferenceModel> Create(PreferenceModel entity)
+        public async Task<PreferenceModel> Create(CreatePreferenceModel entity)
         {
             try
             {
@@ -76,13 +78,28 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<PreferenceModel> Get(int id)
+        public async Task<CreatePreferenceModel> Get(int id)
         {
             try
             {
                 var result = await  _preferenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Preferencia ");
+                return _mapper.Map<CreatePreferenceModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<PreferenceModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _preferenceRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
                 return _mapper.Map<PreferenceModel>(result);
             }
             catch
@@ -154,7 +171,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<PreferenceModel> Update(PreferenceModel entity)
+        public async Task<PreferenceModel> Update(CreatePreferenceModel entity)
         {
             try
             {

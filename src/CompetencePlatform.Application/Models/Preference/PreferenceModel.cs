@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompetencePlatform.Application.Models
+namespace CompetencePlatform.Application.Models.Preference
 {
-    public class PreferenceModel:CommonEntityModel
+    public class PreferenceModel : CommonEntityModel
     {
+
         
-        public int? PreferenceTypeId { get; set; }
         public string PreferenceTypeName { get; set; }
         //public List<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
     }

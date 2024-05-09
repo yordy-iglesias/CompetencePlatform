@@ -9,6 +9,7 @@ using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.Departament;
 using CompetencePlatform.Application.Models.Organization;
+using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Application.Models.TodoItem;
 using CompetencePlatform.Core.Entities;
 using System;

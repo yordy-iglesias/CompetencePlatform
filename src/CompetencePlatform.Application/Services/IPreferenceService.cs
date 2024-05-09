@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IPreferenceService : ICrudInterface<PreferenceModel,DataTableServerSide>
+    public interface IPreferenceService : ICrudInterface<PreferenceModel,CreatePreferenceModel,DataTableServerSide>
     {
     }
 }
