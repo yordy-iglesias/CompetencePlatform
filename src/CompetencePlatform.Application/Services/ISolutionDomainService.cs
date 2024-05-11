@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.SolutionDomain;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ISolutionDomainService : ICrudInterface<SolutionDomainModel, DataTableServerSide>
+    public interface ISolutionDomainService : ICrudInterface<SolutionDomainViewModel,CreateSolutionDomainViewModel, DataTableServerSide>
     {
     }
 }

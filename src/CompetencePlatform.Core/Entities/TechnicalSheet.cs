@@ -28,6 +28,9 @@ namespace CompetencePlatform.Core.Entities
         [Required]
         public string InitialTechnicalProposal { get; set; }
 
+        
+        public int? ProjectId { get; set; }
+        
         public virtual Project Project { get; set; }
 
         /// <summary>

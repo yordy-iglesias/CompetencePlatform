@@ -1,4 +1,5 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.TechnicalSheet;
+using CompetencePlatform.Application.Models.TechnicalSheetCompose;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ITechnicalSheetService : ICrudInterface<TechnicalSheetModel,DataTableServerSide>
+    public interface ITechnicalSheetService : ICrudInterface<TechnicalSheetViewModel, CreateTechnicalSheetViewModel, DataTableServerSide>
     {
     }
 }

@@ -54,10 +54,22 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
         //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         //Configuracion uno a uno con Project y TecnicalSheet
-        builder.Entity<Project>()
-            .HasOne(b => b.TechnicalSheet)
-            .WithOne(ts => ts.Project)
-            .HasForeignKey<Project>(p => p.TechnicalSheetId);
+       // modelBuilder.Entity<Blog>()
+       //.HasOne(e => e.Header)
+       //.WithOne(e => e.Blog)
+       //.HasForeignKey<BlogHeader>("BlogId")
+       //.IsRequired();
+        builder.Entity<TechnicalSheet>()
+            .HasOne(b => b.Project)
+            .WithOne(ts => ts.TechnicalSheet)
+            .HasForeignKey<Project>("ProjectId")
+            .IsRequired(true);
+
+        //builder.Entity<Project>()
+        //    .HasOne(b => b.TechnicalSheet)
+        //    .WithOne(ts => ts.Project)
+        //    .HasForeignKey<Project>(p => p.TechnicalSheetId)
+        //    .IsRequired(true);
         base.OnModelCreating(builder);
 
     }

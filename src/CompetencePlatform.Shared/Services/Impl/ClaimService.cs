@@ -22,5 +22,9 @@ namespace CompetencePlatform.Shared.Services.Impl
         {
             return _httpContextAccessor.HttpContext?.User?.FindFirst(key)?.Value;
         }
+        public string GetUserNameFromIdentity()
+        {
+            return _httpContextAccessor.HttpContext?.User?.Identity.Name;
+        }
     }
 }

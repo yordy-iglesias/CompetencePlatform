@@ -25,31 +25,31 @@ public class PreferenceController : ApiController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreatePreferenceModel createPreferenceModel)
+    public async Task<IActionResult> CreateAsync(CreatePreferenceViewModel createPreferenceModel)
     {
-        return Ok(ApiResult<PreferenceModel>.Success(
+        return Ok(ApiResult<PreferenceViewModel>.Success(
             await _preferenceService.Create(createPreferenceModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreatePreferenceModel createPreferenceModel)
+    public async Task<IActionResult> Update([FromBody] CreatePreferenceViewModel createPreferenceModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<PreferenceModel>.Success(await _preferenceService.Update(createPreferenceModel)));
+        return Ok(ApiResult<PreferenceViewModel>.Success(await _preferenceService.Update(createPreferenceModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<PreferenceModel>.Success(await _preferenceService.Delete(id)));
+        return Ok(ApiResult<PreferenceViewModel>.Success(await _preferenceService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<PreferenceModel>>.Success(
+        return Ok(ApiResult<DataTablePagin<PreferenceViewModel>>.Success(
              await _preferenceService.GetPagination(options)));
 
     }

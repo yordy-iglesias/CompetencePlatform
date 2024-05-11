@@ -11,7 +11,7 @@ namespace CompetencePlatform.Core.DataAccess.Repositories
 {
     public interface IUserRepository : IBaseRepository<ApplicationUser> {
         Task<List<IdentityRole>> GetRolByIdUser(string idUser);
-        Task<List<IdentityRole>> GetRols();
+        //Task<List<IdentityRole>> GetRols();
     }
     
 }

@@ -12,7 +12,7 @@ namespace CompetencePlatform.Core.Entities
     public  class Project : CommonEntity
     {
         
-        public int? TechnicalSheetId { get; set; }
+        public int TechnicalSheetId { get; set; }
         public virtual TechnicalSheet TechnicalSheet { get; set; }
 
         

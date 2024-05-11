@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.Resposability;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IResponsabilityService : ICrudInterface<ResponsabilityModel,DataTableServerSide>
+    public interface IResponsabilityService : ICrudInterface<ResponsabilityViewModel,CreateResponsabilityViewModel,DataTableServerSide>
     {
     }
 }

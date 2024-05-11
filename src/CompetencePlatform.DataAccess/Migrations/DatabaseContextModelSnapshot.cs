@@ -41,11 +41,23 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -101,7 +113,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -146,7 +158,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("DegreeCompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -184,7 +196,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -231,7 +243,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -269,7 +281,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("EmployeeProfileId")
@@ -307,7 +319,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -349,7 +361,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -405,7 +417,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -444,7 +456,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -488,7 +500,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("DepartamentId")
@@ -552,7 +564,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int?>("EmployeeId")
@@ -590,7 +602,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -634,7 +646,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -673,7 +685,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -712,7 +724,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -759,7 +771,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -803,7 +815,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -842,7 +854,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -856,7 +868,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TechnicalSheetId")
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TechnicalSheetId")
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
@@ -867,9 +882,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TechnicalSheetId")
-                        .IsUnique()
-                        .HasFilter("[TechnicalSheetId] IS NOT NULL");
+                    b.HasIndex("ProjectId")
+                        .IsUnique();
 
                     b.ToTable("Projects");
                 });
@@ -888,7 +902,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -932,7 +946,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -973,7 +987,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -1017,7 +1031,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -1056,7 +1070,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -1103,7 +1117,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -1141,7 +1155,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Description")
@@ -1180,7 +1194,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("InitialTechnicalProposal")
@@ -1189,6 +1203,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Scope")
                         .IsRequired()
@@ -1228,7 +1245,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Delete")
+                    b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<int>("EmployeeProfileId")
@@ -1549,7 +1566,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.TechnicalSheet", "TechnicalSheet")
                         .WithOne("Project")
-                        .HasForeignKey("CompetencePlatform.Core.Entities.Project", "TechnicalSheetId");
+                        .HasForeignKey("CompetencePlatform.Core.Entities.Project", "ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TechnicalSheet");
                 });

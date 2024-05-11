@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Behaviour;
+using CompetencePlatform.Application.Models.ProjectTeam;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<ProjectTeamModel> Create(ProjectTeamModel entity)
+        public async Task<ProjectTeamViewModel> Create(CreateProjectTeamViewModel entity)
         {
             try
             {
                 var result = await _projectTeamRepository.AddAsync(_mapper.Map<ProjectTeam>(entity));
-                return _mapper.Map<ProjectTeamModel>(result);
+                return _mapper.Map<ProjectTeamViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ProjectTeamModel> Delete(int id)
+        public async Task<ProjectTeamViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _projectTeamRepository.DeleteAsync(result);
-                    return _mapper.Map<ProjectTeamModel>(resultDelete);
+                    return _mapper.Map<ProjectTeamViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el project team");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<ProjectTeamModel>> Get()
+        public async Task<IEnumerable<ProjectTeamViewModel>> Get()
         {
             try
             {
                 var result = await _projectTeamRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<ProjectTeamModel>>(result);
+                return _mapper.Map<IEnumerable<ProjectTeamViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ProjectTeamModel> Get(int id)
+        public async Task<CreateProjectTeamViewModel> Get(int id)
         {
             try
             {
                 var result = await _projectTeamRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Proeject team ");
-                return _mapper.Map<ProjectTeamModel>(result);
+                return _mapper.Map<CreateProjectTeamViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<ProjectTeamModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<ProjectTeamViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -136,7 +138,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<ProjectTeamModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<ProjectTeamViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -151,7 +153,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<ProjectTeamModel> Update(ProjectTeamModel entity)
+        public async Task<ProjectTeamViewModel> Update(CreateProjectTeamViewModel entity)
         {
             try
             {
@@ -161,7 +163,22 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Project team");
 
                 var result = await _projectTeamRepository.UpdateAsync(_mapper.Map<ProjectTeam>(entity));
-                return _mapper.Map<ProjectTeamModel>(result);
+                return _mapper.Map<ProjectTeamViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<ProjectTeamViewModel> GetDetails(int id)
+        {
+
+            try
+            {
+                var result = await _projectTeamRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<ProjectTeamViewModel>(result);
             }
             catch
             {

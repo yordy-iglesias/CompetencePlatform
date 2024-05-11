@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Resposability;
+using CompetencePlatform.Application.Models.SkillType;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<SkillTypeModel> Create(SkillTypeModel entity)
+        public async Task<SkillTypeViewModel> Create(CreateSkillTypeViewModel entity)
         {
             try
             {
                 var result = await _skillTypeRepository.AddAsync(_mapper.Map<SkillType>(entity));
-                return _mapper.Map<SkillTypeModel>(result);
+                return _mapper.Map<SkillTypeViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SkillTypeModel> Delete(int id)
+        public async Task<SkillTypeViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _skillTypeRepository.DeleteAsync(result);
-                    return _mapper.Map<SkillTypeModel>(resultDelete);
+                    return _mapper.Map<SkillTypeViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el skill type");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<SkillTypeModel>> Get()
+        public async Task<IEnumerable<SkillTypeViewModel>> Get()
         {
             try
             {
                 var result = await _skillTypeRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<SkillTypeModel>>(result);
+                return _mapper.Map<IEnumerable<SkillTypeViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SkillTypeModel> Get(int id)
+        public async Task<CreateSkillTypeViewModel> Get(int id)
         {
             try
             {
                 var result = await _skillTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Skill Type");
-                return _mapper.Map<SkillTypeModel>(result);
+                return _mapper.Map<CreateSkillTypeViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<SkillTypeModel>> GetPagination(DataTableServerSide options)
+        public async Task<SkillTypeViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _skillTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<SkillTypeViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<SkillTypeViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +148,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<SkillTypeModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<SkillTypeViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +171,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SkillTypeModel> Update(SkillTypeModel entity)
+        public async Task<SkillTypeViewModel> Update(CreateSkillTypeViewModel entity)
         {
             try
             {
@@ -164,12 +181,14 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Responsability");
 
                 var result = await _skillTypeRepository.UpdateAsync(_mapper.Map<SkillType>(entity));
-                return _mapper.Map<SkillTypeModel>(result);
+                return _mapper.Map<SkillTypeViewModel>(result);
             }
             catch
             {
                 throw;
             }
         }
+
+        
     }
 }

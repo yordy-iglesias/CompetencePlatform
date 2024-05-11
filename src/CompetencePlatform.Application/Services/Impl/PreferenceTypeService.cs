@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Preference;
+using CompetencePlatform.Application.Models.PreferenceType;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<PreferenceTypeModel> Create(PreferenceTypeModel entity)
+        public async Task<PreferenceTypeViewModel> Create(CreatePreferenceTypeViewModel entity)
         {
             try
             {
                 var result = await _preferenceTypeRepository.AddAsync(_mapper.Map<PreferenceType>(entity));
-                return _mapper.Map<PreferenceTypeModel>(result);
+                return _mapper.Map<PreferenceTypeViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<PreferenceTypeModel> Delete(int id)
+        public async Task<PreferenceTypeViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _preferenceTypeRepository.DeleteAsync(result);
-                    return _mapper.Map<PreferenceTypeModel>(resultDelete);
+                    return _mapper.Map<PreferenceTypeViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra la preferencia");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<PreferenceTypeModel>> Get()
+        public async Task<IEnumerable<PreferenceTypeViewModel>> Get()
         {
             try
             {
                 var result = await _preferenceTypeRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<PreferenceTypeModel>>(result);
+                return _mapper.Map<IEnumerable<PreferenceTypeViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<PreferenceTypeModel> Get(int id)
+        public async Task<CreatePreferenceTypeViewModel> Get(int id)
         {
             try
             {
                 var result = await  _preferenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Preferencia ");
-                return _mapper.Map<PreferenceTypeModel>(result);
+                return _mapper.Map<CreatePreferenceTypeViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<PreferenceTypeModel>> GetPagination(DataTableServerSide options)
+        public async Task<PreferenceTypeViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _preferenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<PreferenceTypeViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<PreferenceTypeViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +148,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<PreferenceTypeModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<PreferenceTypeViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +171,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<PreferenceTypeModel> Update(PreferenceTypeModel entity)
+        public async Task<PreferenceTypeViewModel> Update(CreatePreferenceTypeViewModel entity)
         {
             try
             {
@@ -164,7 +181,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de  Preference");
 
                 var result = await _preferenceTypeRepository.UpdateAsync(_mapper.Map<PreferenceType>(entity));
-                return _mapper.Map<PreferenceTypeModel>(result);
+                return _mapper.Map<PreferenceTypeViewModel>(result);
             }
             catch
             {

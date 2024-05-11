@@ -50,9 +50,11 @@ public static class DataAccessDependencyInjection
         services.AddScoped<ISkillRepository, SkillRepository>();
         services.AddScoped<ISkillTypeRepository, SkillTypeRepository>();
         services.AddScoped<ISolutionDomainRepository, SolutionDomainRepository>();
+        services.AddScoped<ISolutionDomainCompetenceRepository, SolutionDomainCompetenceRepository>();
         services.AddScoped<ITeamRepository, TeamRepository>();
         services.AddScoped<ITechnicalSheetComposeRepository, TechnicalSheetComposeRepository>();
         services.AddScoped<ITechnicalSheetRepository, TechnicalSheetRepository>();
+       
        
     }
 

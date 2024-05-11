@@ -24,9 +24,9 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public PreferenceProfile()
         {
-            CreateMap<Preference, PreferenceModel>()
+            CreateMap<Preference, PreferenceViewModel>()
                 .ForMember(pm => pm.PreferenceTypeName, p => p.MapFrom(p => p.PreferenceType.Name)).ReverseMap();
-            CreateMap<Preference, CreatePreferenceModel>()
+            CreateMap<Preference, CreatePreferenceViewModel>()
                .ForMember(pm => pm.PreferenceTypeId, p => p.MapFrom(p => p.PreferenceType.Id)).ReverseMap();
 
         }

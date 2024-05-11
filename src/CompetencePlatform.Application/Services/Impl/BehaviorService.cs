@@ -2,11 +2,14 @@
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.Behaviour;
+using CompetencePlatform.Core.DataAccess.Identity;
 using CompetencePlatform.Core.DataAccess.Repositories;
+using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
 using CompetencePlatform.Shared.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -23,13 +26,16 @@ namespace CompetencePlatform.Application.Services.Impl
         private readonly IBehaviorRepository _behaviorRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
-        private readonly IUserRepository _userRepository;
-        public BehaviorService(IBehaviorRepository behaviorRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+       // private readonly IUserRepository _userRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+       // private readonly RoleManager<ApplicationUser> _userManager;
+        public BehaviorService(UserManager<ApplicationUser> userManager,IBehaviorRepository behaviorRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _behaviorRepository = behaviorRepository;
             _mapper = mapper;
             _claimService = claimService;
-            _userRepository = userRepository;
+            _userManager = userManager;
+            //_userRepository = userRepository;
         }
         public async Task<BehaviorViewModel> Create(CreateBehaviorViewModel entity)
         {
@@ -97,9 +103,11 @@ namespace CompetencePlatform.Application.Services.Impl
                 var currentUserId = _claimService.GetUserId();
                 if (currentUserId == null)
                     throw new BadRequestException("No se encuentra un usuario vàlido");
-                var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
-                string username = user.UserName;
-                var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
+                //var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
+                //var user =  await _userManager.FindByIdAsync(currentUserId);
+                //string username = user.UserName;
+                //var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
+                var priority = true;
 
                 Expression<Func<Behavior, bool>> where = priority == true ?
                  where = b => (b.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))

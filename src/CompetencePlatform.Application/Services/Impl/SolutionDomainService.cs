@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.SolutionDomain;
+using CompetencePlatform.Application.Models.SolutionDomainCompetence;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<SolutionDomainModel> Create(SolutionDomainModel entity)
+        public async Task<SolutionDomainViewModel> Create(CreateSolutionDomainViewModel entity)
         {
             try
             {
                 var result = await _solutionDomainRepository.AddAsync(_mapper.Map<SolutionDomain>(entity));
-                return _mapper.Map<SolutionDomainModel>(result);
+                return _mapper.Map<SolutionDomainViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SolutionDomainModel> Delete(int id)
+        public async Task<SolutionDomainViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _solutionDomainRepository.DeleteAsync(result);
-                    return _mapper.Map<SolutionDomainModel>(resultDelete);
+                    return _mapper.Map<SolutionDomainViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el skill type");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<SolutionDomainModel>> Get()
+        public async Task<IEnumerable<SolutionDomainViewModel>> Get()
         {
             try
             {
                 var result = await _solutionDomainRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<SolutionDomainModel>>(result);
+                return _mapper.Map<IEnumerable<SolutionDomainViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SolutionDomainModel> Get(int id)
+        public async Task<CreateSolutionDomainViewModel> Get(int id)
         {
             try
             {
                 var result = await _solutionDomainRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este SolutionDomain");
-                return _mapper.Map<SolutionDomainModel>(result);
+                return _mapper.Map<CreateSolutionDomainViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<SolutionDomainModel>> GetPagination(DataTableServerSide options)
+        public async Task<SolutionDomainViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _solutionDomainRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<SolutionDomainViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<SolutionDomainViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -135,7 +152,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<SolutionDomainModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<SolutionDomainViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -158,7 +175,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SolutionDomainModel> Update(SolutionDomainModel entity)
+        public async Task<SolutionDomainViewModel> Update(CreateSolutionDomainViewModel entity)
         {
             try
             {
@@ -168,7 +185,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Solution Domain");
 
                 var result = await _solutionDomainRepository.UpdateAsync(_mapper.Map<SolutionDomain>(entity));
-                return _mapper.Map<SolutionDomainModel>(result);
+                return _mapper.Map<SolutionDomainViewModel>(result);
             }
             catch
             {

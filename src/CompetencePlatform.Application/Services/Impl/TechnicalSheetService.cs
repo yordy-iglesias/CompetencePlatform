@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Motivation;
+using CompetencePlatform.Application.Models.TechnicalSheet;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<TechnicalSheetModel> Create(TechnicalSheetModel entity)
+        public async Task<TechnicalSheetViewModel> Create(CreateTechnicalSheetViewModel entity)
         {
             try
             {
                 var result = await _technicalSheetRepository.AddAsync(_mapper.Map<TechnicalSheet>(entity));
-                return _mapper.Map<TechnicalSheetModel>(result);
+                return _mapper.Map<TechnicalSheetViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<TechnicalSheetModel> Delete(int id)
+        public async Task<TechnicalSheetViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _technicalSheetRepository.DeleteAsync(result);
-                    return _mapper.Map<TechnicalSheetModel>(resultDelete);
+                    return _mapper.Map<TechnicalSheetViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el Technical Sheet");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<TechnicalSheetModel>> Get()
+        public async Task<IEnumerable<TechnicalSheetViewModel>> Get()
         {
             try
             {
                 var result = await _technicalSheetRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<TechnicalSheetModel>>(result);
+                return _mapper.Map<IEnumerable<TechnicalSheetViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<TechnicalSheetModel> Get(int id)
+        public async Task<CreateTechnicalSheetViewModel> Get(int id)
         {
             try
             {
                 var result = await _technicalSheetRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Technical Sheet");
-                return _mapper.Map<TechnicalSheetModel>(result);
+                return _mapper.Map<CreateTechnicalSheetViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<TechnicalSheetModel>> GetPagination(DataTableServerSide options)
+        public async Task<TechnicalSheetViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _technicalSheetRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<TechnicalSheetViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<TechnicalSheetViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -152,7 +169,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     }, where, order, sort);
 
                     obj.OrderColumnName = nameColumnOrder;
-                    var result = _mapper.Map<DataTablePagin<TechnicalSheetModel>>(obj);
+                    var result = _mapper.Map<DataTablePagin<TechnicalSheetViewModel>>(obj);
                     result.Draw = options.Draw;
                     return result;
                 
@@ -169,7 +186,7 @@ namespace CompetencePlatform.Application.Services.Impl
             throw new NotImplementedException();
         }
 
-        public async Task<TechnicalSheetModel> Update(TechnicalSheetModel entity)
+        public async Task<TechnicalSheetViewModel> Update(CreateTechnicalSheetViewModel entity)
         {
             try
             {
@@ -179,7 +196,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Technical Sheet");
 
                 var result = await _technicalSheetRepository.UpdateAsync(_mapper.Map<TechnicalSheet>(entity));
-                return _mapper.Map<TechnicalSheetModel>(result);
+                return _mapper.Map<TechnicalSheetViewModel>(result);
             }
             catch
             {

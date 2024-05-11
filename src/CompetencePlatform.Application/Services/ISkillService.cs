@@ -1,4 +1,4 @@
-﻿using CompetencePlatform.Application.Models;
+﻿using CompetencePlatform.Application.Models.Skill;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ISkillService:ICrudInterface<SkillModel,DataTableServerSide>
+    public interface ISkillService:ICrudInterface<SkillViewModel,CreateSkillViewModel,DataTableServerSide>
     {
     }
 }

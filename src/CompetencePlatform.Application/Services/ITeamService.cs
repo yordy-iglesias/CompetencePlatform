@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Team;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ITeamService:ICrudInterface<TeamModel,DataTableServerSide>
+    public interface ITeamService:ICrudInterface<TeamViewModel,CreateTeamViewModel,DataTableServerSide>
     {
     }
 }

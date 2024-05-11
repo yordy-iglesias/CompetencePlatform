@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.PreferenceType;
+using CompetencePlatform.Application.Models.Project;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<ProjectModel> Create(ProjectModel entity)
+        public async Task<ProjectViewModel> Create(CreateProjectViewModel entity)
         {
             try
             {
                 var result = await _projectRepository.AddAsync(_mapper.Map<Project>(entity));
-                return _mapper.Map<ProjectModel>(result);
+                return _mapper.Map<ProjectViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ProjectModel> Delete(int id)
+        public async Task<ProjectViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _projectRepository.DeleteAsync(result);
-                    return _mapper.Map<ProjectModel>(resultDelete);
+                    return _mapper.Map<ProjectViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra la preferencia");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<ProjectModel>> Get()
+        public async Task<IEnumerable<ProjectViewModel>> Get()
         {
             try
             {
                 var result = await _projectRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<ProjectModel>>(result);
+                return _mapper.Map<IEnumerable<ProjectViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ProjectModel> Get(int id)
+        public async Task<CreateProjectViewModel> Get(int id)
         {
             try
             {
                 var result = await _projectRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este tipo de Preferencia ");
-                return _mapper.Map<ProjectModel>(result);
+                return _mapper.Map<CreateProjectViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<ProjectModel>> GetPagination(DataTableServerSide options)
+        public async Task<ProjectViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _projectRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<ProjectViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<ProjectViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +148,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<ProjectModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<ProjectViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +171,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ProjectModel> Update(ProjectModel entity)
+        public async Task<ProjectViewModel> Update(CreateProjectViewModel entity)
         {
             try
             {
@@ -164,7 +181,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de  Preference");
 
                 var result = await _projectRepository.UpdateAsync(_mapper.Map<Project>(entity));
-                return _mapper.Map<ProjectModel>(result);
+                return _mapper.Map<ProjectViewModel>(result);
             }
             catch
             {

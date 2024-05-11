@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Project;
+using CompetencePlatform.Application.Models.Resposability;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<ResponsabilityModel> Create(ResponsabilityModel entity)
+        public async Task<ResponsabilityViewModel> Create(CreateResponsabilityViewModel entity)
         {
             try
             {
                 var result = await _responsabilityRepository.AddAsync(_mapper.Map<Responsability>(entity));
-                return _mapper.Map<ResponsabilityModel>(result);
+                return _mapper.Map<ResponsabilityViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ResponsabilityModel> Delete(int id)
+        public async Task<ResponsabilityViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _responsabilityRepository.DeleteAsync(result);
-                    return _mapper.Map<ResponsabilityModel>(resultDelete);
+                    return _mapper.Map<ResponsabilityViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el responsability");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<ResponsabilityModel>> Get()
+        public async Task<IEnumerable<ResponsabilityViewModel>> Get()
         {
             try
             {
                 var result = await _responsabilityRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<ResponsabilityModel>>(result);
+                return _mapper.Map<IEnumerable<ResponsabilityViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<ResponsabilityModel> Get(int id)
+        public async Task<CreateResponsabilityViewModel> Get(int id)
         {
             try
             {
                 var result = await _responsabilityRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Responsability");
-                return _mapper.Map<ResponsabilityModel>(result);
+                return _mapper.Map<CreateResponsabilityViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<ResponsabilityModel>> GetPagination(DataTableServerSide options)
+        public async Task<ResponsabilityViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _responsabilityRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<ResponsabilityViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<ResponsabilityViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -130,7 +147,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<ResponsabilityModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<ResponsabilityViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -145,7 +162,7 @@ namespace CompetencePlatform.Application.Services.Impl
            throw new NotImplementedException();
         }
 
-        public async Task<ResponsabilityModel> Update(ResponsabilityModel entity)
+        public async Task<ResponsabilityViewModel> Update(CreateResponsabilityViewModel entity)
         {
             try
             {
@@ -155,7 +172,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Responsability");
 
                 var result = await _responsabilityRepository.UpdateAsync(_mapper.Map<Responsability>(entity));
-                return _mapper.Map<ResponsabilityModel>(result);
+                return _mapper.Map<ResponsabilityViewModel>(result);
             }
             catch
             {

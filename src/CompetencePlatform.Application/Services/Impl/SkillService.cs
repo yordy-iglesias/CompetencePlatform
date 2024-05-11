@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.BehaviorDictionary;
+using CompetencePlatform.Application.Models.Skill;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<SkillModel> Create(SkillModel entity)
+        public async Task<SkillViewModel> Create(CreateSkillViewModel entity)
         {
             try
             {
                 var result = await _skillRepository.AddAsync(_mapper.Map<Skill>(entity));
-                return _mapper.Map<SkillModel>(result);
+                return _mapper.Map<SkillViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SkillModel> Delete(int id)
+        public async Task<SkillViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _skillRepository.DeleteAsync(result);
-                    return _mapper.Map<SkillModel>(resultDelete);
+                    return _mapper.Map<SkillViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el skill");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<SkillModel>> Get()
+        public async Task<IEnumerable<SkillViewModel>> Get()
         {
             try
             {
                 var result = await _skillRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<SkillModel>>(result);
+                return _mapper.Map<IEnumerable<SkillViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<SkillModel> Get(int id)
+        public async Task<CreateSkillViewModel> Get(int id)
         {
             try
             {
                 var result = await _skillRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Skill");
-                return _mapper.Map<SkillModel>(result);
+                return _mapper.Map<CreateSkillViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<SkillModel>> GetPagination(DataTableServerSide options)
+        public async Task<DataTablePagin<SkillViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -134,7 +136,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<SkillModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<SkillViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -156,8 +158,22 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+        public async Task<SkillViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _skillRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<SkillViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
-        public async Task<SkillModel> Update(SkillModel entity)
+        public async Task<SkillViewModel> Update(CreateSkillViewModel entity)
         {
             try
             {
@@ -167,7 +183,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Responsability");
 
                 var result = await _skillRepository.UpdateAsync(_mapper.Map<Skill>(entity));
-                return _mapper.Map<SkillModel>(result);
+                return _mapper.Map<SkillViewModel>(result);
             }
             catch
             {

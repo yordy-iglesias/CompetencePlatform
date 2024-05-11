@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Behaviour;
+using CompetencePlatform.Application.Models.Team;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -32,12 +34,12 @@ namespace CompetencePlatform.Application.Services.Impl
             _claimService = claimService;
             _userRepository = userRepository;
         }
-        public async Task<TeamModel> Create(TeamModel entity)
+        public async Task<TeamViewModel> Create(CreateTeamViewModel entity)
         {
             try
             {
                 var result = await _teamRepository.AddAsync(_mapper.Map<Team>(entity));
-                return _mapper.Map<TeamModel>(result);
+                return _mapper.Map<TeamViewModel>(result);
             }   
             catch (Exception)
             {
@@ -45,7 +47,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<TeamModel> Delete(int id)
+        public async Task<TeamViewModel> Delete(int id)
         {
             try
             {
@@ -53,7 +55,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (result != null)
                 {
                     var resultDelete = await _teamRepository.DeleteAsync(result);
-                    return _mapper.Map<TeamModel>(resultDelete);
+                    return _mapper.Map<TeamViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra el team");
             }
@@ -63,12 +65,12 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<IEnumerable<TeamModel>> Get()
+        public async Task<IEnumerable<TeamViewModel>> Get()
         {
             try
             {
                 var result = await _teamRepository.GetAllAsync();
-                return _mapper.Map<IEnumerable<TeamModel>>(result);
+                return _mapper.Map<IEnumerable<TeamViewModel>>(result);
             }
             catch
             {
@@ -76,14 +78,14 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<TeamModel> Get(int id)
+        public async Task<CreateTeamViewModel> Get(int id)
         {
             try
             {
                 var result = await _teamRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
                     throw new BadRequestException("No existe este Team");
-                return _mapper.Map<TeamModel>(result);
+                return _mapper.Map<CreateTeamViewModel>(result);
             }
             catch
             {
@@ -91,7 +93,22 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<DataTablePagin<TeamModel>> GetPagination(DataTableServerSide options)
+        public async Task<TeamViewModel> GetDetails(int id)
+        {
+            try
+            {
+                var result = await _teamRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este elemento");
+                return _mapper.Map<TeamViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DataTablePagin<TeamViewModel>> GetPagination(DataTableServerSide options)
         {
             try
             {
@@ -131,7 +148,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 }, where, order, sort);
 
                 obj.OrderColumnName = nameColumnOrder;
-                var result = _mapper.Map<DataTablePagin<TeamModel>>(obj);
+                var result = _mapper.Map<DataTablePagin<TeamViewModel>>(obj);
                 result.Draw = options.Draw;
                 return result;
             }
@@ -154,7 +171,7 @@ namespace CompetencePlatform.Application.Services.Impl
             }
         }
 
-        public async Task<TeamModel> Update(TeamModel entity)
+        public async Task<TeamViewModel> Update(CreateTeamViewModel entity)
         {
             try
             {
@@ -164,7 +181,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo Solution Domain");
 
                 var result = await _teamRepository.UpdateAsync(_mapper.Map<Team>(entity));
-                return _mapper.Map<TeamModel>(result);
+                return _mapper.Map<TeamViewModel>(result);
             }
             catch
             {

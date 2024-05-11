@@ -5,5 +5,6 @@
         string GetUserId();
 
         string GetClaim(string key);
+        string GetUserNameFromIdentity();
     }
 }

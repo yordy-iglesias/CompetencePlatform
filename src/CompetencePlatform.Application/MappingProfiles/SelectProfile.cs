@@ -47,7 +47,7 @@ namespace CompetencePlatform.Application.MappingProfiles
              .ForMember(dest => dest.Value, opt => opt.MapFrom(orig => orig.Id))
              .ForMember(dest => dest.Text, opt => opt.MapFrom(orig => orig.Name));
 
-            CreateMap<EmployeeProfile, SelectViewModel>()
+            CreateMap<Core.Entities.EmployeeProfile, SelectViewModel>()
              .ForMember(dest => dest.Value, opt => opt.MapFrom(orig => orig.Id))
              .ForMember(dest => dest.Text, opt => opt.MapFrom(orig => orig.Name));
 

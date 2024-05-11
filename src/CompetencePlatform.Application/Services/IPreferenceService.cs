@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IPreferenceService : ICrudInterface<PreferenceModel,CreatePreferenceModel,DataTableServerSide>
+    public interface IPreferenceService : ICrudInterface<PreferenceViewModel,CreatePreferenceViewModel,DataTableServerSide>
     {
     }
 }

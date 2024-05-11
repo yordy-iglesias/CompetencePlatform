@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Application.Models.Behaviour;
 using CompetencePlatform.Application.Models.C_S_M_K_P;
@@ -10,6 +9,16 @@ using CompetencePlatform.Application.Models.DegreeCompetence;
 using CompetencePlatform.Application.Models.Departament;
 using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Application.Models.Preference;
+using CompetencePlatform.Application.Models.Project;
+using CompetencePlatform.Application.Models.ProjectTeam;
+using CompetencePlatform.Application.Models.Resposability;
+using CompetencePlatform.Application.Models.Skill;
+using CompetencePlatform.Application.Models.SkillType;
+using CompetencePlatform.Application.Models.SolutionDomain;
+using CompetencePlatform.Application.Models.SolutionDomainCompetence;
+using CompetencePlatform.Application.Models.Team;
+using CompetencePlatform.Application.Models.TechnicalSheet;
+using CompetencePlatform.Application.Models.TechnicalSheetCompose;
 using CompetencePlatform.Application.Models.TodoItem;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -49,26 +58,26 @@ namespace CompetencePlatform.Application.MappingProfiles
             CreateMap<Departament, DepartamentViewModel>()
              .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name)).ReverseMap();
             CreateMap<Organization, OrganizationViewModel>().ReverseMap();
-            CreateMap<Preference, PreferenceModel>()
+            CreateMap<Preference, PreferenceViewModel>()
                 .ForMember(pm => pm.PreferenceTypeName, p => p.MapFrom(p => p.PreferenceType.Name)).ReverseMap();
-            CreateMap<Project, ProjectModel>().ReverseMap();
-            CreateMap<ProjectTeam, ProjectTeamModel>()
+            CreateMap<Project, ProjectViewModel>().ReverseMap();
+            CreateMap<ProjectTeam, ProjectTeamViewModel>()
                 .ForMember(ptm => ptm.ProjectName, pt => pt.MapFrom(pt => pt.Project.Name))
                 .ForMember(ptm => ptm.TeamName, pt => pt.MapFrom(pt => pt.Team.Name)).ReverseMap();
-            CreateMap<Responsability, ResponsabilityModel>().ReverseMap();
-            CreateMap<Skill, SkillModel>()
+            CreateMap<Responsability, ResponsabilityViewModel>().ReverseMap();
+            CreateMap<Skill, SkillViewModel>()
                  .ForMember(skm => skm.SkillTypeName, sk => sk.MapFrom(sk => sk.SkillType.Name)).ReverseMap();
-            CreateMap<SkillType, SkillTypeModel>().ReverseMap();
-            CreateMap<SolutionDomain, SolutionDomainModel>()
+            CreateMap<SkillType, SkillTypeViewModel>().ReverseMap();
+            CreateMap<SolutionDomain, SolutionDomainViewModel>()
                  .ForMember(sldm => sldm.OrganizationName, sld => sld.MapFrom(sld => sld.Organization.Name)).ReverseMap();
-            CreateMap<SolutionDomainCompetence, SolutionDomainCompetenceModel>()
+            CreateMap<SolutionDomainCompetence, SolutionDomainCompetenceViewModel>()
                 .ForMember(sldcm => sldcm.SolutionDomainName, sld => sld.MapFrom(sldc => sldc.SolutionDomain.Name))
                 .ForMember(sldcm => sldcm.CompetenceName, sld => sld.MapFrom(sldc => sldc.Competence.Name)).ReverseMap();
-            CreateMap<Team, TeamModel>().ReverseMap();
-            CreateMap<TechnicalSheet, TechnicalSheetModel>()
+            CreateMap<Team, TeamViewModel>().ReverseMap();
+            CreateMap<TechnicalSheet, TechnicalSheetViewModel>()
                 .ForMember(tshm => tshm.SolutionDomainName, ts => ts.MapFrom(ts => ts.SolutionDomain.Name))
                 .ForMember(tshm => tshm.ProjectName, ts => ts.MapFrom(ts => ts.Project.Name)).ReverseMap();
-            CreateMap<TechnicalSheetCompose, TechnicalSheetComposeModel>()
+            CreateMap<TechnicalSheetCompose, TechnicalSheetComposeViewModel>()
                .ForMember(tshcm => tshcm.EmployeeProfileName, tsc => tsc.MapFrom(tsc => tsc.EmployeeProfile.Name)).ReverseMap();
         }
     }
