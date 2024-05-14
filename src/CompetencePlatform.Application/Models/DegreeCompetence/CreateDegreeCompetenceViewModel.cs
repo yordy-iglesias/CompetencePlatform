@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.DegreeCompetence
 {
-    public class CreateDegreeCompetenceViewModel : DegreeCompetenceViewModel
+    public class CreateDegreeCompetenceViewModel : CommonEntityModel//DegreeCompetenceViewModel
     {
        
     }

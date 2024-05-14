@@ -1,4 +1,5 @@
-﻿using CompetencePlatform.Core.Entities;
+﻿using CompetencePlatform.Application.Models.BehaviorDictionary;
+using CompetencePlatform.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CompetencePlatform.Application.Models.Behaviour
 {
     public class BehaviorViewModel : CommonEntityModel
     {
-        // public List<BehaviorDictionaryModel> BehaviorDictionaries { get; set; }
+       public List<BehaviorDictionaryViewModel> BehaviorDictionaries { get; set; }
     }
 }

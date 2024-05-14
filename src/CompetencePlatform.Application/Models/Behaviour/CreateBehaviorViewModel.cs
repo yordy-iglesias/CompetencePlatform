@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Behaviour
 {
-    public class CreateBehaviorViewModel:BehaviorViewModel
+    public class CreateBehaviorViewModel: CommonEntityModel
     {
     }
 }
