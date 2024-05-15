@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CompetencePlatform.Application.Models.C_S_M_K_P
 {
     //CSMK-Competence_Skill_Motivation_Preference
-    public class CreateC_S_M_K_PViewModel : C_S_M_K_PViewModel
+    public class CreateC_S_M_K_PViewModel : BaseEntityModel//C_S_M_K_PViewModel
     {
         public int? CompetenceId { get; set; }
         public int? KnowlwdgeId { get; set; }

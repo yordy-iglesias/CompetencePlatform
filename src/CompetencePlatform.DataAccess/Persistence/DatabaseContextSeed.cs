@@ -16,9 +16,39 @@ public static class DatabaseContextSeed
             await userManager.CreateAsync(user, "Admin123.?");
         }
 
-        await context.Knowledges.AddRangeAsync(KnowledgeGenerator.Generate());
-        await context.SkillTypes.AddRangeAsync(SkillTypeGenerator.Generate());
+        await AddKwnoledges(context);
+        await AddSkillTypes(context);
+
 
         await context.SaveChangesAsync();
+    }
+
+    private static async Task AddKwnoledges(DatabaseContext context)
+    {
+        var knowledges = KnowledgeGenerator.Generate();
+        if (!context.Knowledges.Any())
+            await context.Knowledges.AddRangeAsync(knowledges);
+        else
+        {
+            foreach (var k in knowledges)
+            {
+               if( !context.Knowledges.Any(x=>x.Name==k.Name))
+                    await context.Knowledges.AddAsync(k);
+            }
+        }
+    }
+    private static async Task AddSkillTypes(DatabaseContext context)
+    {
+        var skillTypes = SkillTypeGenerator.Generate();
+        if (!context.SkillTypes.Any())
+            await context.SkillTypes.AddRangeAsync(skillTypes);
+        else
+        {
+            foreach (var skt in skillTypes)
+            {
+                if (!context.SkillTypes.Any(x => x.Name == skt.Name))
+                    await context.SkillTypes.AddAsync(skt);
+            }
+        }
     }
 }

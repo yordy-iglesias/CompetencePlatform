@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.BehaviorDictionary
 {
-    public class CreateBehaviorDictionaryViewModel:BehaviorDictionaryViewModel
+    public class CreateBehaviorDictionaryViewModel:BaseEntityModel//BehaviorDictionaryViewModel
     {
         public int? DegreeCompetenceId { get; set; }
         public int? BehaviorId { get; set; }

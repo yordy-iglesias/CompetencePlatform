@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.PreferenceType
 {
-    public class CreatePreferenceTypeViewModel : PreferenceTypeViewModel
+    public class CreatePreferenceTypeViewModel : CommonEntityModel//PreferenceTypeViewModel
     {
         //public List<PreferenceModel> Preferences { get; set; }
     }
