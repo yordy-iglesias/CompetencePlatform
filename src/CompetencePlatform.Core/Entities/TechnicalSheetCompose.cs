@@ -16,6 +16,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
 
         public int EmployeeProfileId { get; set; }
+        [ForeignKey("EmployeeProfileId")]
         public virtual EmployeeProfile EmployeeProfile { get; set; }
         /// <summary>
         /// Gets or sets the Quantity
@@ -27,6 +28,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
 
         public int? TechnicalSheetId { get; set; }
+        [ForeignKey("TechnicalSheetId")]
         public virtual TechnicalSheet TechnicalSheet { get; set; }
 
         //Audited Method

@@ -13,6 +13,7 @@ namespace CompetencePlatform.Core.Entities
     {
         
         public int TechnicalSheetId { get; set; }
+        [ForeignKey("TechnicalSheetId")]
         public virtual TechnicalSheet TechnicalSheet { get; set; }
 
         

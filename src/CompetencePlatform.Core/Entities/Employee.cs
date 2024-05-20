@@ -36,18 +36,21 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
        
         public int? DepartamentId { get; set; }
+        [ForeignKey("DepartamentId")]
         public virtual  Departament Departament { get; set; }
 
         /// <summary>
         /// Gets or sets the IdEmployeeProfile.
         /// </summary>
         public int? EmployeeProfileId { get; set; }
+        [ForeignKey("EmployeeProfileId")]
         public virtual EmployeeProfile EmployeeProfile { get; set; }
 
         /// <summary>
         /// Gets or sets the IdTeam.
         /// </summary>
         public int? TeamId { get; set; }
+        [ForeignKey("TeamId")]
         public virtual Team Team { get; set; }
 
         public virtual ICollection<EmployeeCompetence> EmployeeCompetences { get; set; }

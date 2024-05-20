@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Skill
 {
-    public class CreateSkillViewModel : SkillViewModel
+    public class CreateSkillViewModel : CommonEntityModel//SkillViewModel
     {
         public int? SkillTypeId { get; set; }
         //public string SkillTypeName { get; set; }

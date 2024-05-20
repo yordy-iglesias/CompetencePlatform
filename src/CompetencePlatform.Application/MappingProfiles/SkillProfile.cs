@@ -31,8 +31,7 @@ namespace CompetencePlatform.Application.MappingProfiles
             
             CreateMap<Skill, SkillViewModel>()
                  .ForMember(skm => skm.SkillTypeName, sk => sk.MapFrom(sk => sk.SkillType.Name)).ReverseMap();
-            CreateMap<Skill, CreateSkillViewModel>()
-                 .ForMember(skm => skm.SkillTypeId, sk => sk.MapFrom(sk => sk.SkillType.Id)).ReverseMap();
+            CreateMap<Skill, CreateSkillViewModel>().ReverseMap();
 
         }
     }

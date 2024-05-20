@@ -16,6 +16,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         
         public int? OrganizationId { get; set; }
+        [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }
         public virtual  ICollection<Employee> Employees { get; set; }
        

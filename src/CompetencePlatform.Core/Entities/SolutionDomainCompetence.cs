@@ -16,12 +16,15 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         
         public int? SolutionDomainId { get; set; }
+        [ForeignKey("SolutionDomainId")]
+
         public virtual SolutionDomain SolutionDomain { get; set; }
         /// <summary>
         /// Gets or sets the IdCompetence.
         /// </summary>
         
         public int? CompetenceId { get; set; }
+        [ForeignKey("CompetenceId")]
         public virtual Competence Competence { get; set; }
 
         /// <summary>

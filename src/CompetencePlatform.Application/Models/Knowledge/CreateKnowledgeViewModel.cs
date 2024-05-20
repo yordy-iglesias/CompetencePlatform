@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Knowledge
 {
-    public class CreateKnowledgeViewModel:KnowledgeViewModel
+    public class CreateKnowledgeViewModel: CommonEntityModel
     {
     }
 }

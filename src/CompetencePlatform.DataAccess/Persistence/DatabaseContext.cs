@@ -23,7 +23,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public DbSet<Behavior> Behaviors { get; set; }
     public DbSet<BehaviorDictionary> BehavioursDictionaries { get; set; }
     public DbSet<Competence> Competences { get; set; }
-    public DbSet<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
+    public DbSet<C_S_M_K_P> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
     public DbSet<CompetenceDictionary> CompetenceDictionaries { get; set; }
     public DbSet<CompetenceProfile> CompetenceProfiles { get; set; }
     public DbSet<CompetenceType> CompetenceTypes { get; set; }
@@ -71,6 +71,11 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
         //    .HasForeignKey<Project>(p => p.TechnicalSheetId)
         //    .IsRequired(true);
         base.OnModelCreating(builder);
+
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseLazyLoadingProxies();
 
     }
 

@@ -16,8 +16,9 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
        
         public int? SkillTypeId { get; set; }
+        [ForeignKey("SkillTypeId")]
         public virtual SkillType SkillType { get; set; }
-        public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
+        public virtual ICollection<C_S_M_K_P> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
 
     }
 }

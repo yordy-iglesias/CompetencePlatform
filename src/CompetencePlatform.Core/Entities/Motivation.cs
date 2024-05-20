@@ -8,6 +8,6 @@ namespace CompetencePlatform.Core.Entities
 {
     public class Motivation:CommonEntity
     {
-        public virtual ICollection<Competence_Skill_Motivation_Knowledge_Preference> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
+        public virtual ICollection<C_S_M_K_P> Competence_Skill_Motivation_Knowledge_Preferences { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace CompetencePlatform.Core.Entities
        
         
         public int? SolutionDomainId { get; set; }
+        [ForeignKey("SolutionDomainId")]
         public virtual SolutionDomain SolutionDomain { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<CompetenceProfile> CompetenceProfiles { get; set; }

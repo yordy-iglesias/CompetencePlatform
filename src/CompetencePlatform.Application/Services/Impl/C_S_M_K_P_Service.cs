@@ -35,7 +35,8 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var result = await _cSMKPRepository.AddAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
+                var result = await _cSMKPRepository.AddAsync(_mapper.Map<C_S_M_K_P>(entity));
+                var r = _mapper.Map<C_S_M_K_PViewModel>(result);
                 return _mapper.Map<C_S_M_K_PViewModel>(result);
             }
             catch (Exception)
@@ -101,11 +102,11 @@ namespace CompetencePlatform.Application.Services.Impl
                 string username = user.UserName;
                 var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
-                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, bool>> where = priority == true ?
+                Expression<Func<C_S_M_K_P, bool>> where = priority == true ?
                  where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
                 : where = csmkp => (csmkp.Competence.Name.Contains(options.Search.Value) || csmkp.Skill.Name.Contains(options.Search.Value) || csmkp.Motivation.Name.Contains(options.Search.Value) || csmkp.Knowledge.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && csmkp.Deleted==false);
 
-                Expression<Func<Competence_Skill_Motivation_Knowledge_Preference, object>> order;
+                Expression<Func<C_S_M_K_P, object>> order;
 
                 int columnsOrder = (int)(options.Order.FirstOrDefault()?.Column);
                 string nameColumnOrder = options.Columns[columnsOrder].Name;
@@ -163,7 +164,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 if (competence == null)
                     throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
 
-                var result = await _cSMKPRepository.UpdateAsync(_mapper.Map<Competence_Skill_Motivation_Knowledge_Preference>(entity));
+                var result = await _cSMKPRepository.UpdateAsync(_mapper.Map<C_S_M_K_P>(entity));
                 return _mapper.Map<C_S_M_K_PViewModel>(result);
             }
             catch

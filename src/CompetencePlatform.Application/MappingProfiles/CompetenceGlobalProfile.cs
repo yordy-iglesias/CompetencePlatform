@@ -40,7 +40,7 @@ namespace CompetencePlatform.Application.MappingProfiles
             CreateMap<BehaviorDictionaryViewModel, BehaviorDictionary>();
 
             CreateMap<Behavior, BehaviorViewModel>().ReverseMap();
-            CreateMap<Competence_Skill_Motivation_Knowledge_Preference, C_S_M_K_PViewModel>()
+            CreateMap<C_S_M_K_P, C_S_M_K_PViewModel>()
                .ForMember(csmkpm => csmkpm.CompetenceName, csmkp => csmkp.MapFrom(csmkp => csmkp.Competence.Name))
                .ForMember(csmkpm => csmkpm.MotivationName, csmkp => csmkp.MapFrom(csmkp => csmkp.Motivation.Name))
                .ForMember(csmkpm => csmkpm.SkillName, csmkp => csmkp.MapFrom(csmkp => csmkp.Skill.Name))

@@ -15,6 +15,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         
         public int? CompetenceDictionaryId { get; set; }
+        [ForeignKey("CompetenceDictionaryId")]
         public virtual CompetenceDictionary CompetenceDictionary { get; set; }
 
         public virtual  ICollection<Responsability> Responsabilities { get; set; }
@@ -25,6 +26,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
 
         public int? EmployeeProfileId { get; set; }
+        [ForeignKey("EmployeeProfileId")]
         public virtual EmployeeProfile EmployeeProfile { get; set; }
         /// <summary>
 		/// Gets or sets the Delete Borrado Logico.

@@ -8,6 +8,7 @@ using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Application.Models.PreferenceType;
 using CompetencePlatform.Application.Models.Project;
 using CompetencePlatform.Application.Models.Resposability;
+using CompetencePlatform.Application.Models.Skill;
 using CompetencePlatform.Application.Models.TodoItem;
 using CompetencePlatform.Application.Services;
 using CompetencePlatform.Core.DataTable;
@@ -18,42 +19,42 @@ using Microsoft.AspNetCore.Mvc;
 namespace CompetencePlatform.API.Controllers;
 
 [Authorize]
-public class ResponsabilityController : ApiController
+public class SkillController : ApiController
 {
-    private readonly IResponsabilityService _responsabilityService;
+    private readonly ISkillService _skillService;
 
-    public ResponsabilityController(IResponsabilityService responsabilityService)
+    public SkillController(ISkillService skillService)
     {
-        _responsabilityService = responsabilityService;
+        _skillService = skillService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateResponsabilityViewModel createResponsabilityModel)
+    public async Task<IActionResult> CreateAsync(CreateSkillViewModel createSkillModel)
     {
-        return Ok(ApiResult<ResponsabilityViewModel>.Success(
-            await _responsabilityService.Create(createResponsabilityModel)));
+        return Ok(ApiResult<SkillViewModel>.Success(
+            await _skillService.Create(createSkillModel)));
     }
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] CreateResponsabilityViewModel createResponsabilityModel)
+    public async Task<IActionResult> Update([FromBody] CreateSkillViewModel createSkillModel)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        return Ok(ApiResult<ResponsabilityViewModel>.Success(await _responsabilityService.Update(createResponsabilityModel)));
+        return Ok(ApiResult<SkillViewModel>.Success(await _skillService.Update(createSkillModel)));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        return Ok(ApiResult<ResponsabilityViewModel>.Success(await _responsabilityService.Delete(id)));
+        return Ok(ApiResult<SkillViewModel>.Success(await _skillService.Delete(id)));
     }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
 
-        return Ok(ApiResult<DataTablePagin<ResponsabilityViewModel>>.Success(
-             await _responsabilityService.GetPagination(options)));
+        return Ok(ApiResult<DataTablePagin<SkillViewModel>>.Success(
+             await _skillService.GetPagination(options)));
 
     }
 }

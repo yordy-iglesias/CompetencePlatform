@@ -15,12 +15,14 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         
         public int? CompetenceId { get; set; }
+        [ForeignKey("CompetenceId")]
         public virtual Competence Competence { get; set; }
         /// <summary>
         /// Gets or sets the BehavoiurDictionaryId.
         /// </summary>
         
         public int? BehaviorDictionaryId { get; set; }
+        [ForeignKey("BehaviorDictionaryId")]
         public virtual BehaviorDictionary BehaviorDictionary { get; set; }
         public virtual ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
 

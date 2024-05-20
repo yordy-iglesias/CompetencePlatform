@@ -38,6 +38,7 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
+                var m = _mapper.Map<Skill>(entity);
                 var result = await _skillRepository.AddAsync(_mapper.Map<Skill>(entity));
                 return _mapper.Map<SkillViewModel>(result);
             }   
@@ -180,7 +181,7 @@ namespace CompetencePlatform.Application.Services.Impl
                 var employee = await _skillRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
 
                 if (employee == null)
-                    throw new BadRequestException("No se encuentra este tipo Responsability");
+                    throw new BadRequestException("No se encuentra este tipo Skill");
 
                 var result = await _skillRepository.UpdateAsync(_mapper.Map<Skill>(entity));
                 return _mapper.Map<SkillViewModel>(result);

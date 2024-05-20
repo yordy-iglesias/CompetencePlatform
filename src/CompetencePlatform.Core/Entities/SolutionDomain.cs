@@ -14,11 +14,12 @@ namespace CompetencePlatform.Core.Entities
         
         
         public int? OrganizationId { get; set; }
+        [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }
         
-        public ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
-        public ICollection<TechnicalSheet> TechnicalSheets { get; set; }
-        public ICollection<EmployeeProfile> EmployeeProfiles { get; set; }
+        public virtual ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
+        public virtual ICollection<TechnicalSheet> TechnicalSheets { get; set; }
+        public virtual ICollection<EmployeeProfile> EmployeeProfiles { get; set; }
 
         
     }

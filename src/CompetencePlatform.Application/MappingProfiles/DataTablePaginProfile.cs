@@ -4,8 +4,11 @@ using CompetencePlatform.Application.Models.Behaviour;
 using CompetencePlatform.Application.Models.Competence;
 using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Application.Models.DegreeCompetence;
+using CompetencePlatform.Application.Models.Knowledge;
 using CompetencePlatform.Application.Models.Motivation;
+using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Application.Models.PreferenceType;
+using CompetencePlatform.Application.Models.Skill;
 using CompetencePlatform.Application.Models.SkillType;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
@@ -59,6 +62,22 @@ namespace CompetencePlatform.Application.MappingProfiles
                 .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
                 .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
                 .ReverseMap();
+            CreateMap<PageResult<Skill>, DataTablePagin<SkillViewModel>>()
+               .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+               .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+               .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+               .ReverseMap();
+            CreateMap<PageResult<Preference>, DataTablePagin<PreferenceViewModel>>()
+               .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+               .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+               .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+               .ReverseMap();
+
+            CreateMap<PageResult<Knowledge>, DataTablePagin<KnowledgeViewModel>>()
+               .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+               .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+               .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+               .ReverseMap();
 
 
 

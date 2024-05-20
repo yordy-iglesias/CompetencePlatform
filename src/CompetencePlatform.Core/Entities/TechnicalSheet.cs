@@ -30,7 +30,8 @@ namespace CompetencePlatform.Core.Entities
 
         
         public int? ProjectId { get; set; }
-        
+        [ForeignKey("ProjectId")]
+
         public virtual Project Project { get; set; }
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace CompetencePlatform.Core.Entities
         /// </summary>
         
         public int? SolutionDomainId { get; set; }
+        [ForeignKey("SolutionDomainId")]
         public virtual SolutionDomain SolutionDomain { get; set; }
 
         public virtual ICollection<TechnicalSheetCompose> TechnicalSheetComposes { get; set; }
