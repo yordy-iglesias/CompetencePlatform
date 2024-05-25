@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.CompetenceProfile
 {
-    public class CreateCompetenceProfileViewModel : CompetenceProfileViewModel
+    public class CreateCompetenceProfileViewModel : BaseEntityModel//CompetenceProfileViewModel
     {
 
         public int? CompetenceDictionaryId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.EmployeeProfile
 {
-    public class CreateEmployeeProfileViewModel : EmployeeProfileViewModel
+    public class CreateEmployeeProfileViewModel : CommonEntityModel
     {
         public int? SolutionDomainId { get; set; }
        // public string SolutionDomainName { get; set; }

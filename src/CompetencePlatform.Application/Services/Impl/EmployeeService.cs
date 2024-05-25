@@ -38,6 +38,7 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
+                var r = _mapper.Map<Employee>(entity);
                 var result = await _employeeRepository.AddAsync(_mapper.Map<Employee>(entity));
                 return _mapper.Map<EmployeeViewModel>(result);
             }   

@@ -62,7 +62,7 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
         builder.Entity<TechnicalSheet>()
             .HasOne(b => b.Project)
             .WithOne(ts => ts.TechnicalSheet)
-            .HasForeignKey<Project>("ProjectId")
+            .HasForeignKey<TechnicalSheet>("ProjectId")
             .IsRequired(true);
 
         //builder.Entity<Project>()

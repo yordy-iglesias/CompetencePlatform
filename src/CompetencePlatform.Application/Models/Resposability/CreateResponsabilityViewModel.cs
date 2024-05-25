@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.Resposability
 {
-    public class CreateResponsabilityViewModel : ResponsabilityViewModel
+    public class CreateResponsabilityViewModel : CommonEntityModel//ResponsabilityViewModel
     {
         public int? CompetenceProfileId { get; set; }
 

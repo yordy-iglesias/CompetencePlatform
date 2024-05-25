@@ -176,7 +176,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
 
                 var result = await _employeeProfileRepository.UpdateAsync(_mapper.Map<EmployeeProfile>(entity));
-                return _mapper.Map<CreateEmployeeProfileViewModel>(result);
+                return _mapper.Map<EmployeeProfileViewModel>(result);
             }
             catch
             {

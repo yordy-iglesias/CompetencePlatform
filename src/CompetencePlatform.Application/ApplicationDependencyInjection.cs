@@ -1,5 +1,6 @@
 ﻿using CompetencePlatform.Application.Common.Email;
 using CompetencePlatform.Application.MappingProfiles;
+using CompetencePlatform.Application.Models.CompetenceDictionary;
 using CompetencePlatform.Application.Services;
 using CompetencePlatform.Application.Services.DevImpl;
 using CompetencePlatform.Application.Services.Impl;
@@ -59,6 +60,9 @@ public static class ApplicationDependencyInjection
         services.AddScoped<ISolutionDomainService, SolutionDomainService>();
         services.AddScoped<ITeamService, TeamService>();
         services.AddScoped<ITechnicalSheetService, TechnicalSheetService>();
+        services.AddScoped<IDepartamentService, DepartamentService>();
+        services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<ICompetenceDictionaryService, CompetenceDictionaryService>();
        
 
         if (env.IsDevelopment())

@@ -28,7 +28,8 @@ namespace CompetencePlatform.Application.MappingProfiles
             .ForMember(empm => empm.EmployeeProfileName, emp => emp.MapFrom(emp => emp.EmployeeProfile.Name))
             .ForMember(empm => empm.TeamName, emp => emp.MapFrom(emp => emp.Team.Name)).ReverseMap();
 
-            CreateMap<Employee, CreateEmployeeViewModel>().ReverseMap();
+            CreateMap<Employee, CreateEmployeeViewModel>();
+            CreateMap<CreateEmployeeViewModel, Employee>();
 
         }
     }
