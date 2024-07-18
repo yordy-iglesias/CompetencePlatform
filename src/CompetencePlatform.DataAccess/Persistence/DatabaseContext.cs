@@ -4,14 +4,16 @@ using System.Reflection.Metadata;
 using CompetencePlatform.Core.Common;
 using CompetencePlatform.Core.DataAccess.Identity;
 using CompetencePlatform.Core.Entities;
+using CompetencePlatform.Core.Entities.Identity;
 using CompetencePlatform.Shared.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace CompetencePlatform.Core.DataAccess.Persistence;
 
-public class DatabaseContext : IdentityDbContext<ApplicationUser>
+public class DatabaseContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
     private readonly IClaimService _claimService;
 
@@ -44,6 +46,13 @@ public class DatabaseContext : IdentityDbContext<ApplicationUser>
     public DbSet<SolutionDomain> SolutionDomains { get; set; }
     public DbSet<Team> Teams { get; set; }
     public DbSet<TechnicalSheet> TechnicalSheets { get; set; }
+
+    //Identity
+    public virtual DbSet<UserClaim> UserClaims { get; set; }
+    public virtual DbSet<UserLogin> UserLogins { get; set; }
+    public virtual DbSet<UserRole> UserRoles { get; set; }
+    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
 
     //public DbSet<TodoItem> TodoItems { get; set; }
