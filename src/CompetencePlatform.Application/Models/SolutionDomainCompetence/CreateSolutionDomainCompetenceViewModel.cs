@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models.SolutionDomainCompetence
 {
-    public class CreateSolutionDomainCompetenceViewModel : SolutionDomainCompetenceViewModel
+    public class CreateSolutionDomainCompetenceViewModel : BaseEntityModel
     {
         public int? SolutionDomainId { get; set; }
         public int? CompetenceId { get; set; }

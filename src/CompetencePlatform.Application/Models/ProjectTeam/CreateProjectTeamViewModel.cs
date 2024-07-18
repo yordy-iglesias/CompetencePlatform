@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Models
 {
-    public class CreateProjectTeamViewModel : ProjectTeamViewModel
+    public class CreateProjectTeamViewModel : BaseEntityModel
     {
         public int? ProjectId { get; set; }
         public int? TeamId { get; set; }

@@ -14,11 +14,16 @@ using CompetencePlatform.Application.Models.Motivation;
 using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Application.Models.PreferenceType;
+using CompetencePlatform.Application.Models.Project;
+using CompetencePlatform.Application.Models.ProjectTeam;
 using CompetencePlatform.Application.Models.Resposability;
 using CompetencePlatform.Application.Models.Skill;
 using CompetencePlatform.Application.Models.SkillType;
 using CompetencePlatform.Application.Models.SolutionDomain;
+using CompetencePlatform.Application.Models.SolutionDomainCompetence;
 using CompetencePlatform.Application.Models.Team;
+using CompetencePlatform.Application.Models.TechnicalSheet;
+using CompetencePlatform.Application.Models.TechnicalSheetCompose;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Utils;
@@ -140,6 +145,38 @@ namespace CompetencePlatform.Application.MappingProfiles
                 .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
                 .ReverseMap();
 
+         CreateMap<PageResult<SolutionDomain>, DataTablePagin<SolutionDomainViewModel>>()
+                   .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                   .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                   .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                   .ReverseMap();
+
+         CreateMap<PageResult<TechnicalSheet>, DataTablePagin<TechnicalSheetViewModel>>()
+                       .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                       .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                       .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                       .ReverseMap();
+         CreateMap<PageResult<Project>, DataTablePagin<ProjectViewModel>>()
+                          .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                          .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                          .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                          .ReverseMap();
+         CreateMap<PageResult<ProjectTeam>, DataTablePagin<ProjectTeamViewModel>>()
+                             .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                             .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                             .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                             .ReverseMap();
+         CreateMap<PageResult<TechnicalSheetCompose>, DataTablePagin<TechnicalSheetComposeViewModel>>()
+                                .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                                .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                                .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                                .ReverseMap();
+
+            CreateMap<PageResult<SolutionDomainCompetence>, DataTablePagin<SolutionDomainCompetenceViewModel>>()
+                                           .ForMember(dest => dest.Data, opt => opt.MapFrom(orig => orig.Result))
+                                           .ForMember(dest => dest.RecordsTotal, opt => opt.MapFrom(orig => orig.Total))
+                                           .ForMember(dest => dest.RecordsFiltered, opt => opt.MapFrom(orig => orig.TotalFilter))
+                                           .ReverseMap();
 
 
 

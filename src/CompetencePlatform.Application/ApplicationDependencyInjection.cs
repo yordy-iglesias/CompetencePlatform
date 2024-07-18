@@ -63,7 +63,9 @@ public static class ApplicationDependencyInjection
         services.AddScoped<IDepartamentService, DepartamentService>();
         services.AddScoped<IOrganizationService, OrganizationService>();
         services.AddScoped<ICompetenceDictionaryService, CompetenceDictionaryService>();
-       
+        services.AddScoped<ITechnicalSheetComposeService, TechnicalSheetComposeService>();
+        services.AddScoped<ISolutionDomainCompetenceService, SolutionDomainCompetenceService>();
+
 
         if (env.IsDevelopment())
             services.AddScoped<IEmailService, DevEmailService>();

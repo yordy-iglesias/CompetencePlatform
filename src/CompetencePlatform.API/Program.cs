@@ -31,7 +31,7 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 
-await AutomatedMigration.MigrateAsync(scope.ServiceProvider);
+//await AutomatedMigration.MigrateAsync(scope.ServiceProvider);
 
 app.UseSwagger();
 app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Competence Platform V1"); });

@@ -30,9 +30,7 @@ namespace CompetencePlatform.Application.MappingProfiles
                 .ForMember(ptm => ptm.ProjectName, pt => pt.MapFrom(pt => pt.Project.Name))
                 .ForMember(ptm => ptm.TeamName, pt => pt.MapFrom(pt => pt.Team.Name)).ReverseMap();
 
-            CreateMap<ProjectTeam, CreateProjectTeamViewModel>()
-                .ForMember(ptm => ptm.ProjectId, pt => pt.MapFrom(pt => pt.Project.Id))
-                .ForMember(ptm => ptm.TeamId, pt => pt.MapFrom(pt => pt.Team.Id)).ReverseMap();
+            CreateMap<ProjectTeam, CreateProjectTeamViewModel>().ReverseMap();
 
         }
     }
