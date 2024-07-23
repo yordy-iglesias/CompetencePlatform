@@ -76,7 +76,7 @@ namespace CompetencePlatform.Application.MappingProfiles
             CreateMap<Team, TeamViewModel>().ReverseMap();
             CreateMap<TechnicalSheet, TechnicalSheetViewModel>()
                 .ForMember(tshm => tshm.SolutionDomainName, ts => ts.MapFrom(ts => ts.SolutionDomain.Name))
-                .ForMember(tshm => tshm.ProjectName, ts => ts.MapFrom(ts => ts.Project.Name)).ReverseMap();
+                .ReverseMap();
             CreateMap<TechnicalSheetCompose, TechnicalSheetComposeViewModel>()
                .ForMember(tshcm => tshcm.EmployeeProfileName, tsc => tsc.MapFrom(tsc => tsc.EmployeeProfile.Name)).ReverseMap();
         }

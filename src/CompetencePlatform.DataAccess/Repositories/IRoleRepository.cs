@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.DataAccess.Repositories
 {
-    public interface IUserRepository : IBaseRepository<User> {
-        Task<List<Role>> GetRolByIdUser(int idUser);
-
+    public interface IRoleRepository : IBaseRepository<Role> {
+        
     }
     
 }

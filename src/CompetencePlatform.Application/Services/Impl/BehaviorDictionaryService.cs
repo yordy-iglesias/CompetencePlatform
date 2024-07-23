@@ -114,7 +114,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     throw new BadRequestException("No se encuentra un usuario vàlido");
                 var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
                 string username = user.UserName;
-                var priority = true;//(await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
+                var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
                 Expression<Func<BehaviorDictionary, bool>> where = priority == true ?
                  where = bd => (bd.Behavior.Name.Contains(options.Search.Value) || bd.DegreeCompetence.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))

@@ -65,7 +65,7 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the CreatedBy.
         /// </summary>
-        public string CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the CreatedOn.
 		/// </summary>
@@ -73,7 +73,7 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the UpdatedBy.
 		/// </summary>
-        public string UpdatedBy { get; set; }
+        public int UpdatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the UpdatedOn.
 		/// </summary>

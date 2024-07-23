@@ -26,16 +26,15 @@ namespace CompetencePlatform.Application.Services.Impl
         private readonly IBehaviorRepository _behaviorRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
-       // private readonly IUserRepository _userRepository;
-        private readonly UserManager<ApplicationUser> _userManager;
-       // private readonly RoleManager<ApplicationUser> _userManager;
-        public BehaviorService(UserManager<ApplicationUser> userManager,IBehaviorRepository behaviorRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        
+        public BehaviorService(IBehaviorRepository behaviorRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _behaviorRepository = behaviorRepository;
             _mapper = mapper;
             _claimService = claimService;
-            _userManager = userManager;
-            //_userRepository = userRepository;
+           
+            _userRepository = userRepository;
         }
         public async Task<BehaviorViewModel> Create(CreateBehaviorViewModel entity)
         {
@@ -102,12 +101,10 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 var currentUserId = _claimService.GetUserId();
                 if (currentUserId == null)
-                    throw new BadRequestException("No se encuentra un usuario vàlido");
-                //var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
-                //var user =  await _userManager.FindByIdAsync(currentUserId);
-                //string username = user.UserName;
-                //var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
-                var priority = true;
+                    throw new BadRequestException("No se encuentra un usuario valido");
+                var user = await _userRepository.GetFirstAsync(x => x.Id == currentUserId, asNoTracking: true);
+                string username = user.UserName;
+                var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
                 Expression<Func<Behavior, bool>> where = priority == true ?
                  where = b => (b.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))

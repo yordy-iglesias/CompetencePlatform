@@ -11,7 +11,6 @@ namespace CompetencePlatform.Core.Entities.Identity
     
     public class UserClaim : IdentityUserClaim<int>
     {
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        
     }
 }

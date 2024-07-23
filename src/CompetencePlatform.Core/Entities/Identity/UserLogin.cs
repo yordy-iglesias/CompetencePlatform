@@ -10,7 +10,6 @@ namespace CompetencePlatform.Core.Entities.Identity
 {
     public class UserLogin : IdentityUserLogin<int>
     {
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        
     }
 }

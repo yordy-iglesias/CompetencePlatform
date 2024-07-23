@@ -38,7 +38,7 @@ public class TodoListService : ITodoListService
 
         return new CreateTodoListResponseModel
         {
-            Id = Guid.NewGuid()//addedTodoList.Id
+            Id = 0//Guid.NewGuid()//addedTodoList.Id
         };
     }
 
@@ -56,7 +56,7 @@ public class TodoListService : ITodoListService
 
         return new UpdateTodoListResponseModel
         {
-            Id = Guid.NewGuid()//(await _todoListRepository.UpdateAsync(todoList)).Id
+            Id = 0//Guid.NewGuid()//(await _todoListRepository.UpdateAsync(todoList)).Id
         };
     }
 
@@ -67,7 +67,7 @@ public class TodoListService : ITodoListService
 
         return new BaseResponseModel
         {
-            Id = Guid.NewGuid()//(await _todoListRepository.DeleteAsync(todoList)).Id
+            Id = 0//Guid.NewGuid()//(await _todoListRepository.DeleteAsync(todoList)).Id
         };
     }
 }

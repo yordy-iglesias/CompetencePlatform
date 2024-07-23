@@ -36,7 +36,7 @@ public static class ApplicationDependencyInjection
         services.AddScoped<IClaimService, ClaimService>();
         services.AddScoped<ITemplateService, TemplateService>();
         //Services
-        services.AddScoped<IUserRepository, UserRepository>();
+        
         services.AddScoped<IBehaviorService, BehaviorService>();
         services.AddScoped<IBehaviorDictionaryService, BehaviorDictionaryService>();
         services.AddScoped<IC_S_M_K_PService, C_S_M_K_P_Service>();

@@ -2,6 +2,8 @@
 using CompetencePlatform.Core.DataAccess.Persistence;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
+using CompetencePlatform.Core.Entities.Identity;
+using CompetencePlatform.Core.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -25,6 +27,10 @@ public static class DataAccessDependencyInjection
 
     private static void AddRepositories(this IServiceCollection services)
     {
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+
+
         services.AddScoped<ITodoItemRepository, TodoItemRepository>();
         services.AddScoped<ITodoListRepository, TodoListRepository>();
         services.AddScoped<IBehaviorDictionaryRepository, BehaviorDictionaryRepository>();
@@ -76,8 +82,9 @@ public static class DataAccessDependencyInjection
 
     private static void AddIdentity(this IServiceCollection services)
     {
-        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<DatabaseContext>();
+        services
+        .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<DatabaseContext>();
 
         services.Configure<IdentityOptions>(options =>
         {
@@ -94,7 +101,18 @@ public static class DataAccessDependencyInjection
 
             options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-            options.User.RequireUniqueEmail = true;
+            options.User.RequireUniqueEmail = false;
+
+        });
+        services.ConfigureApplicationCookie(options =>
+        {
+            // Cookie settings
+            options.Cookie.HttpOnly = true;
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+            options.LoginPath = "/Identity/Account/Login";
+            options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            options.SlidingExpiration = true;
         });
     }
 }

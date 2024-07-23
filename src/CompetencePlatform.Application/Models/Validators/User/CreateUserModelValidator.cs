@@ -8,9 +8,9 @@ namespace CompetencePlatform.Application.Models.Validators.User;
 
 public class CreateUserModelValidator : AbstractValidator<CreateUserModel>
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<Core.Entities.Identity.User> _userManager;
 
-    public CreateUserModelValidator(UserManager<ApplicationUser> userManager)
+    public CreateUserModelValidator(UserManager<Core.Entities.Identity.User> userManager)
     {
         _userManager = userManager;
 

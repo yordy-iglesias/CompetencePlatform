@@ -40,7 +40,7 @@ public class TodoItemService : ITodoItemService
 
         return new CreateTodoItemResponseModel
         {
-            Id = Guid.NewGuid()//(await _todoItemRepository.AddAsync(todoItem)).Id
+            Id = 0//Guid.NewGuid()//(await _todoItemRepository.AddAsync(todoItem)).Id
         };
     }
 
@@ -54,7 +54,7 @@ public class TodoItemService : ITodoItemService
 
         return new UpdateTodoItemResponseModel
         {
-            Id = Guid.NewGuid()//(await _todoItemRepository.UpdateAsync(todoItem)).Id
+            Id = 0//Guid.NewGuid()//(await _todoItemRepository.UpdateAsync(todoItem)).Id
         };
     }
 
@@ -65,7 +65,7 @@ public class TodoItemService : ITodoItemService
 
         return new BaseResponseModel
         {
-            Id = Guid.NewGuid()//(await _todoItemRepository.DeleteAsync(todoItem)).Id
+            Id = 0//Guid.NewGuid()//(await _todoItemRepository.DeleteAsync(todoItem)).Id
         };
     }
 }

@@ -13,14 +13,15 @@ namespace CompetencePlatform.Shared.Services.Impl
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string GetUserId()
+        public int GetUserId()
         {
             return GetClaim(ClaimTypes.NameIdentifier);
         }
 
-        public string GetClaim(string key)
+        public int GetClaim(string key)
         {
-            return _httpContextAccessor.HttpContext?.User?.FindFirst(key)?.Value;
+            var result = _httpContextAccessor.HttpContext?.User?.FindFirst(key)?.Value;
+            return int.Parse(result);
         }
         public string GetUserNameFromIdentity()
         {

@@ -1,5 +1,4 @@
-﻿using CompetencePlatform.Application.Helpers;
-using CompetencePlatform.Application.Models.WeatherForecast;
+﻿using CompetencePlatform.Application.Models.WeatherForecast;
 using CompetencePlatform.Application.Services;
 
 namespace CompetencePlatform.Application.Services.Impl;
@@ -21,8 +20,8 @@ public class WeatherForecastService : IWeatherForecastService
         return Enumerable.Range(1, 5).Select(index => new WeatherForecastResponseModel
         {
             Date = DateTime.Now.AddDays(index),
-            TemperatureC = RandomGenerator.GenerateInteger(-20, 55),
-            Summary = _summaries[RandomGenerator.GenerateInteger(0, _summaries.Count)]
+            TemperatureC = 0,//RandomGenerator.GenerateInteger(-20, 55),
+            Summary = "0"//_summaries[RandomGenerator.GenerateInteger(0, _summaries.Count)]
         });
     }
 }

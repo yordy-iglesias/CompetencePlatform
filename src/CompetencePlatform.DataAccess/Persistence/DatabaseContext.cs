@@ -48,28 +48,15 @@ public class DatabaseContext : IdentityDbContext<User, Role, int, UserClaim, Use
     public DbSet<TechnicalSheet> TechnicalSheets { get; set; }
 
     //Identity
-    public virtual DbSet<UserClaim> UserClaims { get; set; }
-    public virtual DbSet<UserLogin> UserLogins { get; set; }
-    public virtual DbSet<UserRole> UserRoles { get; set; }
-    public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<Role> Roles { get; set; }
-
-
-    //public DbSet<TodoItem> TodoItems { get; set; }
-
-    //public DbSet<TodoList> TodoLists { get; set; }
+    public virtual DbSet<UserClaim> CompetenceUserClaims { get; set; }
+    public virtual DbSet<UserLogin> CompetenceUserLogins { get; set; }
+    public virtual DbSet<UserRole> CompetenceUserRoles { get; set; }
+    public virtual DbSet<User> CompetenceUsers { get; set; }
+    public virtual DbSet<Role> CompetenceRoles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        //Configuracion uno a uno con Project y TecnicalSheet
-        builder.Entity<TechnicalSheet>()
-            .HasOne(b => b.Project)
-            .WithOne(ts => ts.TechnicalSheet)
-            .HasForeignKey<TechnicalSheet>("ProjectId")
-            .IsRequired(false);
 
-       
         base.OnModelCreating(builder);
 
     }

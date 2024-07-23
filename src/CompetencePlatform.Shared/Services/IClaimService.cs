@@ -2,9 +2,9 @@
 {
     public interface IClaimService
     {
-        string GetUserId();
+        int GetUserId();
 
-        string GetClaim(string key);
+        int GetClaim(string key);
         string GetUserNameFromIdentity();
     }
 }
