@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240720052353_Initial")]
+    [Migration("20240730022207_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -36,10 +36,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -56,7 +56,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -78,10 +78,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("BehaviorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DegreeCompetenceId")
@@ -93,7 +93,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -119,10 +119,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -143,7 +143,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("SkillId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -175,10 +175,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -195,7 +195,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -222,10 +222,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -234,7 +234,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -260,10 +260,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceDictionaryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -275,7 +275,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -298,10 +298,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -318,7 +318,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -337,10 +337,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -357,7 +357,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -376,10 +376,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -399,7 +399,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("OrganizationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -420,10 +420,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -456,7 +456,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -484,10 +484,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -499,7 +499,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -522,10 +522,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -545,7 +545,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("SolutionDomainId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -584,17 +584,12 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -626,9 +621,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -642,9 +634,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsBlocked")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -652,9 +641,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("LockoutEndDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
@@ -689,15 +675,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UICultureId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<int?>("User_Id")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -731,14 +711,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("User_Id");
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -746,10 +721,12 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.UserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -757,14 +734,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id")
-                        .HasColumnType("int");
-
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("User_Id");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
@@ -777,19 +749,14 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Role_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("User_Id")
+                    b.Property<int?>("RoleId1")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
-                    b.HasIndex("Role_Id");
-
-                    b.HasIndex("User_Id");
+                    b.HasIndex("RoleId1");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -802,10 +769,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -822,7 +789,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -841,10 +808,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -861,7 +828,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -880,10 +847,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -904,7 +871,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -927,10 +894,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -950,7 +917,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("PreferenceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -971,10 +938,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -991,7 +958,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1010,10 +977,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1033,7 +1000,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("TechnicalSheetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1054,10 +1021,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1072,7 +1039,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1098,10 +1065,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1118,7 +1085,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1139,10 +1106,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1162,7 +1129,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("SkillTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1183,10 +1150,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1203,7 +1170,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1222,10 +1189,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1245,7 +1212,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("OrganizationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1269,10 +1236,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("CompetenceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1284,7 +1251,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("SolutionDomainId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1307,10 +1274,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1327,7 +1294,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1346,10 +1313,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1373,7 +1340,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1394,10 +1361,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
@@ -1415,7 +1382,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("TechnicalSheetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UpdatedBy")
+                    b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
@@ -1460,10 +1427,12 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -1614,13 +1583,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Navigation("SolutionDomain");
                 });
 
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.Role", b =>
-                {
-                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.User", b =>
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.Organization", "Organization")
@@ -1639,14 +1601,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "User")
-                        .WithMany("UserClaims")
-                        .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.UserLogin", b =>
@@ -1656,14 +1610,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "User")
-                        .WithMany("UserLogins")
-                        .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.UserRole", b =>
@@ -1674,27 +1620,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CompetencePlatform.Core.Entities.Identity.Role", "Role")
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.Role", null)
                         .WithMany("UserRoles")
-                        .HasForeignKey("Role_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId1");
 
                     b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Preference", b =>
@@ -1880,17 +1814,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.Role", b =>
                 {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.User", b =>
-                {
-                    b.Navigation("Roles");
-
-                    b.Navigation("UserClaims");
-
-                    b.Navigation("UserLogins");
-
                     b.Navigation("UserRoles");
                 });
 

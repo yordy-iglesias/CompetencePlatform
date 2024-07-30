@@ -83,8 +83,10 @@ public static class DataAccessDependencyInjection
     private static void AddIdentity(this IServiceCollection services)
     {
         services
-        .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddRoles<Role>()
         .AddEntityFrameworkStores<DatabaseContext>();
+   
 
         services.Configure<IdentityOptions>(options =>
         {

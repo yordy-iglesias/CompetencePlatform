@@ -23,10 +23,10 @@ namespace CompetencePlatform.Core.Entities.Identity
         public string TimeZoneId { get; set; } = "";
         public string AvatarUrl { get; set; } = "";
         public bool IsActive { get; set; }
-        public virtual ICollection<UserClaim> UserClaims { get; set; }
-        public virtual ICollection<UserLogin> UserLogins { get; set; }
-        public virtual ICollection<UserRole> UserRoles { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
+        //public virtual ICollection<UserClaim> UserClaims { get; set; }
+        //public virtual ICollection<UserLogin> UserLogins { get; set; }
+        //public virtual ICollection<UserRole> UserRoles { get; set; }
+        // virtual ICollection<Role> Roles { get; set; }
 
 
     }

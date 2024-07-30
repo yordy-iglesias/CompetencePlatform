@@ -21,7 +21,7 @@ public class UserProfile : Profile
             .ForMember(dest => dest.OrganizacionId, opt => opt.MapFrom(orig => orig.Id));
 
         CreateMap<User, UserViewModel>()
-           .ForMember(dest => dest.OrganizacionId, opt => opt.MapFrom(orig => orig.OrganizacionId))
-           .ForMember(dest => dest.IdRole, opt => opt.MapFrom(orig => orig.UserRoles.FirstOrDefault().RoleId));
+           .ForMember(dest => dest.OrganizacionId, opt => opt.MapFrom(orig => orig.OrganizacionId));
+          // .ForMember(dest => dest.IdRole, opt => opt.MapFrom(orig => orig.UserRoles.FirstOrDefault().RoleId));
     }
 }

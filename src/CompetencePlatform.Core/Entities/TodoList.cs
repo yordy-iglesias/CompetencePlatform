@@ -8,11 +8,11 @@ namespace CompetencePlatform.Core.Entities
 
         public List<TodoItem> Items { get; } = new List<TodoItem>();
 
-        public int CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
 
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
 
-        public int UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
 
         public DateTime? UpdatedOn { get; set; }
         // <summary>

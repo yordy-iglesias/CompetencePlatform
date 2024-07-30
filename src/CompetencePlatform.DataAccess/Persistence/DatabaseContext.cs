@@ -47,12 +47,7 @@ public class DatabaseContext : IdentityDbContext<User, Role, int, UserClaim, Use
     public DbSet<Team> Teams { get; set; }
     public DbSet<TechnicalSheet> TechnicalSheets { get; set; }
 
-    //Identity
-    public virtual DbSet<UserClaim> CompetenceUserClaims { get; set; }
-    public virtual DbSet<UserLogin> CompetenceUserLogins { get; set; }
-    public virtual DbSet<UserRole> CompetenceUserRoles { get; set; }
-    public virtual DbSet<User> CompetenceUsers { get; set; }
-    public virtual DbSet<Role> CompetenceRoles { get; set; }
+    
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

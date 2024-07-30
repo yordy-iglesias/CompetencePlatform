@@ -1,11 +1,13 @@
 ﻿using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.User;
 using CompetencePlatform.Application.Services;
+using CompetencePlatform.Core.DataTable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompetencePlatform.API.Controllers;
 
+[Authorize]
 public class UsersController : ApiController
 {
     private readonly IUserService _userService;
@@ -14,7 +16,32 @@ public class UsersController : ApiController
     {
         _userService = userService;
     }
-
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        return Ok(ApiResult<IEnumerable<UserViewModel>>.Success(
+             await _userService.Get()));
+    }
+    [HttpPost("getPagin")]
+    public async Task<IActionResult> GetPagin(DataTableServerSide options)
+    {
+        return Ok(ApiResult<DataTablePagin<UserViewModel>>.Success(
+             await _userService.GetPagination(options)));
+    }
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Get(int id)
+    {
+        return Ok(ApiResult<UserViewModel>.Success(await _userService.Get(id)));
+    }
+    [HttpPut]
+    public async Task<IActionResult> Update(UserViewModel updateUserModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        return Ok(ApiResult<UserViewModel>.Success(await _userService.Update(updateUserModel)));
+    }
     [HttpPost]
     [AllowAnonymous]
     public async Task<IActionResult> RegisterAsync(CreateUserModel createUserModel)
@@ -27,6 +54,17 @@ public class UsersController : ApiController
     public async Task<IActionResult> LoginAsync(LoginUserModel loginUserModel)
     {
         return Ok(ApiResult<LoginResponseModel>.Success(await _userService.LoginAsync(loginUserModel)));
+    }
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        return Ok(ApiResult<UserViewModel>.Success(await _userService.Delete(id)));
+    }
+    [HttpGet("getSelect")]
+    public async Task<IActionResult> GetSelect()
+    {
+        return Ok(ApiResult<IEnumerable<SelectViewModel>>.Success(
+             await _userService.GetSelect()));
     }
 
     [HttpPost("confirmEmail")]

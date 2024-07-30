@@ -37,8 +37,7 @@ public class UserService : IUserService
     private readonly IRoleRepository _roleRepository;
     private string currentUserName;
 
-    public UserService(IMapper mapper,
-        IClaimService claimService,
+    public UserService(IClaimService claimService,
         UserManager<User> userManager,
         SignInManager<User> signInManager,
         IConfiguration configuration,
@@ -46,7 +45,8 @@ public class UserService : IUserService
         IEmailService emailService,
         IUserRepository userRepository,
         IPasswordHasher<User> passwordHasher,
-        IRoleRepository roleRepository)
+        IRoleRepository roleRepository,
+        IMapper mapper)
     {
         _mapper = mapper;
         _claimService = claimService;
@@ -59,7 +59,6 @@ public class UserService : IUserService
         _passwordHasher = passwordHasher;
         _roleRepository = roleRepository;
     }
-
     public async Task<CreateUserResponseModel> CreateAsync(CreateUserModel createUserModel)
     {
         try
@@ -116,7 +115,36 @@ public class UserService : IUserService
         }
     }
 
+    //public async Task<LoginResponseModel> LoginAsync(LoginUserModel loginUserModel)
+    //{
+    //    try
+    //    {
+    //        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginUserModel.Username);
 
+    //        if (user == null)
+    //            throw new NotFoundException("Username or password is incorrect");
+
+    //        var signInResult = await _signInManager.PasswordSignInAsync(user, loginUserModel.Password, false, false);
+
+    //        if (!signInResult.Succeeded)
+    //            throw new BadRequestException("Username or password is incorrect");
+
+    //        var token = JwtHelper.GenerateToken(user, _configuration);
+    //        var rols = await _userRepository.GetRolByIdUser(user.Id);
+    //        currentUserName = user.UserName;
+    //        return new LoginResponseModel
+    //        {
+    //            Username = user.UserName,
+    //            Email = user.Email,
+    //            Token = token,
+    //            Rol = rols,
+    //        };
+    //    }
+    //    catch ( Exception ex )
+    //    {
+    //        throw ex;
+    //    }
+    //}
     public async Task<LoginResponseModel> LoginAsync(LoginUserModel loginUserModel)
     {
         try
@@ -135,6 +163,9 @@ public class UserService : IUserService
 
             var token = JwtHelper.GenerateToken(user, _configuration);
             var roles = await _roleRepository.GetAllAsync(x => x.UserRoles.Any(y => y.UserId == user.Id));
+
+
+
             return new LoginResponseModel
             {
                 Username = user.UserName,
@@ -194,6 +225,7 @@ public class UserService : IUserService
         var user = await _userManager.FindByIdAsync(userId.ToString());
         return user.UserName;
     }
+
     public async Task<IEnumerable<UserViewModel>> Get()
     {
         try
@@ -206,6 +238,58 @@ public class UserService : IUserService
             throw;
         }
     }
+
+    public async Task<UserViewModel> Create(UserViewModel entity)
+    {
+        try
+        {
+  
+            var result = await _userRepository.AddAsync(_mapper.Map<User>(entity));
+            return _mapper.Map<UserViewModel>(result);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<UserViewModel> Delete(int id)
+    {
+        try
+        {
+            var result = await _userRepository.GetFirstAsync(tl => tl.Id == id, asNoTracking: false);
+            if (result != null)
+            {
+                var resultDelete = await _userRepository.DeleteAsync(result);
+                return _mapper.Map<UserViewModel>(resultDelete);
+            }
+            throw new BadRequestException("No se encuentra el usuario");
+        }
+        catch
+        {
+            throw;
+        }
+    }
+
+    public async Task<UserViewModel> Get(int id)
+    {
+        try
+        {
+            var user = await _userRepository.GetFirstAsync(x => x.Id == id, asNoTracking: false);
+            var result = _mapper.Map<UserViewModel>(user);
+            if (result == null)
+                throw new BadRequestException("No existe este usuario");
+            var rols = await _userRepository.GetRolByIdUser(result.Id);
+            result.Roles = _mapper.Map<IEnumerable<RoleViewModel>>(rols);
+            return result;
+
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
     public async Task<UserViewModel> Update(UserViewModel entity)
     {
         try
@@ -220,12 +304,14 @@ public class UserService : IUserService
             _mapper.Map(entity, result);
 
 
-            result.Roles = null;
-
-            var oldRol = await _roleRepository.GetFirstAsync(x => x.Id == result.UserRoles.FirstOrDefault().RoleId, asNoTracking: true);
-            await _userManager.RemoveFromRoleAsync(result, oldRol.Name);
-
-
+            //result.Roles = null;
+            //Arreglar aqui
+            var oldRoles = await _userManager.GetRolesAsync(new User() { });//await _roleRepository.GetFirstAsync(x => x.Id == result.UserRoles.FirstOrDefault().RoleId, asNoTracking: true);
+            foreach (var item in oldRoles)
+            {
+                await _userManager.RemoveFromRoleAsync(result, item);
+            }
+            
             var resultUpdated = await _userRepository.UpdateAsync(result);
 
             var newRol = await _roleRepository.GetFirstAsync(x => x.Id == entity.IdRole, asNoTracking: true);
@@ -239,6 +325,7 @@ public class UserService : IUserService
             throw new ApplicationException("Error al actualizar el usuario", ex);
         }
     }
+
 
     public async Task<DataTablePagin<UserViewModel>> GetPagination(DataTableServerSide options)
     {
@@ -294,6 +381,7 @@ public class UserService : IUserService
             throw;
         }
     }
+
     public async Task<IEnumerable<SelectViewModel>> GetSelect()
     {
         try
@@ -306,8 +394,10 @@ public class UserService : IUserService
             throw;
         }
     }
+
     public async Task<string> GetCurrentUserName()
     {
         return await Task.FromResult(currentUserName);
     }
 }
+
