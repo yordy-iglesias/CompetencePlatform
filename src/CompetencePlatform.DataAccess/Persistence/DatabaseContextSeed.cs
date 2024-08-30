@@ -1,19 +1,21 @@
 ﻿using CompetencePlatform.Core.DataAccess.Identity;
 using CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.KnowledgeData;
 using CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.SkillData;
+using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.Entities;
 using CompetencePlatform.Core.Entities.Identity;
 using CompetencePlatform.Core.Enums;
 using CompetencePlatform.Core.Utils;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace CompetencePlatform.Core.DataAccess.Persistence;
 
 public static class DatabaseContextSeed
 {
-    public static async Task SeedDatabaseAsync(DatabaseContext context, UserManager<User> userManager, RoleManager<Role> roleManager, Microsoft.Extensions.Configuration.IConfiguration configuration)
+    public static async Task SeedDatabaseAsync(DatabaseContext context, UserManager<User> userManager, RoleManager<Role> roleManager,IConfiguration configuration,IOrganizationRepository organizationRepository,ISkillTypeRepository skillTypeRepository,IKnowledgeRepository knowledgeRepository )
     {
-        var organization=await AddDefaultOrganization(context);
+        var organization=await AddDefaultOrganization(organizationRepository);
         if (organization != null)
         {
             foreach (var roleName in Enum.GetNames(typeof(SystemRoleEnum)))
@@ -26,12 +28,12 @@ public static class DatabaseContextSeed
                         RoleAccess newRol = new RoleAccess
                         {
                             RolName = roleName,
-                            Accesses = new List<Access>()
+                            Permisions = new List<Permission>()
                         };
 
                         foreach (var module in Enum.GetNames(typeof(ModuleEnum)))
                         {
-                            var modulePermission = new Access { screenName = module };
+                            var modulePermission = new Permission { screenName = module };
                             var actions = new List<string>();
 
                             foreach (var permission in Enum.GetNames(typeof(PermissionEnum)))
@@ -39,7 +41,7 @@ public static class DatabaseContextSeed
                                 actions.Add(permission);
                             }
                             modulePermission.Actions = actions;
-                            newRol.Accesses.Add(modulePermission);
+                            newRol.Permisions.Add(modulePermission);
                         }
 
                         string stamp = JwtHelper.GenerateRoleToken(newRol, configuration);
@@ -65,16 +67,13 @@ public static class DatabaseContextSeed
                 await userManager.AddToRoleAsync(developer, SystemRoleEnum.Developer.ToString());
                 await userManager.AddToRoleAsync(employee, SystemRoleEnum.Employee.ToString());
             }
-
-            await AddKwnoledges(context);
-            await AddSkillTypes(context);
-
-
             await context.SaveChangesAsync();
+            await SeedKwnoledges(knowledgeRepository);
+            await SeedSkillTypes(skillTypeRepository);
         }
        
     }
-    private static async Task<Organization> AddDefaultOrganization(DatabaseContext context)
+    private static async Task<Organization> AddDefaultOrganization(IOrganizationRepository organizationRepository)
     {
         var defaultOrganization = new Organization() { 
             IsSelected = true,
@@ -85,38 +84,43 @@ public static class DatabaseContextSeed
             Deleted = false
             
         };
-        if (!context.Organizations.Any())
-            return (await context.Organizations.AddAsync(defaultOrganization)).Entity;
+        try
+        {
+            if (!(await organizationRepository.GetAllAsync()).Any())
+            {
+                return await organizationRepository.AddAsync(defaultOrganization);
+
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+        
+
         return null;
        
     }
-    private static async Task AddKwnoledges(DatabaseContext context)
+    private static async Task SeedKwnoledges(IKnowledgeRepository knowledgeRepository)
     {
         var knowledges = KnowledgeGenerator.Generate();
-        if (!context.Knowledges.Any())
-            await context.Knowledges.AddRangeAsync(knowledges);
-        else
-        {
-            foreach (var k in knowledges)
+        foreach (var k in knowledges)
             {
-               if( !context.Knowledges.Any(x=>x.Name==k.Name))
-                    await context.Knowledges.AddAsync(k);
+               if((await knowledgeRepository.GetFirstAsync(x => x.Name == k.Name,false))==null)
+                    await knowledgeRepository.AddAsync(k);
             }
-        }
+        
     }
 
-    private static async Task AddSkillTypes(DatabaseContext context)
+    private static async Task SeedSkillTypes(ISkillTypeRepository skillTypeRepository)
     {
         var skillTypes = SkillTypeGenerator.Generate();
-        if (!context.SkillTypes.Any())
-            await context.SkillTypes.AddRangeAsync(skillTypes);
-        else
-        {
-            foreach (var skt in skillTypes)
+        foreach (var skt in skillTypes)
             {
-                if (!context.SkillTypes.Any(x => x.Name == skt.Name))
-                    await context.SkillTypes.AddAsync(skt);
+                if (await skillTypeRepository.GetFirstAsync(x => x.Name == skt.Name,false)==null)
+                     await skillTypeRepository.AddAsync(skt);
             }
-        }
     }
+    
 }

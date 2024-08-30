@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.DataAccess.Identity;
+using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,9 @@ public static class AutomatedMigration
 
         var userManager = services.GetRequiredService<UserManager<User>>();
         var roleManager = services.GetRequiredService<RoleManager<Role>>();
-        await DatabaseContextSeed.SeedDatabaseAsync(context, userManager,roleManager, configuration);
+        var organizationRepository = services.GetRequiredService<IOrganizationRepository>();
+        var skillTypeRepository = services.GetRequiredService<ISkillTypeRepository>();
+        var knowledgeRepository = services.GetRequiredService<IKnowledgeRepository>();
+        await DatabaseContextSeed.SeedDatabaseAsync(context, userManager,roleManager, configuration,organizationRepository,skillTypeRepository,knowledgeRepository);
     }
 }

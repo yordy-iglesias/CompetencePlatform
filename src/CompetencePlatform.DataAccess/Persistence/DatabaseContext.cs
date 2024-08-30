@@ -67,11 +67,11 @@ public class DatabaseContext : IdentityDbContext<User, Role, int, UserClaim, Use
             switch (entry.State)
             {
                 case EntityState.Added:
-                    entry.Entity.CreatedBy = _claimService.GetUserId();
+                    entry.Entity.CreatedBy = _claimService.GetUserId()==0?Users.FirstOrDefault(x=>x.UserName== "developer")?.Id : _claimService.GetUserId();
                     entry.Entity.CreatedOn = DateTime.Now;
                     break;
                 case EntityState.Modified:
-                    entry.Entity.UpdatedBy = _claimService.GetUserId();
+                    entry.Entity.UpdatedBy = _claimService.GetUserId() == 0 ? Users.FirstOrDefault(x => x.UserName == "developer").Id : _claimService.GetUserId();
                     entry.Entity.UpdatedOn = DateTime.Now;
                     break;
             }

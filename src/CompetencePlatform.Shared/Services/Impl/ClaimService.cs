@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using CompetencePlatform.Shared.Services;
 using Microsoft.AspNetCore.Http;
 
@@ -21,7 +22,10 @@ namespace CompetencePlatform.Shared.Services.Impl
         public int GetClaim(string key)
         {
             var result = _httpContextAccessor.HttpContext?.User?.FindFirst(key)?.Value;
-            return int.Parse(result);
+            if (!String.IsNullOrEmpty(result))
+                return int.Parse(result);
+            return 0;
+
         }
         public string GetUserNameFromIdentity()
         {

@@ -82,7 +82,7 @@ public class RoleService : IRoleService
             }
 
             if (role.ConcurrencyStamp != stamp)
-                role.ConcurrencyStamp = model.Accesses.Count != 0 ? stamp : null;
+                role.ConcurrencyStamp = model.Permisions.Count != 0 ? stamp : null;
 
             return _mapper.Map<RoleViewModel>(await _roleRepository.UpdateAsync(role));
         }
@@ -169,7 +169,7 @@ public class RoleService : IRoleService
             var role = new Role(model.RolName);
 
             role.NormalizedName = model.RolName.ToUpper();
-            role.ConcurrencyStamp = model.Accesses.Count != 0 ? stamp : null;
+            role.ConcurrencyStamp = model.Permisions.Count != 0 ? stamp : null;
 
             return _mapper.Map<RoleViewModel>(await _roleRepository.AddAsync(role));
         }

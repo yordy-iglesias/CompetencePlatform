@@ -51,7 +51,7 @@ public static class JwtHelper
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, rol.RolName),
-                new Claim("Access", JsonSerializer.Serialize(rol.Accesses))
+                new Claim("Permisions", JsonSerializer.Serialize(rol.Permisions))
 
             }),
             //Expires = DateTime.UtcNow.AddDays(7),
@@ -64,13 +64,13 @@ public static class JwtHelper
         return tokenHandler.WriteToken(token);   
     }
 
-    public static Access GetPermissionOfToken(string token, string screenName)
+    public static Permission GetPermissionOfToken(string token, string screenName)
     {
         var handler = new JwtSecurityTokenHandler();
         var jsonToken = handler.ReadToken(token);
         var tokenS = jsonToken as JwtSecurityToken;
         string rolString = tokenS.Payload.Values.OfType<string>().ToList()[1];
-        var permissions = JsonSerializer.Deserialize<List<Access>>(rolString);
+        var permissions = JsonSerializer.Deserialize<List<Permission>>(rolString);
         var permission = permissions.Find(x => x.screenName == screenName);
 
         return permission;
