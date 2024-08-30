@@ -46,6 +46,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -60,6 +63,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Behaviors");
                 });
@@ -87,6 +94,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -100,7 +110,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("BehaviorId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DegreeCompetenceId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("BehavioursDictionaries");
                 });
@@ -123,6 +137,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDefault")
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
@@ -150,6 +167,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("CompetenceId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("KnowledgeId");
 
                     b.HasIndex("MotivationId");
@@ -157,6 +176,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.HasIndex("PreferenceId");
 
                     b.HasIndex("SkillId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Competence_Skill_Motivation_Knowledge_Preferences");
                 });
@@ -185,6 +206,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -201,6 +225,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompetenceTypeId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Competences");
                 });
@@ -228,6 +256,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -242,6 +273,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.HasIndex("BehaviorDictionaryId");
 
                     b.HasIndex("CompetenceId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("CompetenceDictionaries");
                 });
@@ -269,6 +304,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("EmployeeProfileId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -282,7 +320,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("CompetenceDictionaryId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("EmployeeProfileId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("CompetenceProfiles");
                 });
@@ -308,6 +350,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -322,6 +367,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("CompetenceTypes");
                 });
@@ -347,6 +396,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -361,6 +413,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("DegreeCompetences");
                 });
@@ -386,6 +442,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -404,7 +463,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("OrganizationId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Departaments");
                 });
@@ -440,6 +503,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -461,11 +527,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("DepartamentId");
 
                     b.HasIndex("EmployeeProfileId");
 
                     b.HasIndex("TeamId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Employees");
                 });
@@ -493,6 +563,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -506,7 +579,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("CompetenceId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("EmployeeId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("EmployeeCompetences");
                 });
@@ -532,6 +609,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -550,7 +630,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("SolutionDomainId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("EmployeeProfiles");
                 });
@@ -581,12 +665,17 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -708,9 +797,14 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
@@ -731,9 +825,14 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
@@ -749,11 +848,16 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int?>("RoleId1")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -779,6 +883,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -793,6 +900,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Knowledges");
                 });
@@ -818,6 +929,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -833,6 +947,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
+
                     b.ToTable("Motiviations");
                 });
 
@@ -844,9 +962,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -856,6 +971,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
 
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
@@ -867,9 +985,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UpdatedBy")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -904,6 +1019,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -922,7 +1040,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("PreferenceTypeId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Preferences");
                 });
@@ -948,6 +1070,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -962,6 +1087,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("PreferenceTypes");
                 });
@@ -987,6 +1116,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1005,7 +1137,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("TechnicalSheetId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Projects");
                 });
@@ -1027,6 +1163,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1044,9 +1183,13 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("ProjectId");
 
                     b.HasIndex("TeamId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("ProjectTeams");
                 });
@@ -1075,6 +1218,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1091,6 +1237,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompetenceProfileId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Responsability");
                 });
@@ -1116,6 +1266,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1134,7 +1287,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("SkillTypeId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Skills");
                 });
@@ -1160,6 +1317,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1174,6 +1334,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("SkillTypes");
                 });
@@ -1199,6 +1363,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1217,7 +1384,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("OrganizationId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("SolutionDomains");
                 });
@@ -1242,6 +1413,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1258,7 +1432,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("CompetenceId");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("SolutionDomainId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("SolutionDomainCompetence");
                 });
@@ -1284,6 +1462,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1298,6 +1479,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Teams");
                 });
@@ -1323,6 +1508,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1345,7 +1533,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("SolutionDomainId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("TechnicalSheets");
                 });
@@ -1370,6 +1562,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("EmployeeProfileId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("IsDefault")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
@@ -1387,9 +1582,13 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CreatedBy");
+
                     b.HasIndex("EmployeeProfileId");
 
                     b.HasIndex("TechnicalSheetId");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("TechnicalSheetCompose");
                 });
@@ -1439,19 +1638,46 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Behavior", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("BehaviorUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("BehaviorUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
             modelBuilder.Entity("CompetencePlatform.Core.Entities.BehaviorDictionary", b =>
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.Behavior", "Behavior")
                         .WithMany("BehaviorDictionaries")
                         .HasForeignKey("BehaviorId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("BehaviorDictionaryUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.DegreeCompetence", "DegreeCompetence")
                         .WithMany("BehaviourDictionaries")
                         .HasForeignKey("DegreeCompetenceId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("BehaviorDictionaryUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Behavior");
 
                     b.Navigation("DegreeCompetence");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.C_S_M_K_P", b =>
@@ -1459,6 +1685,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.HasOne("CompetencePlatform.Core.Entities.Competence", "Competence")
                         .WithMany("Competence_Skill_Motivation_Knowledge_Preferences")
                         .HasForeignKey("CompetenceId");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("CSMKUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
 
                     b.HasOne("CompetencePlatform.Core.Entities.Knowledge", "Knowledge")
                         .WithMany("Competence_Skill_Motivation_Knowledge_Preferences")
@@ -1476,6 +1706,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("Competence_Skill_Motivation_Knowledge_Preferences")
                         .HasForeignKey("SkillId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("CSMKUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Competence");
 
                     b.Navigation("Knowledge");
@@ -1485,6 +1719,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Navigation("Preference");
 
                     b.Navigation("Skill");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Competence", b =>
@@ -1493,7 +1731,19 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("Competences")
                         .HasForeignKey("CompetenceTypeId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("CompetenceUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("CompetenceUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("CompetenceType");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.CompetenceDictionary", b =>
@@ -1506,9 +1756,21 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("CompetenceDictionaries")
                         .HasForeignKey("CompetenceId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("CompetenceDictionaryUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("CompetenceDictionaryUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("BehaviorDictionary");
 
                     b.Navigation("Competence");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.CompetenceProfile", b =>
@@ -1517,26 +1779,84 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("CompetenceProfiles")
                         .HasForeignKey("CompetenceDictionaryId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("CompetenceProfileUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.EmployeeProfile", "EmployeeProfile")
                         .WithMany("CompetenceProfiles")
                         .HasForeignKey("EmployeeProfileId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("CompetenceProfileUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("CompetenceDictionary");
 
                     b.Navigation("EmployeeProfile");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.CompetenceType", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("CompetenceTypeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("CompetenceTypeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.DegreeCompetence", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("DegreeCompetenceUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("DegreeCompetenceUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Departament", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("DepartamentUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.Organization", "Organization")
                         .WithMany("Departaments")
                         .HasForeignKey("OrganizationId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("DepartamentUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Organization");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Employee", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("EmployeeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.Departament", "Departament")
                         .WithMany("Employees")
                         .HasForeignKey("DepartamentId");
@@ -1549,11 +1869,19 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("TeamId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("EmployeeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Departament");
 
                     b.Navigation("EmployeeProfile");
 
                     b.Navigation("Team");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.EmployeeCompetence", b =>
@@ -1562,22 +1890,53 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("EmployeeCompetences")
                         .HasForeignKey("CompetenceId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("EmployeeCompetenceUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.Employee", "Employee")
                         .WithMany("EmployeeCompetences")
                         .HasForeignKey("EmployeeId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("EmployeeCompetenceUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Competence");
 
                     b.Navigation("Employee");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.EmployeeProfile", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("EmployeeProfileUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
                         .WithMany("EmployeeProfiles")
                         .HasForeignKey("SolutionDomainId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("EmployeeProfileUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("SolutionDomain");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.Role", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.User", b =>
@@ -1598,6 +1957,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
+                        .WithMany("UserClaims")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.UserLogin", b =>
@@ -1607,6 +1970,10 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
+                        .WithMany("UserLogins")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.UserRole", b =>
@@ -1626,30 +1993,107 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", null)
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Knowledge", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("KnowledgeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("KnowledgeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Motivation", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("MotivationUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("MotivationUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Preference", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("PreferenceUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.PreferenceType", "PreferenceType")
                         .WithMany("Preferences")
                         .HasForeignKey("PreferenceTypeId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("PreferenceUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("PreferenceType");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.PreferenceType", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("PreferenceTypeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("PreferenceTypeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Project", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("ProjectUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.TechnicalSheet", "TechnicalSheet")
                         .WithMany("Projects")
                         .HasForeignKey("TechnicalSheetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("ProjectUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("TechnicalSheet");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.ProjectTeam", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("ProjectTeamUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId");
@@ -1658,9 +2102,17 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany()
                         .HasForeignKey("TeamId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("ProjectTeamUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Project");
 
                     b.Navigation("Team");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Responsability", b =>
@@ -1669,25 +2121,76 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("Responsabilities")
                         .HasForeignKey("CompetenceProfileId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("ResponsabilityUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("ResponsabilityUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("CompetenceProfile");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Skill", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("SkillUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.SkillType", "SkillType")
                         .WithMany("Skills")
                         .HasForeignKey("SkillTypeId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("SkillUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("SkillType");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.SkillType", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("SkillTypeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("SkillTypeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.SolutionDomain", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("SolutionDomainUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.Organization", "Organization")
                         .WithMany("SolutionDomains")
                         .HasForeignKey("OrganizationId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("SolutionDomainUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Organization");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.SolutionDomainCompetence", b =>
@@ -1696,26 +2199,69 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("SolutionDomainCompetences")
                         .HasForeignKey("CompetenceId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("SolutionDomainCompetenceUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
                         .WithMany("SolutionDomainCompetences")
                         .HasForeignKey("SolutionDomainId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("SolutionDomainCompetenceUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("Competence");
 
                     b.Navigation("SolutionDomain");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Team", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("TeamUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("TeamUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheet", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("TechnicalSheetUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.SolutionDomain", "SolutionDomain")
                         .WithMany("TechnicalSheets")
                         .HasForeignKey("SolutionDomainId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("TechnicalSheetUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("SolutionDomain");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.TechnicalSheetCompose", b =>
                 {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
+                        .WithMany("TechnicalSheetComposeUserCreatedBy")
+                        .HasForeignKey("CreatedBy");
+
                     b.HasOne("CompetencePlatform.Core.Entities.EmployeeProfile", "EmployeeProfile")
                         .WithMany("TechnicalSheetComposes")
                         .HasForeignKey("EmployeeProfileId")
@@ -1726,9 +2272,17 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("TechnicalSheetComposes")
                         .HasForeignKey("TechnicalSheetId");
 
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("TechnicalSheetComposeUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
                     b.Navigation("EmployeeProfile");
 
                     b.Navigation("TechnicalSheet");
+
+                    b.Navigation("UserCreatedBy");
+
+                    b.Navigation("UserUpdatedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1811,6 +2365,121 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.Role", b =>
                 {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Identity.User", b =>
+                {
+                    b.Navigation("BehaviorDictionaryUserCreatedBy");
+
+                    b.Navigation("BehaviorDictionaryUserUpdatedBy");
+
+                    b.Navigation("BehaviorUserCreatedBy");
+
+                    b.Navigation("BehaviorUserUpdatedBy");
+
+                    b.Navigation("CSMKUserCreatedBy");
+
+                    b.Navigation("CSMKUserUpdatedBy");
+
+                    b.Navigation("CompetenceDictionaryUserCreatedBy");
+
+                    b.Navigation("CompetenceDictionaryUserUpdatedBy");
+
+                    b.Navigation("CompetenceProfileUserCreatedBy");
+
+                    b.Navigation("CompetenceProfileUserUpdatedBy");
+
+                    b.Navigation("CompetenceTypeUserCreatedBy");
+
+                    b.Navigation("CompetenceTypeUserUpdatedBy");
+
+                    b.Navigation("CompetenceUserCreatedBy");
+
+                    b.Navigation("CompetenceUserUpdatedBy");
+
+                    b.Navigation("DegreeCompetenceUserCreatedBy");
+
+                    b.Navigation("DegreeCompetenceUserUpdatedBy");
+
+                    b.Navigation("DepartamentUserCreatedBy");
+
+                    b.Navigation("DepartamentUserUpdatedBy");
+
+                    b.Navigation("EmployeeCompetenceUserCreatedBy");
+
+                    b.Navigation("EmployeeCompetenceUserUpdatedBy");
+
+                    b.Navigation("EmployeeProfileUserCreatedBy");
+
+                    b.Navigation("EmployeeProfileUserUpdatedBy");
+
+                    b.Navigation("EmployeeUserCreatedBy");
+
+                    b.Navigation("EmployeeUserUpdatedBy");
+
+                    b.Navigation("KnowledgeUserCreatedBy");
+
+                    b.Navigation("KnowledgeUserUpdatedBy");
+
+                    b.Navigation("MotivationUserCreatedBy");
+
+                    b.Navigation("MotivationUserUpdatedBy");
+
+                    b.Navigation("PreferenceTypeUserCreatedBy");
+
+                    b.Navigation("PreferenceTypeUserUpdatedBy");
+
+                    b.Navigation("PreferenceUserCreatedBy");
+
+                    b.Navigation("PreferenceUserUpdatedBy");
+
+                    b.Navigation("ProjectTeamUserCreatedBy");
+
+                    b.Navigation("ProjectTeamUserUpdatedBy");
+
+                    b.Navigation("ProjectUserCreatedBy");
+
+                    b.Navigation("ProjectUserUpdatedBy");
+
+                    b.Navigation("ResponsabilityUserCreatedBy");
+
+                    b.Navigation("ResponsabilityUserUpdatedBy");
+
+                    b.Navigation("Roles");
+
+                    b.Navigation("SkillTypeUserCreatedBy");
+
+                    b.Navigation("SkillTypeUserUpdatedBy");
+
+                    b.Navigation("SkillUserCreatedBy");
+
+                    b.Navigation("SkillUserUpdatedBy");
+
+                    b.Navigation("SolutionDomainCompetenceUserCreatedBy");
+
+                    b.Navigation("SolutionDomainCompetenceUserUpdatedBy");
+
+                    b.Navigation("SolutionDomainUserCreatedBy");
+
+                    b.Navigation("SolutionDomainUserUpdatedBy");
+
+                    b.Navigation("TeamUserCreatedBy");
+
+                    b.Navigation("TeamUserUpdatedBy");
+
+                    b.Navigation("TechnicalSheetComposeUserCreatedBy");
+
+                    b.Navigation("TechnicalSheetComposeUserUpdatedBy");
+
+                    b.Navigation("TechnicalSheetUserCreatedBy");
+
+                    b.Navigation("TechnicalSheetUserUpdatedBy");
+
+                    b.Navigation("UserClaims");
+
+                    b.Navigation("UserLogins");
+
                     b.Navigation("UserRoles");
                 });
 

@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,12 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
         /// Gets or sets the IdOrganization.
         /// </summary>
-        
+        public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("DepartamentUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("DepartamentUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         public int? OrganizationId { get; set; }
         [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }

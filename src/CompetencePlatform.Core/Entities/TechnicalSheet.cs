@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,14 +42,17 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the Delete Borrado Logico.
 		/// </summary>
-        public bool? Deleted { get; set; } = false;
+        public bool? Deleted { get; set; } 
 
         //Audited Methods
-
+        
+        
         /// <summary>
-		/// Gets or sets the CreatedBy.
-		/// </summary>
+        /// Gets or sets the CreatedBy.
+        /// </summary>
         public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("TechnicalSheetUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the CreatedOn.
 		/// </summary>
@@ -57,6 +61,8 @@ namespace CompetencePlatform.Core.Entities
 		/// Gets or sets the UpdatedBy.
 		/// </summary>
         public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("TechnicalSheetUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
@@ -64,6 +70,7 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the IsSelected Determine if this Object is part of the organization
 		/// </summary>
-        public bool? IsSelected { get; set; } = false;
+        public bool? IsSelected { get; set; } 
+        public bool? IsDefault { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +11,13 @@ namespace CompetencePlatform.Core.Entities
 {
     public  class Responsability:CommonEntity
     {
-        
+
+        public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("ResponsabilityUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("ResponsabilityUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         public int? CompetenceProfileId { get; set; }
         [ForeignKey("CompetenceProfileId")]
         public virtual CompetenceProfile CompetenceProfile { get; set; }

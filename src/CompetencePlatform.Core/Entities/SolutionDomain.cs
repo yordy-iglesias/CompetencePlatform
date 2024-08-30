@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,8 +12,14 @@ namespace CompetencePlatform.Core.Entities
 {
     public class SolutionDomain : CommonEntity
     {
-        
-        
+        public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("SolutionDomainUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("SolutionDomainUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
+
+
         public int? OrganizationId { get; set; }
         [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }

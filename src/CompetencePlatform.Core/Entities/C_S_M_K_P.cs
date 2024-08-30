@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -58,18 +59,23 @@ namespace CompetencePlatform.Core.Entities
         /// Gets or sets the CreatedBy.
         /// </summary>
         public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("CSMKUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the CreatedOn.
 		/// </summary>
         public DateTime? CreatedOn { get; set; }
         /// <summary>
-		/// Gets or sets the UpdatedBy.
-		/// </summary>
+        /// Gets or sets the UpdatedBy.
+        /// </summary>
         public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("CSMKUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
-        public bool? IsSelected { get; set; } = false;
+        public bool? IsSelected { get; set; } 
+        public bool? IsDefault { get; set; }
     }
 }

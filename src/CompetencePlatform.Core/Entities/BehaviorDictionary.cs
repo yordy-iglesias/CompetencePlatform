@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,19 +29,22 @@ namespace CompetencePlatform.Core.Entities
         public virtual ICollection<CompetenceDictionary> CompetenceDictionaries { get; set; }
 
         //Audited Method
-
         /// <summary>
 		/// Gets or sets the CreatedBy.
 		/// </summary>
         public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("BehaviorDictionaryUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the CreatedOn.
 		/// </summary>
         public DateTime? CreatedOn { get; set; }
         /// <summary>
-		/// Gets or sets the UpdatedBy.
-		/// </summary>
+        /// Gets or sets the UpdatedBy.
+        /// </summary>
         public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("BehaviorDictionaryUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
@@ -48,10 +52,11 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the Delete Borrado Logico.
 		/// </summary>
-        public bool? Deleted { get; set; } = false;
+        public bool? Deleted { get; set; } 
         /// <summary>
 		/// Gets or sets the IsSelected Determine if this Object is part of the organization
 		/// </summary>
-        public bool? IsSelected { get; set; } = false;
+        public bool? IsSelected { get; set; } 
+        public bool? IsDefault { get; set; }
     }
 }

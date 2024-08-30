@@ -29,7 +29,8 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the CreatedBy.
 		/// </summary>
-        public int? CreatedBy { get; set; }
+       // public int? CreatedBy { get; set; }
+
         /// <summary>
 		/// Gets or sets the CreatedOn.
 		/// </summary>
@@ -37,15 +38,16 @@ namespace CompetencePlatform.Core.Entities
         /// <summary>
 		/// Gets or sets the UpdatedBy.
 		/// </summary>
-        public int? UpdatedBy { get; set; }
+        //public int? UpdatedBy { get; set; }
         /// <summary>
 		/// Gets or sets the UpdatedOn.
 		/// </summary>
         public DateTime? UpdatedOn { get; set; }
-        public bool? Deleted { get ; set; } = false;
+        public bool? Deleted { get ; set; } 
         /// <summary>
 		/// Gets or sets the IsSelected Determine if this Object is part of the organization
 		/// </summary>
-        public bool? IsSelected { get; set; } = false;
+        public bool? IsSelected { get; set; }
+        public bool? IsDefault { get; set; }
     }
 }

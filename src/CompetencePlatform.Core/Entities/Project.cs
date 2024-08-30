@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,13 @@ namespace CompetencePlatform.Core.Entities
         public int TechnicalSheetId { get; set; }
         [ForeignKey("TechnicalSheetId")]
         public virtual TechnicalSheet TechnicalSheet { get; set; }
+        public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("ProjectUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("ProjectUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
 
-        
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,10 +12,15 @@ namespace CompetencePlatform.Core.Entities
 {
     public class Skill:CommonEntity
     {
-         /// <summary>
+        /// <summary>
         /// Gets or sets the IdSkillType.
         /// </summary>
-       
+        public int? CreatedBy { get; set; }
+        [ForeignKey("CreatedBy"), InverseProperty("SkillUserCreatedBy")]
+        public virtual User UserCreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("SkillUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
         public int? SkillTypeId { get; set; }
         [ForeignKey("SkillTypeId")]
         public virtual SkillType SkillType { get; set; }
