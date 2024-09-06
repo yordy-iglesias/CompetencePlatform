@@ -13,10 +13,10 @@ namespace CompetencePlatform.Core.DataAccess.Persistence.DataGenerators.SkillDat
         {
             var skillList = new List<SkillType>
             {
-                new SkillType() { Name = "Cognitiva", Description = "Habilidad Cognitiva" },
-                new SkillType() { Name = "Emocional", Description = "Habilidad Emocional" },
-                new SkillType() { Name = "Social", Description = "Habilidad Social" },
-                new SkillType() { Name = "Tècnica", Description = "Habilidad Tècnica" }
+                new SkillType() { Name = "Cognitiva", Description = "Habilidad Cognitiva",IsSelected=false,IsDefault=true},
+                new SkillType() { Name = "Emocional", Description = "Habilidad Emocional",IsSelected=false,IsDefault=true },
+                new SkillType() { Name = "Social", Description = "Habilidad Social",IsSelected=false,IsDefault=true },
+                new SkillType() { Name = "Tècnica", Description = "Habilidad Tècnica",IsSelected = false, IsDefault=true }
             };
             return skillList;
         }

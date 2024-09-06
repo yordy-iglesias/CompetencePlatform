@@ -47,6 +47,11 @@ public class SkillTypeController : ApiController
     {
         return Ok(ApiResult<SkillTypeViewModel>.Success(await _skillTypeService.Delete(id)));
     }
+    [HttpDelete("DeletePrime/{id:int}")]
+    public async Task<IActionResult> DeletePrime(int id)
+    {
+        return Ok(ApiResult<SkillTypeViewModel>.Success(await _skillTypeService.DeletePrime(id)));
+    }
     [HttpPost("getPagin")]
     public async Task<IActionResult> GetPagin(DataTableServerSide options)
     {
@@ -54,5 +59,35 @@ public class SkillTypeController : ApiController
         return Ok(ApiResult<DataTablePagin<SkillTypeViewModel>>.Success(
              await _skillTypeService.GetPagination(options)));
 
+    }
+    [HttpGet]
+    public async Task<IActionResult> Get()
+    {
+        return Ok(ApiResult<IEnumerable<SkillTypeViewModel>>.Success(
+             await _skillTypeService.Get()));
+    }
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Get(int id)
+    {
+        return Ok(ApiResult<CreateSkillTypeViewModel>.Success(await _skillTypeService.Get(id)));
+    }
+    
+    [HttpGet]
+    [Route("IsUnique")]
+    public async Task<bool> IsUnique(string key, string value)
+    {
+        return await _skillTypeService.IsUnique(key, value);
+    }
+    [HttpGet]
+    [Route("hasChildren")]
+    public async Task<bool> HasChildren(int id)
+    {
+        return await _skillTypeService.HasChildren(id);
+    }
+    [HttpGet]
+    [Route("restore")]
+    public async Task<IActionResult> Restore(int id)
+    {
+        return Ok(ApiResult<SkillTypeViewModel>.Success(await _skillTypeService.Restore(id)));
     }
 }

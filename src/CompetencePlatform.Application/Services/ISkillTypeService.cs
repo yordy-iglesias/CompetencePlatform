@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface ISkillTypeService:ICrudInterface<SkillTypeViewModel,CreateSkillTypeViewModel,DataTableServerSide>
+    public interface ISkillTypeService : ICrudInterface<SkillTypeViewModel, CreateSkillTypeViewModel, DataTableServerSide>
     {
+        Task<SkillTypeViewModel> DeletePrime(int id);
+        Task<bool> HasChildren(int id);
+        Task<bool> IsUnique(string name, string value);
+        Task<SkillTypeViewModel> Restore(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Security.Claims;
 using CompetencePlatform.Shared.Services;
 using Microsoft.AspNetCore.Http;
@@ -31,5 +32,6 @@ namespace CompetencePlatform.Shared.Services.Impl
         {
             return _httpContextAccessor.HttpContext?.User?.Identity.Name;
         }
+       
     }
 }

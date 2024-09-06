@@ -24,20 +24,28 @@ namespace CompetencePlatform.Application.Services.Impl
     public class SkillTypeService : ISkillTypeService
     {
         private readonly ISkillTypeRepository _skillTypeRepository;
+        private readonly ISkillRepository _skillRepository;
+        private readonly IC_S_M_K_PRepository _c_s_m_k_pRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public SkillTypeService(ISkillTypeRepository skillTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        public SkillTypeService(IC_S_M_K_PRepository c_s_m_k_pRepository,ISkillRepository skillRepository,ISkillTypeRepository skillTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _skillTypeRepository = skillTypeRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
+            _skillRepository = skillRepository;
+            _c_s_m_k_pRepository = c_s_m_k_pRepository;
         }
         public async Task<SkillTypeViewModel> Create(CreateSkillTypeViewModel entity)
         {
             try
             {
+                entity.IsDefault = false;
+                entity.IsSelected = true;
+                entity.Deleted = false;
+                entity.CreatedBy=(await _userRepository.CurrentUser()).Id;
                 var result = await _skillTypeRepository.AddAsync(_mapper.Map<SkillType>(entity));
                 return _mapper.Map<SkillTypeViewModel>(result);
             }   
@@ -52,8 +60,56 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _skillTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = true;
                 if (result != null)
                 {
+                    var resultDelete = await _skillTypeRepository.UpdateAsync(result);
+                    return _mapper.Map<SkillTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el skill type");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<SkillTypeViewModel> Restore(int id)
+        {
+            try
+            {
+                var result = await _skillTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = false;
+                if (result != null)
+                {
+                    var resultDelete = await _skillTypeRepository.UpdateAsync(result);
+                    return _mapper.Map<SkillTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el skill type");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<SkillTypeViewModel> DeletePrime(int id)
+        {
+            try
+            {
+                var result = await _skillTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                if (result != null)
+                {
+                    //1.Obtener skills que se relacionan con el skill type
+                    var skills=await _skillRepository.GetAllAsync(x=>x.SkillTypeId==id );
+                    //2. Obtener CSMKP asociados a esos skills
+                    foreach (var skill in skills)
+                    {
+                        var csmkp= await _c_s_m_k_pRepository.GetAllAsync(x => x.SkillId == skill.Id);
+                        //3. Eliminar  csmkp
+                       foreach(var e in csmkp)
+                            await _c_s_m_k_pRepository.DeleteAsync(e);
+                       //4.Eliminar skill 
+                       await _skillRepository.DeleteAsync(skill);
+                    }
                     var resultDelete = await _skillTypeRepository.DeleteAsync(result);
                     return _mapper.Map<SkillTypeViewModel>(resultDelete);
                 }
@@ -134,6 +190,7 @@ namespace CompetencePlatform.Application.Services.Impl
                     case "name":
                         order = col => col.Name;
                         break;
+
                     default:
                         order = col => col.CreatedOn;
                         nameColumnOrder = "createdOn";
@@ -176,7 +233,7 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var employee = await _skillTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-
+                entity.UpdatedBy= (await _userRepository.CurrentUser()).Id;
                 if (employee == null)
                     throw new BadRequestException("No se encuentra este tipo Responsability");
 
@@ -188,7 +245,34 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+        public async Task<bool> IsUnique(string name, string value)
+        {
+            try
+            {
+                Expression<Func<SkillType, bool>> where;
+                switch (name)
+                {
+                    case "name":
+                        where = s => s.Name == value;
+                        break;
+                    default:
 
-        
+                        return false;
+                }
+
+                var obj = await _skillTypeRepository.GetFirstAsync(where, false);
+                return obj == null;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+        public async Task<bool>HasChildren(int id)
+        {
+            var result = await _skillRepository.GetFirstAsync(x => x.SkillTypeId == id,false);
+            return result != null;
+        }
     }
 }

@@ -14,6 +14,7 @@ using CompetencePlatform.Core.Entities.Identity;
 using CompetencePlatform.Core.Utils;
 using CompetencePlatform.Shared.Services;
 using CompetencePlatform.Shared.Services.Impl;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -36,8 +37,10 @@ public class UserService : IUserService
     private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IRoleRepository _roleRepository;
     private string currentUserName;
+    
 
-    public UserService(IClaimService claimService,
+    public UserService(
+        IClaimService claimService,
         UserManager<User> userManager,
         SignInManager<User> signInManager,
         IConfiguration configuration,
@@ -58,6 +61,7 @@ public class UserService : IUserService
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
         _roleRepository = roleRepository;
+        
     }
     public async Task<CreateUserResponseModel> CreateAsync(CreateUserModel createUserModel)
     {
@@ -399,5 +403,6 @@ public class UserService : IUserService
     {
         return await Task.FromResult(currentUserName);
     }
+   
 }
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace CompetencePlatform.Core.DataAccess.Repositories
 {
     public interface IUserRepository : IBaseRepository<User> {
+        Task<User> CurrentUser();
         Task<List<Role>> GetRolByIdUser(int idUser);
 
     }
