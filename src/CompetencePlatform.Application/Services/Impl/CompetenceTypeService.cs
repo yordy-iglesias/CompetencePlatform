@@ -3,6 +3,7 @@ using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.Competence;
 using CompetencePlatform.Application.Models.CompetenceType;
+using CompetencePlatform.Application.Models.SkillType;
 using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
@@ -24,19 +25,28 @@ namespace CompetencePlatform.Application.Services.Impl
     {
         private readonly ICompetenceTypeRepository _competenceTypeRepository;
         private readonly IMapper _mapper;
+        private readonly ICompetenceRepository _competenceRepository;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public CompetenceTypeService(ICompetenceTypeRepository competenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        private readonly IC_S_M_K_PRepository _c_s_m_k_pRepository;
+        public CompetenceTypeService(IC_S_M_K_PRepository c_s_m_k_pRepository, ICompetenceRepository competenceRepository,ICompetenceTypeRepository competenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _competenceTypeRepository = competenceTypeRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
+            _competenceRepository = competenceRepository;
+            _c_s_m_k_pRepository = c_s_m_k_pRepository;
+
         }
         public async Task<CompetenceTypeViewModel> Create(CreateCompetenceTypeViewModel entity)
         {
             try
             {
+                entity.IsDefault = false;
+                entity.IsSelected = true;
+                entity.Deleted = false;
+                entity.CreatedBy = (await _userRepository.CurrentUser())?.Id;
                 var result = await _competenceTypeRepository.AddAsync(_mapper.Map<CompetenceType>(entity));
                 return _mapper.Map<CompetenceTypeViewModel>(result);
             }
@@ -50,13 +60,14 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var result = await _competenceTypeRepository.GetFirstAsync(bd => bd.Id == id, asNoTracking: false);
+                var result = await _competenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = true;
                 if (result != null)
                 {
-                    var resultDelete = await _competenceTypeRepository.DeleteAsync(result);
+                    var resultDelete = await _competenceTypeRepository.UpdateAsync(result);
                     return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
                 }
-                throw new BadRequestException("No se encuentra el Competence Dictionary ");
+                throw new BadRequestException("No se encuentra el competence type");
             }
             catch
             {
@@ -70,6 +81,54 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 var result = await _competenceTypeRepository.GetAllAsync();
                 return _mapper.Map<IEnumerable<CompetenceTypeViewModel>>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<CompetenceTypeViewModel> Restore(int id)
+        {
+            try
+            {
+                var result = await _competenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = false;
+                if (result != null)
+                {
+                    var resultDelete = await _competenceTypeRepository.UpdateAsync(result);
+                    return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el competence type");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<CompetenceTypeViewModel> DeletePrime(int id)
+        {
+            try
+            {
+                var result = await _competenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                if (result != null)
+                {
+                    //1.Obtener competences que se relacionan con el competence type
+                    var competences = await _competenceRepository.GetAllAsync(x => x.CompetenceTypeId == id);
+                    //2. Obtener CSMKP asociados a esos skills
+                    foreach (var c in competences)
+                    {
+                        var csmkp = await _c_s_m_k_pRepository.GetAllAsync(x => x.CompetenceId == c.Id);
+                        //3. Eliminar  csmkp
+                        foreach (var e in csmkp)
+                            await _c_s_m_k_pRepository.DeleteAsync(e);
+                        //4.Eliminar competenceType 
+                        await _competenceTypeRepository.DeleteAsync(result);
+                    }
+                    var resultDelete = await _competenceTypeRepository.DeleteAsync(result);
+                    return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el competence type");
             }
             catch
             {
@@ -175,10 +234,10 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var competence = await _competenceTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id; ;
                 if (competence == null)
-                    throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
-
+                    throw new BadRequestException("No se encuentra este tipo de Competence Type");
+               
                 var result = await _competenceTypeRepository.UpdateAsync(_mapper.Map<CompetenceType>(entity));
                 return _mapper.Map<CompetenceTypeViewModel>(result);
             }
@@ -186,6 +245,34 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 throw;
             }
+        }
+        public async Task<bool> IsUnique(string name, string value)
+        {
+            try
+            {
+                Expression<Func<CompetenceType, bool>> where;
+                switch (name)
+                {
+                    case "name":
+                        where = s => s.Name == value;
+                        break;
+                    default:
+
+                        return false;
+                }
+
+                var obj = await _competenceTypeRepository.GetFirstAsync(where, false);
+                return obj == null;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        public async Task<bool> HasChildren(int id)
+        {
+            var result = await _competenceRepository.GetFirstAsync(x => x.CompetenceTypeId == id, false);
+            return result != null;
         }
     }
 }

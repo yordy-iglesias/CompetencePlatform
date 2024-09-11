@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CompetencePlatform.Application.Exceptions;
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Application.Models.Preference;
 using CompetencePlatform.Application.Models.PreferenceType;
 using CompetencePlatform.Core.DataAccess.Repositories;
@@ -24,20 +25,28 @@ namespace CompetencePlatform.Application.Services.Impl
     public class PreferenceTypeService : IPreferenceTypeService
     {
         private readonly IPreferenceTypeRepository _preferenceTypeRepository;
+        private readonly IPreferenceRepository _preferenceRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public PreferenceTypeService(IPreferenceTypeRepository preferenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        private readonly IC_S_M_K_PRepository _c_s_m_k_pRepository;
+        public PreferenceTypeService(IPreferenceRepository preferenceRepository,IC_S_M_K_PRepository c_s_m_k_pRepository, IPreferenceTypeRepository preferenceTypeRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _preferenceTypeRepository = preferenceTypeRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
+            _c_s_m_k_pRepository = c_s_m_k_pRepository;
+            _preferenceRepository = preferenceRepository;   
         }
         public async Task<PreferenceTypeViewModel> Create(CreatePreferenceTypeViewModel entity)
         {
             try
             {
+                entity.IsDefault = false;
+                entity.IsSelected = true;
+                entity.Deleted = false;
+                entity.CreatedBy = (await _userRepository.CurrentUser())?.Id;
                 var result = await _preferenceTypeRepository.AddAsync(_mapper.Map<PreferenceType>(entity));
                 return _mapper.Map<PreferenceTypeViewModel>(result);
             }   
@@ -52,12 +61,60 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _preferenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = true;
                 if (result != null)
                 {
                     var resultDelete = await _preferenceTypeRepository.DeleteAsync(result);
                     return _mapper.Map<PreferenceTypeViewModel>(resultDelete);
                 }
                 throw new BadRequestException("No se encuentra la preferencia");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<PreferenceTypeViewModel> DeletePrime(int id)
+        {
+            try
+            {
+                var result = await _preferenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                if (result != null)
+                {
+                    //1.Obtener preferences que se relacionan con el preference type
+                    var preferences = await _preferenceRepository.GetAllAsync(x => x.PreferenceTypeId == id);
+                    //2. Obtener CSMKP asociados a esos preferences
+                    foreach (var p in preferences)
+                    {
+                        var csmkp = await _c_s_m_k_pRepository.GetAllAsync(x => x.PreferenceId == p.Id);
+                        //3. Eliminar  csmkp
+                        foreach (var e in csmkp)
+                            await _c_s_m_k_pRepository.DeleteAsync(e);
+                        //4.Eliminar competenceType 
+                        await _preferenceTypeRepository.DeleteAsync(result);
+                    }
+                    var resultDelete = await _preferenceTypeRepository.DeleteAsync(result);
+                    return _mapper.Map<PreferenceTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el preferemce type");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<PreferenceTypeViewModel> Restore(int id)
+        {
+            try
+            {
+                var result = await _preferenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = false;
+                if (result != null)
+                {
+                    var resultDelete = await _preferenceTypeRepository.UpdateAsync(result);
+                    return _mapper.Map<PreferenceTypeViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el preference type");
             }
             catch
             {
@@ -176,9 +233,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var employee = await _preferenceTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id; ;
                 if (employee == null)
-                    throw new BadRequestException("No se encuentra este tipo de  Preference");
+                    throw new BadRequestException("No se encuentra este tipo de  Preference Type");
 
                 var result = await _preferenceTypeRepository.UpdateAsync(_mapper.Map<PreferenceType>(entity));
                 return _mapper.Map<PreferenceTypeViewModel>(result);
@@ -187,6 +244,35 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 throw;
             }
+        }
+
+        public async Task<bool> IsUnique(string name, string value)
+        {
+            try
+            {
+                Expression<Func<PreferenceType, bool>> where;
+                switch (name)
+                {
+                    case "name":
+                        where = s => s.Name == value;
+                        break;
+                    default:
+
+                        return false;
+                }
+
+                var obj = await _preferenceTypeRepository.GetFirstAsync(where, false);
+                return obj == null;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        public async Task<bool> HasChildren(int id)
+        {
+            var result = await _preferenceRepository.GetFirstAsync(x => x.PreferenceTypeId == id, false);
+            return result != null;
         }
     }
 }

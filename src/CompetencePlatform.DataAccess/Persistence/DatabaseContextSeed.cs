@@ -20,6 +20,18 @@ public static class DatabaseContextSeed
         {
             foreach (var roleName in Enum.GetNames(typeof(SystemRoleEnum)))
             {
+                int priority = 0;
+                switch (roleName)
+                {
+                    case "Admin":
+                        priority = 1;
+                        break;
+                    case "Developer":
+                        priority = 0;
+                        break;
+                    default:
+                        priority = 2;break;
+                }
                 if (!await roleManager.RoleExistsAsync(roleName))
                 {
                     var role = new Role(roleName,roleName);
@@ -47,7 +59,10 @@ public static class DatabaseContextSeed
                         string stamp = JwtHelper.GenerateRoleToken(newRol, configuration);
 
                         role.ConcurrencyStamp = stamp;
+                        
+
                     }
+                    role.Priority= priority;
                     await roleManager.CreateAsync(role);
                 }
             }

@@ -232,10 +232,10 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var employee = await _skillTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
+                var skillType = await _skillTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
                 entity.UpdatedBy= (await _userRepository.CurrentUser()).Id;
-                if (employee == null)
-                    throw new BadRequestException("No se encuentra este tipo Responsability");
+                if (skillType == null)
+                    throw new BadRequestException("No se encuentra este tipo Skill type");
 
                 var result = await _skillTypeRepository.UpdateAsync(_mapper.Map<SkillType>(entity));
                 return _mapper.Map<SkillTypeViewModel>(result);

@@ -1,6 +1,7 @@
 ﻿
 
 using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.CompetenceType;
 using CompetencePlatform.Core.DataTable;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -28,5 +29,6 @@ namespace CompetencePlatform.Application.Services
         Task<T> GetDetails(int id);
         Task<T> Update(C entity);
         Task<DataTablePagin<T>> GetPagination(D options);
+        
     }
 }
