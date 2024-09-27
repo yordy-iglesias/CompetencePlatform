@@ -61,9 +61,11 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _competenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
-                result.Deleted = true;
+               
                 if (result != null)
                 {
+                    result.Deleted = true;
+                    result.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
                     var resultDelete = await _competenceTypeRepository.UpdateAsync(result);
                     return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
                 }
@@ -234,10 +236,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var competence = await _competenceTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id; ;
                 if (competence == null)
                     throw new BadRequestException("No se encuentra este tipo de Competence Type");
-               
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id; ;
                 var result = await _competenceTypeRepository.UpdateAsync(_mapper.Map<CompetenceType>(entity));
                 return _mapper.Map<CompetenceTypeViewModel>(result);
             }

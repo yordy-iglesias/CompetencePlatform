@@ -60,9 +60,11 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _skillTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
-                result.Deleted = true;
+              
                 if (result != null)
                 {
+                    result.Deleted = true;
+                    result.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
                     var resultDelete = await _skillTypeRepository.UpdateAsync(result);
                     return _mapper.Map<SkillTypeViewModel>(resultDelete);
                 }
@@ -233,10 +235,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var skillType = await _skillTypeRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-                entity.UpdatedBy= (await _userRepository.CurrentUser())?.Id;
                 if (skillType == null)
                     throw new BadRequestException("No se encuentra este tipo Skill type");
-
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
                 var result = await _skillTypeRepository.UpdateAsync(_mapper.Map<SkillType>(entity));
                 return _mapper.Map<SkillTypeViewModel>(result);
             }

@@ -37,6 +37,10 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
+                entity.IsDefault = false;
+                entity.IsSelected = true;
+                entity.Deleted = false;
+                entity.CreatedBy = (await _userRepository.CurrentUser())?.Id;
                 var result = await _degreeCompetenceRepository.AddAsync(_mapper.Map<DegreeCompetence>(entity));
                 return _mapper.Map<DegreeCompetenceViewModel>(result);
             }
@@ -53,10 +57,12 @@ namespace CompetencePlatform.Application.Services.Impl
                 var result = await _degreeCompetenceRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
                 if (result != null)
                 {
-                    var resultDelete = await _degreeCompetenceRepository.DeleteAsync(result);
+                    result.Deleted = true;
+                    result.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
+                    var resultDelete = await _degreeCompetenceRepository.UpdateAsync(result);
                     return _mapper.Map<DegreeCompetenceViewModel>(resultDelete);
                 }
-                throw new BadRequestException("No se encuentra el Competence Dictionary ");
+                throw new BadRequestException("No se encuentra el Degree Competence Type");
             }
             catch
             {
@@ -175,9 +181,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var competence = await _degreeCompetenceRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
-
                 if (competence == null)
                     throw new BadRequestException("No se encuentra este tipo de Competence Dictionary");
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
 
                 var result = await _degreeCompetenceRepository.UpdateAsync(_mapper.Map<DegreeCompetence>(entity));
                 return _mapper.Map<DegreeCompetenceViewModel>(result);
@@ -187,5 +193,83 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+        public async Task<bool> IsUnique(string name, string value)
+        {
+            try
+            {
+                Expression<Func<DegreeCompetence, bool>> where;
+                switch (name)
+                {
+                    case "name":
+                        where = s => s.Name == value;
+                        break;
+                    default:
+
+                        return false;
+                }
+
+                var obj = await _degreeCompetenceRepository.GetFirstAsync(where, false);
+                return obj == null;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        public async Task<bool> HasChildren(int id)
+        {
+            //var result = await _degreeCompetenceRepository.GetFirstAsync(x => x.BehaviourDictionaries == id, false);
+            return false;
+        }
+        public async Task<DegreeCompetenceViewModel> Restore(int id)
+        {
+            try
+            {
+                var result = await _degreeCompetenceRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                result.Deleted = false;
+                if (result != null)
+                {
+                    var resultDelete = await _degreeCompetenceRepository.UpdateAsync(result);
+                    return _mapper.Map<DegreeCompetenceViewModel>(resultDelete);
+                }
+                throw new BadRequestException("No se encuentra el degre competence");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<DegreeCompetenceViewModel> DeletePrime(int id)
+        {
+            try
+            {
+                //var result = await _degreeCompetenceRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
+                //if (result != null)
+                //{
+                //    //1.Obtener competences que se relacionan con el competence type
+                //    var competences = await _degreeCompetenceRepository.GetAllAsync(x => x.CompetenceTypeId == id);
+                //    //2. Obtener CSMKP asociados a esos skills
+                //    foreach (var c in competences)
+                //    {
+                //        var csmkp = await _c_s_m_k_pRepository.GetAllAsync(x => x.CompetenceId == c.Id);
+                //        //3. Eliminar  csmkp
+                //        foreach (var e in csmkp)
+                //            await _c_s_m_k_pRepository.DeleteAsync(e);
+                //        //4.Eliminar competenceType 
+                //        await _competenceTypeRepository.DeleteAsync(result);
+                //    }
+                //    var resultDelete = await _competenceTypeRepository.DeleteAsync(result);
+                //    return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
+                return await Delete(id);
+                
+                throw new BadRequestException("No se encuentra el competence type");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }
