@@ -226,9 +226,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _degreeCompetenceRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
-                result.Deleted = false;
                 if (result != null)
                 {
+                    result.Deleted = false;
                     var resultDelete = await _degreeCompetenceRepository.UpdateAsync(result);
                     return _mapper.Map<DegreeCompetenceViewModel>(resultDelete);
                 }

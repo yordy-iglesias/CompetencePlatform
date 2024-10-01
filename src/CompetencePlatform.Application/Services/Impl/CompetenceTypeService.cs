@@ -94,9 +94,9 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _competenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
-                result.Deleted = false;
                 if (result != null)
                 {
+                    result.Deleted = false;
                     var resultDelete = await _competenceTypeRepository.UpdateAsync(result);
                     return _mapper.Map<CompetenceTypeViewModel>(resultDelete);
                 }
@@ -125,7 +125,7 @@ namespace CompetencePlatform.Application.Services.Impl
                         foreach (var e in csmkp)
                             await _c_s_m_k_pRepository.DeleteAsync(e);
                         //4.Eliminar competenceType 
-                        await _competenceTypeRepository.DeleteAsync(result);
+                        await _competenceRepository.DeleteAsync(c);
                     }
                     var resultDelete = await _competenceTypeRepository.DeleteAsync(result);
                     return _mapper.Map<CompetenceTypeViewModel>(resultDelete);

@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IMotivationService : ICrudInterface<MotivationViewModel,CreateMotivationViewModel,DataTableServerSide>
+    public interface IMotivationService : ICrudInterface<MotivationViewModel, CreateMotivationViewModel, DataTableServerSide>
     {
+        Task<MotivationViewModel> DeletePrime(int id);
+        Task<bool> HasChildren(int id);
+        Task<bool> IsUnique(string name, string value);
+        Task<MotivationViewModel> Restore(int id);
     }
 }

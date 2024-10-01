@@ -108,9 +108,10 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 var result = await _preferenceTypeRepository.GetFirstAsync(dc => dc.Id == id, asNoTracking: false);
-                result.Deleted = false;
+               
                 if (result != null)
                 {
+                    result.Deleted = false;
                     var resultDelete = await _preferenceTypeRepository.UpdateAsync(result);
                     return _mapper.Map<PreferenceTypeViewModel>(resultDelete);
                 }
