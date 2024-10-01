@@ -8,7 +8,7 @@ namespace CompetencePlatform.Core.Enums
 {
     public enum ModuleEnum
     {
-          Behaviour=1,
+          Behavior=1,
           BehaviorDictionary=2,
           C_S_M_K_P=3,
           Competence=4,

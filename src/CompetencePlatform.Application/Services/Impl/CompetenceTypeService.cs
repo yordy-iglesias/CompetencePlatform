@@ -144,7 +144,7 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 var result = await _competenceTypeRepository.GetFirstAsync(x => x.Id == id, asNoTracking: true);
                 if (result == null)
-                    throw new BadRequestException("No existe este tipo de Competence Dictionary ");
+                    throw new BadRequestException("No existe este tipo de Competence Type ");
                 return _mapper.Map<CreateCompetenceTypeViewModel>(result);
             }
             catch

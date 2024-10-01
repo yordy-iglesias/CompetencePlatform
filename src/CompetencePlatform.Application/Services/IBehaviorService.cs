@@ -11,5 +11,9 @@ namespace CompetencePlatform.Application.Services
 {
     public interface IBehaviorService : ICrudInterface<BehaviorViewModel, CreateBehaviorViewModel, DataTableServerSide>
     {
+        Task<BehaviorViewModel> DeletePrime(int id);
+        Task<bool> HasChildren(int id);
+        Task<bool> IsUnique(string name, string value);
+        Task<BehaviorViewModel> Restore(int id);
     }
 }
