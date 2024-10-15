@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Entities;
+using CompetencePlatform.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace CompetencePlatform.Application.Models.Departament
     public class CreateDepartamentViewModel : CommonEntityModel
     {
         public int? OrganizationId { get; set; }
-        
+        public int HierarchyLevel { get; set; }
+
     }
 }

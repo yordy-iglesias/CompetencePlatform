@@ -1,5 +1,6 @@
 ﻿using CompetencePlatform.Core.Common;
 using CompetencePlatform.Core.Entities.Identity;
+using CompetencePlatform.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,8 @@ namespace CompetencePlatform.Core.Entities
         public int? UpdatedBy { get; set; }
         [ForeignKey("UpdatedBy"), InverseProperty("EmployeeProfileUserUpdatedBy")]
         public virtual User UserUpdatedBy { get; set; }
+        public HierarchyLevelEnum Type { get; set; }
+        public bool IsActive { get; set; }
         public int? SolutionDomainId { get; set; }
         [ForeignKey("SolutionDomainId")]
         public virtual SolutionDomain SolutionDomain { get; set; }

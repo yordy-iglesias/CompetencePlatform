@@ -33,7 +33,7 @@ namespace CompetencePlatform.Application.MappingProfiles
         {
            
             CreateMap<SolutionDomain, SolutionDomainViewModel>()
-                 .ForMember(sldm => sldm.OrganizationName, sld => sld.MapFrom(sld => sld.Organization.Name)).ReverseMap();
+                 .ForMember(sldm => sldm.DepartamentName, sld => sld.MapFrom(sld => sld.Departament.Name)).ReverseMap();
 
             CreateMap<SolutionDomain, CreateSolutionDomainViewModel>().ReverseMap();
         }

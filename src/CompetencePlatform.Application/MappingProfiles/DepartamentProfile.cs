@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompetencePlatform.Application.Extensions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Application.Models.Behaviour;
@@ -24,9 +25,12 @@ namespace CompetencePlatform.Application.MappingProfiles
         {
           
             CreateMap<Departament, DepartamentViewModel>()
-             .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name)).ReverseMap();
+             .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name))
+             .ForMember(dpm => dpm.HierarchyLevel, dp => dp.MapFrom(dp => dp.HierarchyLevel.GetDescription()));
+            
             CreateMap<Departament, CreateDepartamentViewModel>()
-            .ForMember(cdpm => cdpm.OrganizationId, dp => dp.MapFrom(dp => dp.OrganizationId)).ReverseMap();
+            .ForMember(cdpm => cdpm.OrganizationId, dp => dp.MapFrom(dp => dp.OrganizationId))
+            .ForMember(cdpm => cdpm.HierarchyLevel, dp => dp.MapFrom(dp => dp.HierarchyLevel));
 
         }
     }

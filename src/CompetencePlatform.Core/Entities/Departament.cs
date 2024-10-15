@@ -1,5 +1,6 @@
 ﻿using CompetencePlatform.Core.Common;
 using CompetencePlatform.Core.Entities.Identity;
+using CompetencePlatform.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,9 +25,16 @@ namespace CompetencePlatform.Core.Entities
         public int? OrganizationId { get; set; }
         [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }
+        public HierarchyLevelEnum HierarchyLevel { get; set; }
+        public string Code {  get; set; }   
+        public string Email {  get; set; }   
+        public string PhoneNumber {  get; set; }
+        public DepartamentStateEnum State { get; set; }
         public virtual  ICollection<Employee> Employees { get; set; }
-       
+        public virtual ICollection<SolutionDomain> SolutionDomains { get; set; }
 
-        
+
+
+
     }
 }

@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IKnowledgeService : ICrudInterface<KnowledgeViewModel,CreateKnowledgeViewModel,DataTableServerSide>
+    public interface IKnowledgeService : ICrudInterface<KnowledgeViewModel, CreateKnowledgeViewModel, DataTableServerSide>
     {
+        Task<KnowledgeViewModel> DeletePrime(int id);
+        Task<bool> HasChildren(int id);
+        Task<bool> IsUnique(string name, string value);
+        Task<KnowledgeViewModel> Restore(int id);
     }
 }

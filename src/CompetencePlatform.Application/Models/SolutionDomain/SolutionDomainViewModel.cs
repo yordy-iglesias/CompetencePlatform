@@ -10,9 +10,7 @@ namespace CompetencePlatform.Application.Models.SolutionDomain
     public class SolutionDomainViewModel : CommonEntityModel
     {
         
-        public string OrganizationName { get; set; }
-        //public List<SolutionDomainCompetenceModel> SolutionDomainCompetences { get; set; }
-        //public List<TechnicalSheetModel> TechnicalSheets { get; set; }
-        //public List<EmployeeProfileModel> EmployeeProfiles { get; set; }
+        public string DepartamentName { get; set; }
+        
     }
 }

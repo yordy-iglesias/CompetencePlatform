@@ -1,4 +1,5 @@
 ﻿using CompetencePlatform.Core.Entities;
+using CompetencePlatform.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,6 +15,21 @@ namespace CompetencePlatform.Application.Models.Organization
         public string Mision { get; set; }
 
         public string Vision { get; set; }
+        [Required]
+        public int Type { get; set; }
+        public string TypeName { get; set; }
+        [Required]
+        public SectorTypeEnum Sector { get; set; }
+        //Ubication
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public string WebSiteAddress { get; set; }
+        //Qauntities
+        public int QuantityEmployeesByTemplate { get; set; }
+        public int QuantityDepartament { get; set; }
         // public List<DepartamentModel> Departaments { get; set; }
         //public List<SolutionDomainModel> SolutionDomains { get; set; }
     }

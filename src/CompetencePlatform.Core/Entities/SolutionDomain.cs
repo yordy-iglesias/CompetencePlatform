@@ -20,10 +20,14 @@ namespace CompetencePlatform.Core.Entities
         public virtual User UserUpdatedBy { get; set; }
 
 
-        public int? OrganizationId { get; set; }
-        [ForeignKey("OrganizationId")]
-        public virtual Organization Organization { get; set; }
-        
+        //public int? OrganizationId { get; set; }
+        //[ForeignKey("OrganizationId")]
+        //public virtual Organization Organization { get; set; }
+
+        public int? DepartamentId { get; set; }
+        [ForeignKey("DepartamentId")]
+        public virtual Departament Departament { get; set; }
+
         public virtual ICollection<SolutionDomainCompetence> SolutionDomainCompetences { get; set; }
         public virtual ICollection<TechnicalSheet> TechnicalSheets { get; set; }
         public virtual ICollection<EmployeeProfile> EmployeeProfiles { get; set; }

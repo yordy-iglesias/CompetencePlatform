@@ -18,10 +18,13 @@ namespace CompetencePlatform.Application.MappingProfiles
         public OrganizationProfile()
         {
          
-            CreateMap<Organization, OrganizationViewModel>().ReverseMap();
-            CreateMap<Organization, CreateOrganizationViewModel>().ReverseMap();
-           
-               
+            CreateMap<Organization, OrganizationViewModel>()
+               .ForMember(orgvm => orgvm.TypeName, dp => dp.MapFrom(org => org.Type.ToString()));
+
+            CreateMap<Organization, CreateOrganizationViewModel>()
+                 .ForMember(orgvm => orgvm.Type, dp => dp.MapFrom(org => (int)org.Type));
+
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompetencePlatform.Application.Extensions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Application.Models.Behaviour;
@@ -24,9 +25,12 @@ namespace CompetencePlatform.Application.MappingProfiles
         public EmployeeProfileProfile()
         {
             
-            CreateMap<Core.Entities.EmployeeProfile, EmployeeProfileViewModel>().ReverseMap();
-            CreateMap<Core.Entities.EmployeeProfile, CreateEmployeeProfileViewModel>().ReverseMap();
-           
+            CreateMap<Core.Entities.EmployeeProfile, EmployeeProfileViewModel>()
+               .ForMember(epvm => epvm.Type, dp => dp.MapFrom(ep => ep.Type.GetDescription()));
+
+            CreateMap<Core.Entities.EmployeeProfile, CreateEmployeeProfileViewModel>()
+                 .ForMember(cepvm => cepvm.Type, dp => dp.MapFrom(ep => ep.Type.GetDescription()));
+
         }
     }
 }
