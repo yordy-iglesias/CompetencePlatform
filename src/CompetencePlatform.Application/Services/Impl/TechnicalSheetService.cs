@@ -120,8 +120,8 @@ namespace CompetencePlatform.Application.Services.Impl
                 var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
                 Expression<Func<TechnicalSheet, bool>> where = priority == true ?
-                 where = k => (k.InitialTechnicalProposal.Contains(options.Search.Value) || k.Scope.Contains(options.Search.Value) || k.SolutionDomain.Name.Contains(options.Search.Value) || k.SolutionDomain.Organization.Name.Contains(options.Search.Value) || k.Target.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
-                : where = k => (k.InitialTechnicalProposal.Contains(options.Search.Value)  || k.Scope.Contains(options.Search.Value) || k.SolutionDomain.Name.Contains(options.Search.Value) || k.SolutionDomain.Organization.Name.Contains(options.Search.Value) || k.Target.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
+                 where = k => (k.InitialTechnicalProposal.Contains(options.Search.Value) || k.Scope.Contains(options.Search.Value) || k.SolutionDomain.Name.Contains(options.Search.Value) || k.SolutionDomain.Departament.Name.Contains(options.Search.Value) || k.Target.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
+                : where = k => (k.InitialTechnicalProposal.Contains(options.Search.Value)  || k.Scope.Contains(options.Search.Value) || k.SolutionDomain.Name.Contains(options.Search.Value) || k.SolutionDomain.Departament.Name.Contains(options.Search.Value) || k.Target.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
 
                 Expression<Func<TechnicalSheet, object>> order;
                 Expression<Func<TechnicalSheet, DateTime?>> orderDate;

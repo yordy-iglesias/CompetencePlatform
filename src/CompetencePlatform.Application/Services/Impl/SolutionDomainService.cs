@@ -120,8 +120,8 @@ namespace CompetencePlatform.Application.Services.Impl
                 var priority = (await _userRepository.GetRolByIdUser(currentUserId)).Any(x => x.NormalizedName == "ADMIN" || x.NormalizedName == "DEVELOPER");
 
                 Expression<Func<SolutionDomain, bool>> where = priority == true ?
-                 where = k => (k.Name.Contains(options.Search.Value) || k.Organization.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
-                : where = k => (k.Name.Contains(options.Search.Value) || k.Organization.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
+                 where = k => (k.Name.Contains(options.Search.Value) || k.Departament.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value))
+                : where = k => (k.Name.Contains(options.Search.Value) || k.Departament.Name.Contains(options.Search.Value) || string.IsNullOrEmpty(options.Search.Value) && k.Deleted==false);
 
                 Expression<Func<SolutionDomain, object>> order;
 
@@ -132,8 +132,8 @@ namespace CompetencePlatform.Application.Services.Impl
                 switch (nameColumnOrder)
                 {
                     
-                    case "organizationName":
-                        order = col => col.Organization.Name;
+                    case "departamentName":
+                        order = col => col.Departament.Name;
                         break;
                     case "name":
                         order = col => col.Name;

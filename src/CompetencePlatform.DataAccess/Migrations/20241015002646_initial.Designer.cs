@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240830023745_Initial")]
-    partial class Initial
+    [Migration("20241015002646_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -432,6 +432,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("CreatedBy")
                         .HasColumnType("int");
 
@@ -445,6 +448,12 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HierarchyLevel")
+                        .HasColumnType("int");
+
                     b.Property<bool?>("IsDefault")
                         .HasColumnType("bit");
 
@@ -456,6 +465,12 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("State")
                         .HasColumnType("int");
 
                     b.Property<int?>("UpdatedBy")
@@ -612,6 +627,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsDefault")
                         .HasColumnType("bit");
 
@@ -623,6 +641,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SolutionDomainId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<int?>("UpdatedBy")
@@ -965,6 +986,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -973,6 +1003,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsDefault")
@@ -989,11 +1022,26 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuantityEmployeesByTemplate")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sector")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Vision")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebSiteAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1362,6 +1410,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("Deleted")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DepartamentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1376,9 +1427,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrganizationId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 
@@ -1389,7 +1437,7 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.HasIndex("OrganizationId");
+                    b.HasIndex("DepartamentId");
 
                     b.HasIndex("UpdatedBy");
 
@@ -2181,15 +2229,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .WithMany("SolutionDomainUserCreatedBy")
                         .HasForeignKey("CreatedBy");
 
-                    b.HasOne("CompetencePlatform.Core.Entities.Organization", "Organization")
+                    b.HasOne("CompetencePlatform.Core.Entities.Departament", "Departament")
                         .WithMany("SolutionDomains")
-                        .HasForeignKey("OrganizationId");
+                        .HasForeignKey("DepartamentId");
 
                     b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
                         .WithMany("SolutionDomainUserUpdatedBy")
                         .HasForeignKey("UpdatedBy");
 
-                    b.Navigation("Organization");
+                    b.Navigation("Departament");
 
                     b.Navigation("UserCreatedBy");
 
@@ -2350,6 +2398,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Departament", b =>
                 {
                     b.Navigation("Employees");
+
+                    b.Navigation("SolutionDomains");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Employee", b =>
@@ -2499,8 +2549,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Organization", b =>
                 {
                     b.Navigation("Departaments");
-
-                    b.Navigation("SolutionDomains");
                 });
 
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Preference", b =>

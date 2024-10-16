@@ -43,7 +43,7 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 entity.IsDefault = false;
-                entity.IsSelected = true;
+                entity.IsSelected = false;
                 entity.Deleted = false;
                 entity.CreatedBy=(await _userRepository.CurrentUser())?.Id;
                 var result = await _skillTypeRepository.AddAsync(_mapper.Map<SkillType>(entity));

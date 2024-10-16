@@ -69,7 +69,7 @@ namespace CompetencePlatform.Application.MappingProfiles
                  .ForMember(skm => skm.SkillTypeName, sk => sk.MapFrom(sk => sk.SkillType.Name)).ReverseMap();
             CreateMap<SkillType, SkillTypeViewModel>().ReverseMap();
             CreateMap<SolutionDomain, SolutionDomainViewModel>()
-                 .ForMember(sldm => sldm.OrganizationName, sld => sld.MapFrom(sld => sld.Organization.Name)).ReverseMap();
+                 .ForMember(sldm => sldm.DepartamentName, sld => sld.MapFrom(sld => sld.Departament.Name)).ReverseMap();
             CreateMap<SolutionDomainCompetence, SolutionDomainCompetenceViewModel>()
                 .ForMember(sldcm => sldcm.SolutionDomainName, sld => sld.MapFrom(sldc => sldc.SolutionDomain.Name))
                 .ForMember(sldcm => sldcm.CompetenceName, sld => sld.MapFrom(sldc => sldc.Competence.Name)).ReverseMap();

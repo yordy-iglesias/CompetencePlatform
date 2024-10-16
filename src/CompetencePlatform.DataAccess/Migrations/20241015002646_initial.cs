@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Mision = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Sector = table.Column<int>(type: "int", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WebSiteAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuantityEmployeesByTemplate = table.Column<int>(type: "int", nullable: false),
                     Vision = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -272,6 +281,11 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     OrganizationId = table.Column<int>(type: "int", nullable: true),
+                    HierarchyLevel = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -421,43 +435,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         name: "FK_SkillTypes_AspNetUsers_UpdatedBy",
                         column: x => x.UpdatedBy,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SolutionDomains",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
-                    OrganizationId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
-                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SolutionDomains", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SolutionDomains_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SolutionDomains_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SolutionDomains_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
-                        principalTable: "Organizations",
                         principalColumn: "Id");
                 });
 
@@ -628,6 +605,43 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SolutionDomains",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    DepartamentId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: true),
+                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SolutionDomains", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SolutionDomains_AspNetUsers_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SolutionDomains_AspNetUsers_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SolutionDomains_Departaments_DepartamentId",
+                        column: x => x.DepartamentId,
+                        principalTable: "Departaments",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Preferences",
                 columns: table => new
                 {
@@ -702,6 +716,47 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CompetenceDictionaries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompetenceId = table.Column<int>(type: "int", nullable: true),
+                    BehaviorDictionaryId = table.Column<int>(type: "int", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: true),
+                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompetenceDictionaries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompetenceDictionaries_AspNetUsers_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceDictionaries_AspNetUsers_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceDictionaries_BehavioursDictionaries_BehaviorDictionaryId",
+                        column: x => x.BehaviorDictionaryId,
+                        principalTable: "BehavioursDictionaries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceDictionaries_Competences_CompetenceId",
+                        column: x => x.CompetenceId,
+                        principalTable: "Competences",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeProfiles",
                 columns: table => new
                 {
@@ -709,6 +764,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     SolutionDomainId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -733,44 +790,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_EmployeeProfiles_SolutionDomains_SolutionDomainId",
-                        column: x => x.SolutionDomainId,
-                        principalTable: "SolutionDomains",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TechnicalSheets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Target = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Scope = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InitialTechnicalProposal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SolutionDomainId = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TechnicalSheets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TechnicalSheets_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TechnicalSheets_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TechnicalSheets_SolutionDomains_SolutionDomainId",
                         column: x => x.SolutionDomainId,
                         principalTable: "SolutionDomains",
                         principalColumn: "Id");
@@ -818,43 +837,40 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompetenceDictionaries",
+                name: "TechnicalSheets",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompetenceId = table.Column<int>(type: "int", nullable: true),
-                    BehaviorDictionaryId = table.Column<int>(type: "int", nullable: true),
+                    Target = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Scope = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InitialTechnicalProposal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SolutionDomainId = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
                     IsSelected = table.Column<bool>(type: "bit", nullable: true),
                     IsDefault = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompetenceDictionaries", x => x.Id);
+                    table.PrimaryKey("PK_TechnicalSheets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CompetenceDictionaries_AspNetUsers_CreatedBy",
+                        name: "FK_TechnicalSheets_AspNetUsers_CreatedBy",
                         column: x => x.CreatedBy,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CompetenceDictionaries_AspNetUsers_UpdatedBy",
+                        name: "FK_TechnicalSheets_AspNetUsers_UpdatedBy",
                         column: x => x.UpdatedBy,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CompetenceDictionaries_BehavioursDictionaries_BehaviorDictionaryId",
-                        column: x => x.BehaviorDictionaryId,
-                        principalTable: "BehavioursDictionaries",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CompetenceDictionaries_Competences_CompetenceId",
-                        column: x => x.CompetenceId,
-                        principalTable: "Competences",
+                        name: "FK_TechnicalSheets_SolutionDomains_SolutionDomainId",
+                        column: x => x.SolutionDomainId,
+                        principalTable: "SolutionDomains",
                         principalColumn: "Id");
                 });
 
@@ -914,6 +930,47 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         name: "FK_Competence_Skill_Motivation_Knowledge_Preferences_Skills_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Skills",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CompetenceProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompetenceDictionaryId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeProfileId = table.Column<int>(type: "int", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: true),
+                    CreatedBy = table.Column<int>(type: "int", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompetenceProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CompetenceProfiles_AspNetUsers_CreatedBy",
+                        column: x => x.CreatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceProfiles_AspNetUsers_UpdatedBy",
+                        column: x => x.UpdatedBy,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceProfiles_CompetenceDictionaries_CompetenceDictionaryId",
+                        column: x => x.CompetenceDictionaryId,
+                        principalTable: "CompetenceDictionaries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CompetenceProfiles_EmployeeProfiles_EmployeeProfileId",
+                        column: x => x.EmployeeProfileId,
+                        principalTable: "EmployeeProfiles",
                         principalColumn: "Id");
                 });
 
@@ -1050,43 +1107,39 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CompetenceProfiles",
+                name: "Responsability",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompetenceDictionaryId = table.Column<int>(type: "int", nullable: true),
-                    EmployeeProfileId = table.Column<int>(type: "int", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
                     CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<int>(type: "int", nullable: true),
+                    CompetenceProfileId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: true),
                     IsSelected = table.Column<bool>(type: "bit", nullable: true),
                     IsDefault = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompetenceProfiles", x => x.Id);
+                    table.PrimaryKey("PK_Responsability", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CompetenceProfiles_AspNetUsers_CreatedBy",
+                        name: "FK_Responsability_AspNetUsers_CreatedBy",
                         column: x => x.CreatedBy,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CompetenceProfiles_AspNetUsers_UpdatedBy",
+                        name: "FK_Responsability_AspNetUsers_UpdatedBy",
                         column: x => x.UpdatedBy,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_CompetenceProfiles_CompetenceDictionaries_CompetenceDictionaryId",
-                        column: x => x.CompetenceDictionaryId,
-                        principalTable: "CompetenceDictionaries",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CompetenceProfiles_EmployeeProfiles_EmployeeProfileId",
-                        column: x => x.EmployeeProfileId,
-                        principalTable: "EmployeeProfiles",
+                        name: "FK_Responsability_CompetenceProfiles_CompetenceProfileId",
+                        column: x => x.CompetenceProfileId,
+                        principalTable: "CompetenceProfiles",
                         principalColumn: "Id");
                 });
 
@@ -1169,43 +1222,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         name: "FK_ProjectTeams_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Responsability",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    UpdatedBy = table.Column<int>(type: "int", nullable: true),
-                    CompetenceProfileId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true),
-                    IsSelected = table.Column<bool>(type: "bit", nullable: true),
-                    IsDefault = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Responsability", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Responsability_AspNetUsers_CreatedBy",
-                        column: x => x.CreatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Responsability_AspNetUsers_UpdatedBy",
-                        column: x => x.UpdatedBy,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Responsability_CompetenceProfiles_CompetenceProfileId",
-                        column: x => x.CompetenceProfileId,
-                        principalTable: "CompetenceProfiles",
                         principalColumn: "Id");
                 });
 
@@ -1639,9 +1655,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 column: "CreatedBy");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolutionDomains_OrganizationId",
+                name: "IX_SolutionDomains_DepartamentId",
                 table: "SolutionDomains",
-                column: "OrganizationId");
+                column: "DepartamentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SolutionDomains_UpdatedBy",
@@ -1761,9 +1777,6 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                 name: "SkillTypes");
 
             migrationBuilder.DropTable(
-                name: "Departaments");
-
-            migrationBuilder.DropTable(
                 name: "Teams");
 
             migrationBuilder.DropTable(
@@ -1792,6 +1805,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "CompetenceTypes");
+
+            migrationBuilder.DropTable(
+                name: "Departaments");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -38,7 +38,7 @@ namespace CompetencePlatform.Application.Services.Impl
             try
             {
                 entity.IsDefault = false;
-                entity.IsSelected = true;
+                entity.IsSelected = false;
                 entity.Deleted = false;
                 entity.CreatedBy = (await _userRepository.CurrentUser())?.Id;
                 var result = await _degreeCompetenceRepository.AddAsync(_mapper.Map<DegreeCompetence>(entity));
