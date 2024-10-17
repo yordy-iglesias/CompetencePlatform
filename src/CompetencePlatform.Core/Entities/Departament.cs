@@ -30,6 +30,7 @@ namespace CompetencePlatform.Core.Entities
         public string Email {  get; set; }   
         public string PhoneNumber {  get; set; }
         public DepartamentStateEnum State { get; set; }
+        public string? LogoUrl { get; set; }
         public virtual  ICollection<Employee> Employees { get; set; }
         public virtual ICollection<SolutionDomain> SolutionDomains { get; set; }
 

@@ -11,7 +11,7 @@ namespace CompetencePlatform.Application.Models.Organization
     public class CreateOrganizationViewModel : OrganizationViewModel
     {
 
-        
+        public string LogoUrl { get; set; }
         // public List<DepartamentModel> Departaments { get; set; }
         //public List<SolutionDomainModel> SolutionDomains { get; set; }
     }

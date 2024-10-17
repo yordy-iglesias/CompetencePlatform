@@ -12,6 +12,7 @@ namespace CompetencePlatform.Application.Models.Departament
     {
         public int? OrganizationId { get; set; }
         public int HierarchyLevel { get; set; }
+        public string? LogoUrl { get; set; }
 
     }
 }

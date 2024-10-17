@@ -31,6 +31,7 @@ namespace CompetencePlatform.Core.Entities
         public string WebSiteAddress {  get; set; }
         //Qauntities
         public int QuantityEmployeesByTemplate {  get; set; }
+        public string LogoUrl {  get; set; }
         
 
 
