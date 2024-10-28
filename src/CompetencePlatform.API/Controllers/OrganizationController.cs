@@ -4,6 +4,7 @@ using CompetencePlatform.Application.Models.Behaviour;
 using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Application.Models.TodoItem;
 using CompetencePlatform.Application.Services;
+using CompetencePlatform.Application.Services.Impl;
 using CompetencePlatform.Core.DataTable;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,5 +50,15 @@ public class OrganizationController : ApiController
         return Ok(ApiResult<DataTablePagin<OrganizationViewModel>>.Success(
              await _organizationService.GetPagination(options)));
 
+    }
+    [HttpGet("getDefaultOrganization")]
+    public async Task<IActionResult> GetDefaultOrganization()
+    {
+        return Ok(ApiResult<CreateOrganizationViewModel>.Success((await _organizationService.GetDefaultOrganization())));
+    }
+    [HttpGet("getOrganizationSectorTypes")]
+    public async Task<IActionResult> GetOrganizationSectorTypes()
+    {
+        return Ok(ApiResult<IEnumerable<SelectViewModel>>.Success((await _organizationService.GetOrganizationSectorTypes())));
     }
 }

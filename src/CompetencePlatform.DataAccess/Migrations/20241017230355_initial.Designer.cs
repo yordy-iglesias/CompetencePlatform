@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompetencePlatform.Core.DataAccess.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241015002646_initial")]
+    [Migration("20241017230355_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -459,6 +459,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1013,6 +1016,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mision")
                         .IsRequired()

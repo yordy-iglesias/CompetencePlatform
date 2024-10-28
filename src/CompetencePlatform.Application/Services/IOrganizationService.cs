@@ -1,4 +1,5 @@
-﻿using CompetencePlatform.Application.Models.Organization;
+﻿using CompetencePlatform.Application.Models;
+using CompetencePlatform.Application.Models.Organization;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
 using System;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Application.Services
 {
-    public interface IOrganizationService : ICrudInterface<OrganizationViewModel,CreateOrganizationViewModel,DataTableServerSide>
+    public interface IOrganizationService : ICrudInterface<OrganizationViewModel, CreateOrganizationViewModel, DataTableServerSide>
     {
+        Task<CreateOrganizationViewModel> GetDefaultOrganization();
+        Task<IList<SelectViewModel>> GetOrganizationSectorTypes();
     }
 }

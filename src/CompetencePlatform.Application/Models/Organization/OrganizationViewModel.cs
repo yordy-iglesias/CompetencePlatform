@@ -16,7 +16,7 @@ namespace CompetencePlatform.Application.Models.Organization
 
         public string Vision { get; set; }
         [Required]
-        public int Type { get; set; }
+        public OrganizationTypeEnum Type { get; set; }
         public string TypeName { get; set; }
         [Required]
         public SectorTypeEnum Sector { get; set; }

@@ -457,6 +457,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1010,6 +1013,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
 
                     b.Property<bool?>("IsSelected")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LogoUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mision")
                         .IsRequired()

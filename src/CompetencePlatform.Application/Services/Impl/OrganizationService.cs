@@ -6,6 +6,7 @@ using CompetencePlatform.Core.DataAccess.Repositories;
 using CompetencePlatform.Core.DataAccess.Repositories.Impl;
 using CompetencePlatform.Core.DataTable;
 using CompetencePlatform.Core.Entities;
+using CompetencePlatform.Core.Enums;
 using CompetencePlatform.Core.Utils;
 using CompetencePlatform.Shared.Services;
 using Microsoft.Data.SqlClient;
@@ -91,6 +92,20 @@ namespace CompetencePlatform.Application.Services.Impl
                 throw;
             }
         }
+        public async Task<CreateOrganizationViewModel> GetDefaultOrganization()
+        {
+            try
+            {
+                var result = await _organizationRepository.GetFirstAsync(x => x.Name == "default", asNoTracking: true);
+                if (result == null)
+                    throw new BadRequestException("No existe este tipo de Organization");
+                return _mapper.Map<CreateOrganizationViewModel>(result);
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         public Task<OrganizationViewModel> GetDetails(int id)
         {
@@ -158,6 +173,22 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 throw;
             }
+        }
+
+        public async Task<IList<SelectViewModel>>GetOrganizationSectorTypes()
+        {
+            Array values = Enum.GetValues(typeof(SectorTypeEnum));
+            List<SelectViewModel> items = new List<SelectViewModel>(values.Length);
+            foreach (var i in values)
+            {
+                SelectViewModel item = new SelectViewModel
+                {
+                    Text = Enum.GetName(typeof(SectorTypeEnum), i).Replace("_", " "),
+                    Value = (int)i
+                };
+                items.Add(item);
+            }
+            return items;
         }
 
         public async Task<OrganizationViewModel> Update(CreateOrganizationViewModel entity)

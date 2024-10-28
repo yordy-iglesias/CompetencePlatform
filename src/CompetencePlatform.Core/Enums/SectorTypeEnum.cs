@@ -8,9 +8,14 @@ namespace CompetencePlatform.Core.Enums
 {
     public enum SectorTypeEnum
     {
-        Tecnology=0,
-        Healt=1,
-        Education=2
+        Tecnology=1,
+        Healt=2,
+        Education=3,
+        Sports=4,
+        Comunications=5,
+        Finances=6,
+        Economy=7,
+        Trades=8
 
     }
 }

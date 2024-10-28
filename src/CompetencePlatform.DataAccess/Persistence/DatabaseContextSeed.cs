@@ -96,7 +96,19 @@ public static class DatabaseContextSeed
             Mision = "default",
             Vision = "default",
             Description= "default",
-            Deleted = false
+            Deleted = false,
+            Address = "default",
+            City = "default",
+            Country = "default",
+            Email = "default",
+            IsDefault = true,
+            LogoUrl = "default",
+            Phone = "default",
+            QuantityEmployeesByTemplate=0,
+            Sector=SectorTypeEnum.Tecnology,
+            Type=OrganizationTypeEnum.Public,
+            WebSiteAddress= "default"
+
             
         };
         try
