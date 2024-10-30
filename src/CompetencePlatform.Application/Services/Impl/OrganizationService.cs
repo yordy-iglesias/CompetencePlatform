@@ -183,7 +183,7 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 SelectViewModel item = new SelectViewModel
                 {
-                    Text = Enum.GetName(typeof(SectorTypeEnum), i).Replace("_", " "),
+                    Text = Enum.GetName(typeof(SectorTypeEnum), i),
                     Value = (int)i
                 };
                 items.Add(item);
@@ -207,6 +207,21 @@ namespace CompetencePlatform.Application.Services.Impl
             {
                 throw;
             }
+        }
+        public async Task<IList<SelectViewModel>> GetCities()
+        {
+            Array values = Enum.GetValues(typeof(CitiesEnum));
+            List<SelectViewModel> items = new List<SelectViewModel>(values.Length);
+            foreach (var i in values)
+            {
+                SelectViewModel item = new SelectViewModel
+                {
+                    Text = Enum.GetName(typeof(CitiesEnum), i).Replace("_"," "),
+                    Value = (int)i
+                };
+                items.Add(item);
+            }
+            return items;
         }
     }
 }

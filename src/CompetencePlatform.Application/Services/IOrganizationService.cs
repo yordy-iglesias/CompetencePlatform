@@ -12,6 +12,7 @@ namespace CompetencePlatform.Application.Services
 {
     public interface IOrganizationService : ICrudInterface<OrganizationViewModel, CreateOrganizationViewModel, DataTableServerSide>
     {
+        Task<IList<SelectViewModel>> GetCities();
         Task<CreateOrganizationViewModel> GetDefaultOrganization();
         Task<IList<SelectViewModel>> GetOrganizationSectorTypes();
     }

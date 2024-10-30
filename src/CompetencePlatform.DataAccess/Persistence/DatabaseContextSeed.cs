@@ -100,14 +100,14 @@ public static class DatabaseContextSeed
             Address = "default",
             City = "default",
             Country = "default",
-            Email = "default",
+            Email = "default@default.com",
             IsDefault = true,
             LogoUrl = "default",
             Phone = "default",
             QuantityEmployeesByTemplate=0,
             Sector=SectorTypeEnum.Tecnology,
             Type=OrganizationTypeEnum.Public,
-            WebSiteAddress= "default"
+            WebSiteAddress= "https://default.com"
 
             
         };

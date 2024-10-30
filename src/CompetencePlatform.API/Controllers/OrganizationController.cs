@@ -61,4 +61,9 @@ public class OrganizationController : ApiController
     {
         return Ok(ApiResult<IEnumerable<SelectViewModel>>.Success((await _organizationService.GetOrganizationSectorTypes())));
     }
+    [HttpGet("getCities")]
+    public async Task<IActionResult> GetCities()
+    {
+        return Ok(ApiResult<IEnumerable<SelectViewModel>>.Success((await _organizationService.GetCities())));
+    }
 }
