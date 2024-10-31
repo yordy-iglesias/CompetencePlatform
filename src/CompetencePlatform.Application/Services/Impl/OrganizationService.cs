@@ -24,12 +24,16 @@ namespace CompetencePlatform.Application.Services.Impl
     public class OrganizationService : IOrganizationService
     {
         private readonly IOrganizationRepository _organizationRepository;
+        private readonly IEmployeeProfileRepository _employeeProfileRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
         private readonly IClaimService _claimService;
         private readonly IUserRepository _userRepository;
-        public OrganizationService(IOrganizationRepository organizationRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
+        public OrganizationService(IEmployeeRepository employeeRepository,IEmployeeProfileRepository employeeProfileRepository, IOrganizationRepository organizationRepository, IMapper mapper, IClaimService claimService, IUserRepository userRepository)
         {
             _organizationRepository = organizationRepository;
+            _employeeProfileRepository = employeeProfileRepository;
+            _employeeRepository = employeeRepository;
             _mapper = mapper;
             _claimService = claimService;
             _userRepository = userRepository;
@@ -96,9 +100,13 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var result = await _organizationRepository.GetFirstAsync(x => x.Name == "default", asNoTracking: true);
-                if (result == null)
+                var organization = (await _organizationRepository.GetAllAsync()).FirstOrDefault();
+                if (organization == null)
                     throw new BadRequestException("No existe este tipo de Organization");
+                var result= _mapper.Map<CreateOrganizationViewModel>(organization);
+                result.QuantityEmployeProfiles=await _employeeProfileRepository.Count();
+                result.QuantityEmployees=await _employeeRepository.Count();
+                result.TemplateCoverage=(result.QuantityEmployees != 0 && organization.QuantityEmployeesByTemplate!=0)?(result.QuantityEmployees/organization.QuantityEmployeesByTemplate ) *100:0;
                 return _mapper.Map<CreateOrganizationViewModel>(result);
             }
             catch
@@ -195,11 +203,13 @@ namespace CompetencePlatform.Application.Services.Impl
         {
             try
             {
-                var employee = await _organizationRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
+                var organization = await _organizationRepository.GetFirstAsync(x => x.Id == entity.Id, asNoTracking: true);
 
-                if (employee == null)
+                if (organization == null)
                     throw new BadRequestException("No se encuentra este tipo de Employe Profile");
-
+                entity.UpdatedOn = DateTime.Now;
+                entity.UpdatedBy = (await _userRepository.CurrentUser())?.Id;
+                var org = _mapper.Map<Organization>(entity);
                 var result = await _organizationRepository.UpdateAsync(_mapper.Map<Organization>(entity));
                 return _mapper.Map<OrganizationViewModel>(result);
             }

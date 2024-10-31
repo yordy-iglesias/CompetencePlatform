@@ -80,6 +80,7 @@ namespace CompetencePlatform.Core.Entities.Identity
         public virtual ICollection<TechnicalSheet> TechnicalSheetUserUpdatedBy { get; set; }
         public virtual ICollection<TechnicalSheetCompose> TechnicalSheetComposeUserCreatedBy { get; set; }
         public virtual ICollection<TechnicalSheetCompose> TechnicalSheetComposeUserUpdatedBy { get; set; }
+        public virtual ICollection<Organization> OrganizationUserUpdatedBy { get; set; }
     }
 }
 

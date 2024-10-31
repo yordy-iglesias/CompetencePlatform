@@ -18,19 +18,22 @@ namespace CompetencePlatform.Application.Models.Organization
         [Required]
         public OrganizationTypeEnum Type { get; set; }
         public string TypeName { get; set; }
+        public string SectorTypeName { get; set; }
         [Required]
         public SectorTypeEnum Sector { get; set; }
         //Ubication
         public string Address { get; set; }
-        public string City { get; set; }
+        public int City { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string WebSiteAddress { get; set; }
-        //Qauntities
+        //Quantities
         public int QuantityEmployeesByTemplate { get; set; }
         public int QuantityDepartament { get; set; }
-        // public List<DepartamentModel> Departaments { get; set; }
-        //public List<SolutionDomainModel> SolutionDomains { get; set; }
+        public int QuantityEmployees { get; set; }
+        public int QuantityEmployeProfiles { get; set; }
+        public int TemplateCoverage { get; set; }
+
     }
 }

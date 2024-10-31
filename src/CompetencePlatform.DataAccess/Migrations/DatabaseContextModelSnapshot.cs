@@ -989,8 +989,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("City")
+                        .HasColumnType("int");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -1037,6 +1037,9 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
@@ -1048,6 +1051,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UpdatedBy");
 
                     b.ToTable("Organizations");
                 });
@@ -2083,6 +2088,15 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Navigation("UserUpdatedBy");
                 });
 
+            modelBuilder.Entity("CompetencePlatform.Core.Entities.Organization", b =>
+                {
+                    b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserUpdatedBy")
+                        .WithMany("OrganizationUserUpdatedBy")
+                        .HasForeignKey("UpdatedBy");
+
+                    b.Navigation("UserUpdatedBy");
+                });
+
             modelBuilder.Entity("CompetencePlatform.Core.Entities.Preference", b =>
                 {
                     b.HasOne("CompetencePlatform.Core.Entities.Identity.User", "UserCreatedBy")
@@ -2481,6 +2495,8 @@ namespace CompetencePlatform.Core.DataAccess.Migrations
                     b.Navigation("MotivationUserCreatedBy");
 
                     b.Navigation("MotivationUserUpdatedBy");
+
+                    b.Navigation("OrganizationUserUpdatedBy");
 
                     b.Navigation("PreferenceTypeUserCreatedBy");
 

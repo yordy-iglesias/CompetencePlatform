@@ -10,6 +10,7 @@ namespace CompetencePlatform.Core.Enums
     {
         Public=1,
         Private=2,
+        Mix=3,
 
     }
 }

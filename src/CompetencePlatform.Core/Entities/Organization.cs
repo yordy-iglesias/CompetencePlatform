@@ -1,8 +1,10 @@
 ﻿using CompetencePlatform.Core.Common;
+using CompetencePlatform.Core.Entities.Identity;
 using CompetencePlatform.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,7 @@ namespace CompetencePlatform.Core.Entities
         public SectorTypeEnum Sector { get; set; }
         //Ubication
         public string Address {  get; set; }
-        public string City {  get; set; }
+        public CitiesEnum City {  get; set; }
         public string Country {  get; set; }
         public string Phone {  get; set; }
         public string Email {  get; set; }
@@ -32,17 +34,16 @@ namespace CompetencePlatform.Core.Entities
         //Qauntities
         public int QuantityEmployeesByTemplate {  get; set; }
         public string LogoUrl {  get; set; }
-        
-
-
-        /// <summary>
+       /// <summary>
 		/// Gets or sets the Vision.
 		/// </summary>
         [Required]
         public string Vision  { get; set; }
-        public virtual ICollection<Departament> Departaments { get; set; } 
-        //public virtual ICollection<SolutionDomain> SolutionDomains { get; set; } 
+        public virtual ICollection<Departament> Departaments { get; set; }
+        public int? UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy"), InverseProperty("OrganizationUserUpdatedBy")]
+        public virtual User UserUpdatedBy { get; set; }
 
-        
+
     }
 }

@@ -98,16 +98,18 @@ public static class DatabaseContextSeed
             Description= "default",
             Deleted = false,
             Address = "default",
-            City = "default",
+            City = CitiesEnum.La_Isla_De_La_Juventud,
             Country = "default",
             Email = "default@default.com",
             IsDefault = true,
-            LogoUrl = "default",
+            LogoUrl = "./assets/media/svg/avatars/blank.svg",
             Phone = "default",
             QuantityEmployeesByTemplate=0,
             Sector=SectorTypeEnum.Tecnology,
             Type=OrganizationTypeEnum.Public,
-            WebSiteAddress= "https://default.com"
+            WebSiteAddress= "https://default.com",
+            CreatedOn= DateTime.Now,
+            
 
             
         };

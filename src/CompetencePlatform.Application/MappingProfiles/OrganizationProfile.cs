@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CompetencePlatform.Application.Extensions;
 using CompetencePlatform.Application.Models;
 using CompetencePlatform.Application.Models.BehaviorDictionary;
 using CompetencePlatform.Application.Models.Behaviour;
@@ -17,12 +18,17 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public OrganizationProfile()
         {
-         
+
             CreateMap<Organization, OrganizationViewModel>()
                .ForMember(orgvm => orgvm.TypeName, dp => dp.MapFrom(org => org.Type.ToString()));
 
             CreateMap<Organization, CreateOrganizationViewModel>()
-                 .ForMember(orgvm => orgvm.Type, dp => dp.MapFrom(org => (int)org.Type));
+                 .ForMember(orgvm => orgvm.QuantityDepartament, dp => dp.MapFrom(org => org.Departaments.Count))
+                 .ForMember(orgvm => orgvm.LogoUrl, dp => dp.MapFrom(org => org.LogoUrl))
+                 .ForMember(orgvm => orgvm.Type, dp => dp.MapFrom(org => (int)org.Type))
+                 .ForMember(dest => dest.SectorTypeName, dp => dp.MapFrom(org => org.Sector.ToString()))
+                 .ForMember(dest => dest.TypeName, dp => dp.MapFrom(org => org.Type.ToString()));
+           
 
 
         }
