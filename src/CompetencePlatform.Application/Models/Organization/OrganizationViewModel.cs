@@ -16,11 +16,11 @@ namespace CompetencePlatform.Application.Models.Organization
 
         public string Vision { get; set; }
         [Required]
-        public OrganizationTypeEnum Type { get; set; }
+        public int Type { get; set; }
         public string TypeName { get; set; }
         public string SectorTypeName { get; set; }
         [Required]
-        public SectorTypeEnum Sector { get; set; }
+        public int Sector { get; set; }
         //Ubication
         public string Address { get; set; }
         public int City { get; set; }

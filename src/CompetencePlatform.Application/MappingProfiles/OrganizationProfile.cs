@@ -28,7 +28,7 @@ namespace CompetencePlatform.Application.MappingProfiles
                  .ForMember(orgvm => orgvm.Type, dp => dp.MapFrom(org => (int)org.Type))
                  .ForMember(dest => dest.SectorTypeName, dp => dp.MapFrom(org => org.Sector.ToString()))
                  .ForMember(dest => dest.TypeName, dp => dp.MapFrom(org => org.Type.ToString()));
-           
+            CreateMap<CreateOrganizationViewModel, Organization>();
 
 
         }
