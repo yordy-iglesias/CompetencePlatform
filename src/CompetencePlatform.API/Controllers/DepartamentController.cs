@@ -51,4 +51,5 @@ public class DepartamentController : ApiController
              await _departamentService.GetPagination(options)));
 
     }
+    
 }

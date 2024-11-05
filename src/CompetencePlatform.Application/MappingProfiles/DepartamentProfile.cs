@@ -23,10 +23,11 @@ namespace CompetencePlatform.Application.MappingProfiles
     {
         public DepartamentProfile()
         {
-          
+
             CreateMap<Departament, DepartamentViewModel>()
              .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name))
              .ForMember(dpm => dpm.HierarchyLevel, dp => dp.MapFrom(dp => dp.HierarchyLevel.GetDescription()));
+ 
             
             CreateMap<Departament, CreateDepartamentViewModel>()
             .ForMember(cdpm => cdpm.OrganizationId, dp => dp.MapFrom(dp => dp.OrganizationId))
