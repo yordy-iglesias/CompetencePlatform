@@ -56,6 +56,9 @@ namespace CompetencePlatform.Application.MappingProfiles
             CreateMap<CompetenceType, CompetenceTypeViewModel>().ReverseMap();
             CreateMap<DegreeCompetence, DegreeCompetenceViewModel>().ReverseMap(); 
             CreateMap<Departament, DepartamentViewModel>()
+             .ForMember(dpm => dpm.CantEmployees, dp => dp.MapFrom(dp => dp.Employees.Count()))
+             .ForMember(dpm => dpm.CantProjects, dp => dp.MapFrom(dp => dp.SolutionDomains.Count()))
+            // .ForMember(dpm => dpm.Badgecolor, dp => dp.ConvertUsing(ConverterBgColorForDepartament(dp.)))
              .ForMember(dpm => dpm.OrganizationName, dp => dp.MapFrom(dp => dp.Organization.Name)).ReverseMap();
             CreateMap<Organization, OrganizationViewModel>().ReverseMap();
             CreateMap<Preference, PreferenceViewModel>()
@@ -80,5 +83,36 @@ namespace CompetencePlatform.Application.MappingProfiles
             CreateMap<TechnicalSheetCompose, TechnicalSheetComposeViewModel>()
                .ForMember(tshcm => tshcm.EmployeeProfileName, tsc => tsc.MapFrom(tsc => tsc.EmployeeProfile.Name)).ReverseMap();
         }
+        private static object ConverterBgColorForDepartament(Departament value)
+        {
+            string bgColor = "";
+            switch (value.HierarchyLevel)
+            {
+                case Core.Enums.HierarchyLevelEnum.None:
+                    bgColor = "secondary";
+                    break;
+                case Core.Enums.HierarchyLevelEnum.Functional_Managment:
+                    bgColor = "success";
+                    break;
+                case Core.Enums.HierarchyLevelEnum.Intermediate_Management:
+                    bgColor = "primary";
+                    break;
+                case Core.Enums.HierarchyLevelEnum.Operative_Supervisors:
+                    bgColor = "info";
+                    break;
+                case Core.Enums.HierarchyLevelEnum.Operative_Level:
+                    bgColor = "warning";
+                    break;
+                case Core.Enums.HierarchyLevelEnum.Subcontrated_Support_Personal:
+                    bgColor = "danger";
+                    break;
+                default:
+                    break;
+            }
+            return bgColor;
+
+           
+        }
     }
+    
 }
