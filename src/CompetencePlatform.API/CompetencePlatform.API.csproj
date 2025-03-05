@@ -4,7 +4,9 @@
         <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>CompetencePlatform.API</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>27455185-0fdf-47e2-9d9a-bfc336775652</UserSecretsId>
+        <DockerfileContext>..\..</DockerfileContext>
     </PropertyGroup>
 
     <ItemGroup>
