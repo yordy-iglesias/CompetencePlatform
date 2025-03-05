@@ -11,6 +11,13 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa el perfil de cada empleado.
+    /// Por ejemplo(Directivo de entidad,Analista de Negocio,Desarrollador de Software
+    /// Ingeniero de Calidad (QA),Gestor de Proyecto,Especialista en Marketing y Ventas
+    /// Especialista en Innovación y Desarrollo,Especialista en Recursos Humanos,
+    /// Cliente).
+    /// </summary>
     public class EmployeeProfile : CommonEntity
     {
 

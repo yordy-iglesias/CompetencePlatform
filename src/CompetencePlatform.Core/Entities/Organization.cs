@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa la Organizaciòn
+    /// </summary>
     public class Organization : CommonEntity
     {
 

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa las soluciones de dominio.
+    /// </summary>
     public class SolutionDomainCompetence:BaseEntity, IAuditedEntity
     {
 

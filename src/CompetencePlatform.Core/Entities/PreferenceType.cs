@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa los tipos de preferencias
+    /// </summary>
     public class PreferenceType : CommonEntity
     {
         public int? CreatedBy { get; set; }

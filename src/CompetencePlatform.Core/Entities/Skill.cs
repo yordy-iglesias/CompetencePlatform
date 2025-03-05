@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa las habilidades.
+    /// </summary>
     public class Skill:CommonEntity
     {
         /// <summary>

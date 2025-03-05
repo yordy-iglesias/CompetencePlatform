@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa la ficha tècnica del pryecto.
+    /// </summary>
     public class TechnicalSheet : BaseEntity, IAuditedEntity
     {
 

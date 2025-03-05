@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Refleja la relaciòn entre Competencias,Conocimientos,Preferencias
+    /// Habilidades y Motivaciones.
+    /// </summary>
     public class C_S_M_K_P: BaseEntity, IAuditedEntity
     {
         /// <summary>

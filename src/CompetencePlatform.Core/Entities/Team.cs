@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa los equipos.
+    /// </summary>
     public class Team : CommonEntity
     {
         public int? CreatedBy { get; set; }

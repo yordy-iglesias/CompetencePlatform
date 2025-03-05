@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa la composiciòn de la ficha tecnica del proyecto.
+    /// </summary>
     public class TechnicalSheetCompose:BaseEntity, IAuditedEntity
     {
 

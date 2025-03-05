@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Entidad que refelfa los comportamientos 
+    /// </summary>
     public class Behavior:CommonEntity
     {
         public virtual ICollection<BehaviorDictionary> BehaviorDictionaries { get; set; }

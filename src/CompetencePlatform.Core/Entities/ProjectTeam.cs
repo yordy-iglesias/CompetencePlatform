@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa los equipos de proyectos.
+    /// </summary>
     public class ProjectTeam: BaseEntity, IAuditedEntity
     {
         /// <summary>

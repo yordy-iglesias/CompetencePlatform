@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa los empleados de la organizacòn.
+    /// </summary>
     public class Employee : BaseEntity, IAuditedEntity
     {
         /// <summary>

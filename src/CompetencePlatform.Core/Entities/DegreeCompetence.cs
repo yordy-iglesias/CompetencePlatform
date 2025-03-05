@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa el grado de competencia de cada competencia.
+    /// </summary>
     public class DegreeCompetence :CommonEntity
     {
         public int? CreatedBy { get; set; }

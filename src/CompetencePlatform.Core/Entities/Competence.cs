@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Entidad Competencia
+    /// </summary>
     public class Competence:CommonEntity
     {
         /// <summary>

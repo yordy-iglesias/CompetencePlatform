@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa las preferencias.
+    /// </summary>
     public class Preference:CommonEntity
     {
         /// <summary>

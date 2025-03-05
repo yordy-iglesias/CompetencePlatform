@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa la entidad conocimiento.
+    /// </summary>
     public class Knowledge : CommonEntity
     {
         public int? CreatedBy { get; set; }

@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public  class Responsability:CommonEntity
+    /// <summary>
+    /// Representa las responsabilidades.
+    /// </summary>
+    public class Responsability:CommonEntity
     {
 
         public int? CreatedBy { get; set; }

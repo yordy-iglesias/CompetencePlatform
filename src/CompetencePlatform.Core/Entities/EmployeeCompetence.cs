@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa las competencias que realmente tiene cada empleado.
+    /// </summary>
     public class EmployeeCompetence: BaseEntity, IAuditedEntity
     {
         // <summary>

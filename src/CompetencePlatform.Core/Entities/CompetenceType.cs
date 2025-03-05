@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Entidad que representa el Tipo de Competencia.
+    /// </summary>
     public class CompetenceType:CommonEntity
     {
         public virtual  ICollection<Competence> Competences { get; set; }

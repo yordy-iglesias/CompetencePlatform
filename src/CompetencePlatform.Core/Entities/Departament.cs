@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa los departamentos de la organizaciòn.
+    /// </summary>
     public class Departament : CommonEntity
     {
         /// <summary>

@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
-    public  class Project : CommonEntity
+    /// <summary>
+    /// Representa los Proyectos.
+    /// </summary>
+    public class Project : CommonEntity
     {
         
         public int TechnicalSheetId { get; set; }

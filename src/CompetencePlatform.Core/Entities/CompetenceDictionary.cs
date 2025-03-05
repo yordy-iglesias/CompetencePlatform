@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Entidad que representa el dicionario de competencias.
+    /// </summary>
     public class CompetenceDictionary: BaseEntity, IAuditedEntity
     {
         /// <summary>

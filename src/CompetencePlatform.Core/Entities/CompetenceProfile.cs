@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa el perfil de competencia de un EmployeeProfile.
+    /// </summary>
     public class CompetenceProfile : BaseEntity, IAuditedEntity
     {
         /// <summary>

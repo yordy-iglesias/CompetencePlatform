@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Entidad que refleja el diccionario de comportamientos.
+    /// </summary>
     public class BehaviorDictionary:BaseEntity, IAuditedEntity
     {
         // <summary>

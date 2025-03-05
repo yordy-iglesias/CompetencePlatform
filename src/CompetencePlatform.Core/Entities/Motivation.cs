@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompetencePlatform.Core.Entities
 {
+    /// <summary>
+    /// Representa la entidad Motivaciòn.
+    /// </summary>
     public class Motivation:CommonEntity
     {
         public int? CreatedBy { get; set; }
