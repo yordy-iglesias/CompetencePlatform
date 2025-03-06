@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CompetencePlatform.Core.Entities
 {
     /// <summary>
-    /// Entidad que refelfa los comportamientos 
+    /// Entidad que representa los comportamientos 
     /// </summary>
     public class Behavior:CommonEntity
     {
