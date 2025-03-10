@@ -1,20 +1,18 @@
-version: "3.9"
-
-services:
-    n-tier-api:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-            - "8080:80"
-        depends_on:
-            - dockerDB
-
-    dockerDB:
-        image: "mcr.microsoft.com/mssql/server:2022-latest"
-        ports:
-            - "1433:1433"
-
-        environment:
-            SA_PASSWORD: "S3cur3P@ssW0rd!"
-            ACCEPT_EULA: "Y"
+﻿services:
+  competenceplatform.api:
+    image: ${DOCKER_REGISTRY-}competenceplatformapi
+    container_name: "competenceplatform.api"
+    build:
+      context: .
+      dockerfile: src/CompetencePlatform.API/Dockerfile
+    ports:
+     - "5000:5000"
+     - "5001:5001"
+  competenceplataform.database:
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      container_name: "competenceplataform.database"
+      # volumes:
+      #   - sqlserver_data:/var/opt/mssql
+      ports:
+        - "5432:5432"
+     
