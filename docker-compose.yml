@@ -1,13 +1,6 @@
-﻿services:
-  competenceplatform.api:
-    image: ${DOCKER_REGISTRY-}competenceplatformapi
-    container_name: "competenceplatform.api"
-    build:
-      context: .
-      dockerfile: src/CompetencePlatform.API/Dockerfile
-    ports:
-     - "5000:5000"
-     - "5001:5001"
+﻿networks:
+  competencenetworkapi:
+services:
   competenceplataform.database:
       image: mcr.microsoft.com/mssql/server:2022-latest
       container_name: "competenceplataform.database"
@@ -15,4 +8,23 @@
       #   - sqlserver_data:/var/opt/mssql
       ports:
         - "5432:5432"
+      environment:
+       - ACCEPT_EULA=Y
+       - MSSQL_SA_PASSWORD=MyPassword*1234
+      networks:
+        - competencenetworkapi
+  competenceplatform.api:
+    image: ${DOCKER_REGISTRY-}competenceplatformapi
+    container_name: "competenceplatform.api"
+    build:
+      context: .
+      dockerfile: src/CompetencePlatform.API/Dockerfile
+    networks:
+        - competencenetworkapi
+    depends_on:
+        - competenceplataform.database
+    ports:
+     - "5000:5000"
+     - "5001:5001"
+  
      
