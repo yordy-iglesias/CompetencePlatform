@@ -4,10 +4,10 @@ services:
   competenceplataform.database:
       image: mcr.microsoft.com/mssql/server:2022-latest
       container_name: "competenceplataform.database"
-      # volumes:
-      #   - sqlserver_data:/var/opt/mssql
+      volumes:
+      - sqlserver_data:/var/opt/mssql
       ports:
-        - "5432:5432"
+        - "1433:1433"
       environment:
        - ACCEPT_EULA=Y
        - MSSQL_SA_PASSWORD=MyPassword*1234
@@ -26,5 +26,6 @@ services:
     ports:
      - "5000:5000"
      - "5001:5001"
-  
+volumes:
+  sqlserver_data:  
      
